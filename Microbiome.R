@@ -1,3 +1,4 @@
+# Author: Sanon Aboubakar
 #######Install the required packages for your analysis
 BiocManager:: install.packages("dada2", version = "3.11")
 
