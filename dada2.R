@@ -115,7 +115,8 @@ taxid <- t(sapply(ids, function(x) {
   taxa
 }))
 
-colnames(taxid) <- ranks; rownames(taxid) <- getSequences(seqtab.nochim)
+colnames(taxid) <- ranks
+rownames(taxid) <- getSequences(seqtab.nochim)
 colnames(taxid)
 
 # Removing sequence rownames for display only
