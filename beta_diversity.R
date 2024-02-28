@@ -26,7 +26,8 @@ pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
   scale_color_brewer(palette = "Oranges")+
-  labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)")) +
+  labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
+       shape="Breeding material") +
   guides(color = guide_legend(override.aes = list(alpha = 1)))
 
 ggsave("figures/PCoA.pdf", dpi=300)
@@ -53,7 +54,7 @@ nmds_df <- data.frame(nmds.ord$points) %>%
 ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
   scale_color_brewer(palette = "Oranges")+
-  labs(x="NMDS1", y="NMDS2") +
+  labs(x="NMDS1", y="NMDS2", shape="Breeding material") +
   guides(color = guide_legend(override.aes = list(alpha = 1)))
 
 ggsave("figures/NMDS.pdf", dpi=300)
