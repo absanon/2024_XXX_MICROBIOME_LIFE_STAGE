@@ -73,7 +73,7 @@ alpha <- alpha_average_df %>%
   theme(strip.text.x = element_text(size = 10),
         axis.title.x = element_blank(),
         legend.text.align = 0)+
-  scale_color_brewer(palette = "Set1")+
+  scale_color_brewer(palette="Oranges")+
   stat_pwc(method = "wilcox.test", p.adjust.method="BH",
            label = "p.adj.format", hide.ns="p.adj", show.legend = F, tip.length = 0.01)
 alpha
