@@ -152,10 +152,14 @@ samdf <- samdf %>%
   mutate(Stage=case_when(Stage == "wa" ~ "water",
                          Stage == "lar" ~ "larvae",
                          Stage == "pu" ~ "pupae",
-                         Stage =="ad" ~ "adult"),
+                         Stage =="ad" ~ "adult", 
+                         TRUE ~ Stage),
          Stage=factor(Stage, levels=levels),
+         Breeding=case_when(Breeding == "plas" ~ "plastic",
+                            TRUE ~Breeding),
          Urbanisation=case_when(Sites == "LG" ~ "urban",
-                                Sites == "TD" ~ "peri-urban"))
+                                Sites == "TD" ~ "peri-urban"), 
+         breeding_urban=glue::glue("{Breeding}_{Urbanisation}"))
 
 samdf
 
