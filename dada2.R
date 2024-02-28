@@ -13,9 +13,7 @@ library("devtools")
 library(dada2)
 packageVersion("dada2")
 
-library(here)
-
-i_am("dada2.R")
+here::i_am("dada2.R")
 
 ###############Load your fastq data
 path<-"C:/sanon"
