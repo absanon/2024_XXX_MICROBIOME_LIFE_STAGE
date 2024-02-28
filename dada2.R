@@ -148,12 +148,14 @@ samdf <- data.frame(Stage=stage, Breeding=breeding, Sites=sites)
 rownames(samdf) <- samples.out
 
 levels <- c("water", "larvae", "pupae", "adult" ) 
-samdf %>% 
+samdf <- samdf %>% 
   mutate(Stage=case_when(Stage == "wa" ~ "water",
                          Stage == "lar" ~ "larvae",
                          Stage == "pu" ~ "pupae",
                          Stage =="ad" ~ "adult"),
-         Stage=factor(Stage, levels=levels),)
+         Stage=factor(Stage, levels=levels),
+         Urbanisation=case_when(Sites == "LG" ~ "urban",
+                                Sites == "TD" ~ "peri-urban"))
 
 samdf
 
