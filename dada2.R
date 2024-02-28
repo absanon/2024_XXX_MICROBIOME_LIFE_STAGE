@@ -216,9 +216,43 @@ ps.noncontam
 
 ps.noncontam <- prune_samples(sample_data(ps)$Breeding!='NC', ps.noncontam)
 
-Sanon <- ps.noncontam
+SANON <- ps.noncontam
 
-Sanon
+tax_table(SANON)[1,]
+
+SANON
+
+summary(SANON)
+
+###### Summarize SANON
+
+microbiome::summarize_phyloseq(SANON)
+
+phyloseq::tax_table(SANON)[1:20,1:6]
+
+# Total number of individuals observed from each ASV
+
+sum.check <- taxa_sums(SANON)
+
+sum(sum.check)#
+
+# Other descriptive statistics:
+
+median(sample_sums(SANON))
+
+SANON <- microbiome::add_refseq(SANON)
+
+# Check if ref_seq slot is added to phyloseq object
+
+print(SANON)
+
+# now check taxa names are ASVids
+taxa_names(SANON)[1:3]
+
+phyloseq::tax_table(SANON)[1:6]
+
+abou<-phyloseq::tax_table(SANON)
+abou
 
 # Save your workspace to a .RData file
 save.image(file = "Sanon_16S_DADA2_data.RData")

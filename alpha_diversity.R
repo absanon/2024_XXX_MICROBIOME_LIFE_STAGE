@@ -8,47 +8,6 @@ library(ggpubr)
 load("Sanon_16S_DADA2_data.RData")
 ##################################################################################################################
 ##### clean up your sequence
-#ps.fam <- subset_taxa(Sanon, !is.na(Family) & !Family %in% c("", "uncharacterized"))
-
-#SANON<-ps.fam
-
-SANON <- Sanon
-
-tax_table(SANON)[1,]
-
-SANON
-
-summary(SANON)
-
-###### Summarize SANON
-
-microbiome::summarize_phyloseq(SANON)
-
-phyloseq::tax_table(Sanon)[1:20,1:6]
-
-# Total number of individuals observed from each ASV
-
-sum.check <- taxa_sums(SANON)
-
-sum(sum.check)#
-
-# Other descriptive statistics:
-
-median(sample_sums(SANON))
-
-SANON <- microbiome::add_refseq(SANON)
-
-# Check if ref_seq slot is added to phyloseq object
-
-print(SANON)
-
-# now check taxa names are ASVids
-taxa_names(SANON)[1:3]
-
-phyloseq::tax_table(SANON)[1:6]
-
-abou<-phyloseq::tax_table(SANON)
-abou
 
 #### Sort samples as you want they appear in your graph
 ## Alpha diversity measures per developmental stages
