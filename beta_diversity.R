@@ -1,45 +1,107 @@
 library(vegan)
+library(glue)
 here::i_am("beta_diversity.R")
+load("Sanon_16S_DADA2_data.RData")
 
-source("alpha_diversity.R")
+df <- as_tibble(sample_data(SANON))
+df$LibrarySize <- sample_sums(SANON)
+df<- df[order(df$LibrarySize),]
 
-permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
-                        method="bray", by= "terms",na.rm=T)
-permM
-permM1<- adonis2(t(otu)~Sites+Stage,data= meta, permutations=999, 
-                method="bray", by= "terms",na.rm=T)
-permM1
-permM2<- adonis2(t(otu)~Breeding*Stage,data= meta, permutations=999, 
-                method="bray", by= "terms",na.rm=T)
-permM2
-permM3<- adonis2(t(otu)~Breeding+Stage,data= meta, permutations=999, 
-                 method="bray", by= "terms",na.rm=T)
-permM3
-permM4<- adonis2(t(otu)~Sites*Stage*Breeding,data= meta, permutations=999, 
-                 method="bray", by= "terms",na.rm=T)
-permM4
+min_depth <- df %>% 
+  select(LibrarySize) %>% 
+  min()
 
-#### Plots for Beta diversity 
-# Transform data to proportions as appropriate for Bray-Curtis distances
+vegan_avgdist <- avgdist(as.data.frame(t(otu_table(SANON))), 
+                         sample=min_depth, iterations = 10)
 
-ps.prop <- transform_sample_counts(SANON, function(otu) otu/sum(otu))
+# PCoA
+pcoa.ord <- ape::pcoa(vegan_avgdist)
 
-ord.nmds.bray <- ordinate(ps.prop, method="NMDS", distance="bray")
+pcoa_df <- data.frame(pcoa.ord$vectors) %>% 
+  rownames_to_column("Sample") %>% 
+  left_join(samdf %>% rownames_to_column("Sample"))
 
-ord.pca.bray <- ordinate(ps.prop, method="PCoA", distance="bray")
+pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 
-plot_ordination(ps.prop, ord.pca.bray, color="Breeding",title="Bray NMDS")+geom_point(size=3)
+ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
+  geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
+  scale_color_brewer(palette = "Oranges")+
+  labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)")) +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
 
-plot_ordination(ps.prop, ord.pca.bray, color="Stage",title="Bray NMDS")+geom_point(size=3)
+ggsave("figures/PCoA.pdf", dpi=300)
 
-plot_ordination(ps.prop, ord.pca.bray, color="Sites",title="Bray NMDS")+geom_point(size=3)
+# NMDS
+NMDS.scree <- function(x) { #where x is the name of the data frame variable
+  plot(rep(1, 10), replicate(10, metaMDS(x, autotransform = F, k = 1)$stress),
+       xlim = c(1, 10),ylim = c(0, 0.30), xlab = "# of Dimensions", ylab = "Stress",
+       main = "NMDS stress plot")
+  for (i in 1:10) {
+    points(rep(i + 1,10),replicate(10, metaMDS(x, autotransform = F, k = i + 1)$stress))
+  }
+}
 
-plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Stage",title="Bray NMDS")+geom_point(size=3)
+NMDS.scree(vegan_avgdist)
 
-plot_ordination(ps.prop, ord.pca.bray, color="Sites", title="Bray NMDS")+geom_point(size=3)
+# Scree plot shows that from 4 dimensions the stress is significantly reduced
+nmds.ord <- metaMDS(vegan_avgdist, k=4)
 
-plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Sites", title="Bray NMDS")+geom_point(size=3)
+nmds_df <- data.frame(nmds.ord$points) %>% 
+  rownames_to_column("Sample") %>% 
+  left_join(samdf %>% rownames_to_column("Sample"))
 
-plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Sites", title="Bray NMDS")+geom_point(size=3)
+ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
+  geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
+  scale_color_brewer(palette = "Oranges")+
+  labs(x="NMDS1", y="NMDS2") +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
 
-plot_ordination(ps.prop, ord.pca.bray, color="Stage", shape="Sites", title="Bray NMDS")+geom_point(size=3)
+ggsave("figures/NMDS.pdf", dpi=300)
+
+
+# PERMANOVA
+
+meta <- data.frame(sample_data(SANON))
+
+adonis2(vegan_avgdist~Sites*Stage*Breeding, data=meta, permutations=999)
+
+# permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
+#                         method="bray", by= "terms",na.rm=T)
+# permM
+# permM1<- adonis2(t(otu)~Sites+Stage,data= meta, permutations=999, 
+#                 method="bray", by= "terms",na.rm=T)
+# permM1
+# permM2<- adonis2(t(otu)~Breeding*Stage,data= meta, permutations=999, 
+#                 method="bray", by= "terms",na.rm=T)
+# permM2
+# permM3<- adonis2(t(otu)~Breeding+Stage,data= meta, permutations=999, 
+#                  method="bray", by= "terms",na.rm=T)
+# permM3
+# permM4<- adonis2(t(otu)~Sites*Stage*Breeding,data= meta, permutations=999, 
+#                  method="bray", by= "terms",na.rm=T)
+# permM4
+# 
+# #### Plots for Beta diversity 
+# # Transform data to proportions as appropriate for Bray-Curtis distances
+# 
+# #ps.prop <- transform_sample_counts(SANON, function(otu) otu/sum(otu))
+# 
+# ord.nmds.bray <- ordinate(ps.prop, method="NMDS", distance="bray")
+# 
+# ord.pca.bray <- ordinate(ps.prop, method="PCoA", distance="bray")
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Breeding",title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Stage",title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Sites",title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Stage",title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Sites", title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Sites", title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Breeding", shape="Sites", title="Bray NMDS")+geom_point(size=3)
+# 
+# plot_ordination(ps.prop, ord.pca.bray, color="Stage", shape="Sites", title="Bray NMDS")+geom_point(size=3)
