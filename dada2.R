@@ -10,8 +10,7 @@ install.packages("devtools")
 
 library("devtools")
 
-library(dada2);
-
+library(dada2)
 packageVersion("dada2")
 
 library(here)
@@ -103,24 +102,24 @@ load("C:/sanon/SILVA_SSU_r138_2019.RData") # CHANGE TO THE PATH OF YOUR TRAINING
 
 ids <- IdTaxa(dna, trainingSet, strand="top", processors=10, verbose=TRUE) # use all processors
 
-ranks <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species") # ranks of interest
-ranks
-class(ranks)
+ # ranks of interest
+ranks <- c("domain", "phylum", "class", "order", "family", "genus", "species")
 
 # Convert the output object of class "Taxa" to a matrix analogous to the output from assignTaxonomy
-taxid <- t(sapply(ids, function(x) {
+taxa <- t(sapply(ids, function(x) {
   m <- match(ranks, x$rank)
   taxa <- x$taxon[m]
-  taxa[startsWith(taxa, "unclassified_")] <- NA
+  #taxa[startsWith(taxa, "unclassified_")] <- NA
   taxa
 }))
 
-colnames(taxid) <- ranks
-rownames(taxid) <- getSequences(seqtab.nochim)
-colnames(taxid)
+ranks <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+colnames(taxa) <- ranks
+rownames(taxa) <- getSequences(seqtab.nochim)
+colnames(taxa)
 
 # Removing sequence rownames for display only
-taxa.print <- taxid
+taxa.print <- taxa
 
 rownames(taxa.print) <- NULL
 
@@ -195,9 +194,9 @@ ps.pa.pos <- prune_samples(sample_data(ps.pa)$Breeding != "NC", ps.pa)
 
 # Make data.frame of prevalence in positive and negative samples
 df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
-                    contaminant=contamdf.prev$contaminant)
+                    contaminant=contamdf.prev05$contaminant)
 
-ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
+ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_jitter(alpha=.5, width = .3) +
   xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
 
 ##### Remove negative controls and contaminants from phyloseq object
@@ -212,11 +211,5 @@ Sanon <- ps.noncontam
 
 Sanon
 
-Sanon_DECIPHER <- Sanon
-
-tax_table(Sanon_DECIPHER) <- taxid
-
-Sanon_DECIPHER
-
 # Save your workspace to a .RData file
-save.image(file = "C:/sanon/Sanon_16S_DADA2_data.RData")
+save.image(file = "Sanon_16S_DADA2_data.RData")
