@@ -96,7 +96,7 @@ ggplot(data=df, aes(x=LibrarySize, y="samples")) +
   theme_bw()
 
 set.seed(1234)
-alpha_df_list <- purrr::map(1:10, ~alpha_rarefied(ab_table=as_tibble(otu_table(SANON)), sequencing_depth=min_depth))
+alpha_df_list <- purrr::map(1:1000, ~alpha_rarefied(ab_table=as_tibble(otu_table(SANON)), sequencing_depth=min_depth))
 alpha_average_df <- Reduce(`+`, alpha_df_list) / length(alpha_df_list)
 alpha_average_df <- alpha_average_df %>% 
   mutate(Observed=round(Observed))
@@ -120,11 +120,3 @@ alpha <- alpha_average_df %>%
 alpha
 
 ggsave("figures/alpha_diversity.pdf", dpi=300)
-
-# Pick relative abundances (compositional) and sample metadata 
-
-SANON.rel <- microbiome::transform(SANON, "compositional")
-
-otu <- microbiome::abundances(SANON.rel)
-
-meta <- meta(SANON.rel)
