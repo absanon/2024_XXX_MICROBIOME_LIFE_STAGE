@@ -1,10 +1,5 @@
 here::i_am("relative_abundance.R")
-
 load("Sanon_16S_DADA2_data.RData")
-
-ps.fam <- subset_taxa(Sanon, !is.na(Family) & !Family %in% c("", "uncharacterized"))
-
-SANON <- ps.fam
 
 ##### Community composition per sites
 #### Phylum
@@ -38,7 +33,7 @@ ps.melt_sum <- ps.melt %>%
   summarise(Abundance=sum(Abundance))
 
 # Setting factor levels
-ps.melt_sum$Stage <- factor(ps.melt_sum$Stage, levels = c("wa", "lar", "pu", "ad"))
+#ps.melt_sum$Stage <- factor(ps.melt_sum$Stage, levels = c("water", "larvae", "pupae", "adult"))
 
 ggplot(ps.melt_sum, aes(x = Sample, y = Abundance, fill = Phylum)) + 
   geom_bar(stat = "identity", aes(fill=Phylum)) + 
@@ -324,7 +319,7 @@ ps.melt_sum
  ###############################################################################################################
  #### Class
 
-  ps.relD <- transform_sample_counts(Sanon, function(x) x/sum(x)*100)
+  ps.relD <- transform_sample_counts(SANON, function(x) x/sum(x)*100)
  
  ps.relD
 
