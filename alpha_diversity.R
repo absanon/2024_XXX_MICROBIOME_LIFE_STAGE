@@ -101,7 +101,7 @@ alpha_average_df <- Reduce(`+`, alpha_df_list) / length(alpha_df_list)
 alpha_average_df <- alpha_average_df %>% 
   mutate(Observed=round(Observed))
 
-alpha_average_df %>% 
+alpha <- alpha_average_df %>% 
   rownames_to_column("Sample") %>% 
   select(-Observed) %>% 
   left_join(samdf %>% rownames_to_column("Sample")) %>% 
@@ -119,6 +119,7 @@ alpha_average_df %>%
            label = "p.adj.format", hide.ns="p.adj", show.legend = F, tip.length = 0.01)
 alpha
 
+ggsave("figures/alpha_diversity.pdf", dpi=300)
 
 # Pick relative abundances (compositional) and sample metadata 
 
