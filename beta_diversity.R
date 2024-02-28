@@ -12,7 +12,7 @@ min_depth <- df %>%
   min()
 
 vegan_avgdist <- avgdist(as.data.frame(t(otu_table(SANON))), 
-                         sample=min_depth, iterations = 10)
+                         sample=min_depth, iterations = 1000)
 
 # PCoA
 pcoa.ord <- ape::pcoa(vegan_avgdist)
