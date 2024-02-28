@@ -145,14 +145,23 @@ stage <- sapply(strsplit(samples.out, "-"), `[`, 3)
 stage
 
 samdf <- data.frame(Stage=stage, Breeding=breeding, Sites=sites)
+rownames(samdf) <- samples.out
+
+levels <- c("water", "larvae", "pupae", "adult" ) 
+samdf %>% 
+  mutate(Stage=case_when(Stage == "wa" ~ "water",
+                         Stage == "lar" ~ "larvae",
+                         Stage == "pu" ~ "pupae",
+                         Stage =="ad" ~ "adult"),
+         Stage=factor(Stage, levels=levels),)
 
 samdf
 
-rownames(samdf) <- samples.out
+
 ########################################################################## 
 ##### Built the Phylosequ file
 rownames(samdf)
-ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), 
+ps <- phyloseq(otu_table(t(seqtab.nochim), taxa_are_rows=T), 
                sample_data(samdf), 
                tax_table(taxid))
 ps
