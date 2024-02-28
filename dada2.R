@@ -104,24 +104,24 @@ ids <- IdTaxa(dna, trainingSet, strand="top", processors=10, verbose=TRUE) # use
 ranks <- c("domain", "phylum", "class", "order", "family", "genus", "species")
 
 # Convert the output object of class "Taxa" to a matrix analogous to the output from assignTaxonomy
-taxa <- t(sapply(ids, function(x) {
+taxid <- t(sapply(ids, function(x) {
   m <- match(ranks, x$rank)
-  taxa <- x$taxon[m]
-  #taxa[startsWith(taxa, "unclassified_")] <- NA
-  taxa
+  taxid <- x$taxon[m]
+  #taxid[startsWith(taxid, "unclassified_")] <- NA
+  taxid
 }))
 
 ranks <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")
-colnames(taxa) <- ranks
-rownames(taxa) <- getSequences(seqtab.nochim)
-colnames(taxa)
+colnames(taxid) <- ranks
+rownames(taxid) <- getSequences(seqtab.nochim)
+colnames(taxid)
 
 # Removing sequence rownames for display only
-taxa.print <- taxa
+taxid.print <- taxid
 
-rownames(taxa.print) <- NULL
+rownames(taxid.print) <- NULL
 
-head(taxa.print)
+head(taxid.print)
 
 ####### 
 samples.out <- rownames(seqtab.nochim)
@@ -154,7 +154,7 @@ rownames(samdf) <- samples.out
 rownames(samdf)
 ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), 
                sample_data(samdf), 
-               tax_table(taxa))
+               tax_table(taxid))
 ps
 ###################################################################################################################
 ###REMOVE CONTAMINANT########
