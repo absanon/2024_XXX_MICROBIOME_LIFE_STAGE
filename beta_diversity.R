@@ -24,11 +24,11 @@ pcoa_df <- data.frame(pcoa.ord$vectors) %>%
 pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 
 ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
-  geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
+  geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
+  scale_shape_manual(values=c(15, 16, 17, 8))+
   labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
-       shape="Breeding material") +
-  guides(color = guide_legend(override.aes = list(alpha = 1)))
+       shape="Breeding material/Urbanisation")
 
 ggsave("figures/PCoA.pdf", dpi=300)
 
@@ -52,10 +52,10 @@ nmds_df <- data.frame(nmds.ord$points) %>%
   left_join(samdf %>% rownames_to_column("Sample"))
 
 ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
-  geom_point(aes(color=Stage, shape=Breeding), size=3, alpha=.75)+
+  geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
-  labs(x="NMDS1", y="NMDS2", shape="Breeding material") +
-  guides(color = guide_legend(override.aes = list(alpha = 1)))
+  scale_shape_manual(values=c(15, 16, 17, 8))+
+  labs(x="NMDS1", y="NMDS2", shape="Breeding material/Urbanisation")
 
 ggsave("figures/NMDS.pdf", dpi=300)
 
@@ -64,7 +64,27 @@ ggsave("figures/NMDS.pdf", dpi=300)
 
 meta <- data.frame(sample_data(SANON))
 
-adonis2(vegan_avgdist~Sites*Stage*Breeding, data=meta, permutations=999)
+adonis2(vegan_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
+
+adonis2(vegan_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
+
+# db-RDA
+source("custom_rldbrda.R")
+
+rda <- custom_rldbrda(
+  vegan_avgdist, 
+  samdf %>% 
+    select(-Urbanisation, -breeding_urban) %>% 
+    filter(Breeding != "NC")
+  )
+
+plot_data <- prepare_plot_data(rda)
+plot_data 
+
+g <- plot_dbrda(plot_data)
+g
+ggsave("figures/dbRDA.pdf", dpi=300)
+
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
 #                         method="bray", by= "terms",na.rm=T)
