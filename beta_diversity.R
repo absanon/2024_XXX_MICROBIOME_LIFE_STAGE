@@ -92,7 +92,8 @@ g+
                             "Breeding"="Breeding\nmaterial", 
                             "Sites"="Location"))+
   scale_fill_grey(start = .8, end=0.2,
-                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))
+                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
+  theme_bw()
 
 ggsave("figures/dbRDA.pdf", dpi=300)
 
