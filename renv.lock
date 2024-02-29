@@ -352,14 +352,14 @@
     },
     "RLdbRDA": {
       "Package": "RLdbRDA",
-      "Version": "0.1.0",
+      "Version": "0.1.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "raeslab",
       "RemoteRepo": "RLdbRDA",
       "RemoteRef": "main",
-      "RemoteSha": "d0ce366c7d4bcbcca535a4cb62c4d5c854778986",
+      "RemoteSha": "5f4830b38463f375110e59df0eefe92e0f41321c",
       "Requirements": [
         "dplyr",
         "ggplot2",
@@ -368,7 +368,7 @@
         "tidyr",
         "vegan"
       ],
-      "Hash": "5656c34aeccfbacebed02753f2b2981f"
+      "Hash": "92148470d4911dc40eb5dc19763d1ab7"
     },
     "RSQLite": {
       "Package": "RSQLite",

@@ -1,3 +1,4 @@
+library(tidyverse)
 library(vegan)
 library(glue)
 library(RLdbRDA)
@@ -29,7 +30,8 @@ ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
   labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
-       shape="Breeding material/Urbanisation")
+       shape="Breeding material/Urbanisation")+
+  theme_bw()
 
 ggsave("figures/PCoA.pdf", dpi=300)
 
@@ -56,7 +58,8 @@ ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
-  labs(x="NMDS1", y="NMDS2", shape="Breeding material/Urbanisation")
+  labs(x="NMDS1", y="NMDS2", shape="Breeding material/Urbanisation")+
+  theme_bw()
 
 ggsave("figures/NMDS.pdf", dpi=300)
 
@@ -80,10 +83,17 @@ rda <- custom_rldbrda(
   )
 
 plot_data <- prepare_plot_data(rda)
-plot_data 
+plot_data
 
 g <- plot_dbrda(plot_data)
-g
+g+
+  labs(y="")+
+  scale_y_discrete(labels=c("Stage"="Mosquito\nlife stage", 
+                            "Breeding"="Breeding\nmaterial", 
+                            "Sites"="Location"))+
+  scale_fill_grey(start = .8, end=0.2,
+                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))
+
 ggsave("figures/dbRDA.pdf", dpi=300)
 
 

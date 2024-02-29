@@ -80,25 +80,3 @@ combine_data <- function(r2, cumul){
   return(all)
 }
 
-plot_dbrda <- function(plot_data) {
-    if (length(unique(plot_data$significant)) > 1) {
-      alpha_scale <- scale_alpha_continuous(range = c(0.5, 1))
-    } else if (unique(plot_data$significant) == 1) {
-      alpha_scale <- scale_alpha_continuous(range = 1)
-    } else {
-      alpha_scale <-scale_alpha_continuous(range = 0.5)
-    }
-    
-    ggplot(data = plot_data, aes(x = value, y = rowname, fill = variable)) +
-      geom_bar(aes(alpha = significant), stat = 'identity', position = position_dodge2()) +
-      theme_minimal() +
-      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-      xlab('Effect size') +
-      ylab('Feature') +
-      labs(fill = "", alpha = "") + # Hide title of the legend and alpha legend
-      guides(alpha = "none") + # Hide alpha legend
-      scale_fill_manual(values = c("#60A68B", "#1F4068"),
-                        labels = c(bquote(R^2), bquote('Cumulative' ~ R^2))) +
-      alpha_scale
-  }
-

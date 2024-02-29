@@ -1,3 +1,6 @@
+library(tidyverse)
+library(ggpubr)
+library(phyloseq)
 here::i_am("relative_abundance.R")
 load("Sanon_16S_DADA2_data.RData")
 
