@@ -1,3 +1,13 @@
+#NMDS scree plot
+NMDS_scree <- function(x) { #where x is the name of the data frame variable
+  plot(rep(1, 10), replicate(10, metaMDS(x, autotransform = F, k = 1, trace = F)$stress),
+       xlim = c(1, 10),ylim = c(0, 0.30), xlab = "# of Dimensions", ylab = "Stress",
+       main = "NMDS stress plot")
+  for (i in 1:10) {
+    points(rep(i + 1,10),replicate(10, metaMDS(x, autotransform = F, k = i + 1, trace=F)$stress))
+  }
+}
+
 #' Functions are adapted or copied (because they were not exported) from https://github.com/raeslab/RLdbRDA/tree/main
 custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
   

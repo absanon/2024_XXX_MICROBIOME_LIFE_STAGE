@@ -2,6 +2,7 @@ library(tidyverse)
 library(vegan)
 library(glue)
 library(RLdbRDA)
+library(patchwork)
 here::i_am("beta_diversity.R")
 load("Sanon_16S_DADA2_data.RData")
 
@@ -25,27 +26,19 @@ pcoa_df <- data.frame(pcoa.ord$vectors) %>%
 
 pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 
-ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
+p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
   labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
        shape="Breeding material/Urbanisation")+
   theme_bw()
+p_pcoa
 
 ggsave("figures/PCoA.pdf", dpi=300)
 
 # NMDS
-NMDS.scree <- function(x) { #where x is the name of the data frame variable
-  plot(rep(1, 10), replicate(10, metaMDS(x, autotransform = F, k = 1)$stress),
-       xlim = c(1, 10),ylim = c(0, 0.30), xlab = "# of Dimensions", ylab = "Stress",
-       main = "NMDS stress plot")
-  for (i in 1:10) {
-    points(rep(i + 1,10),replicate(10, metaMDS(x, autotransform = F, k = i + 1)$stress))
-  }
-}
-
-NMDS.scree(vegan_avgdist)
+NMDS_scree(vegan_avgdist)
 
 # Scree plot shows that from 4 dimensions the stress is significantly reduced
 nmds.ord <- metaMDS(vegan_avgdist, k=4)
@@ -149,10 +142,10 @@ for (i in c("water", "larvae", "pupae", "adult")){
 plot_data <- prepare_plot_data(final_rda)
 plot_data
 
-plot_data %>% 
+p_dbrda <- plot_data %>% 
   filter(variable != "RDAcumul_R2.adj") %>% 
   plot_dbrda()+
-  facet_wrap(~factor(Stage, levels = c("water", "larvae", "pupae", "adult")))+
+  facet_wrap(~factor(Stage, levels = c("water", "larvae", "pupae", "adult")), nrow=1)+
   scale_fill_grey(start = 0.4,
                   labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
   scale_y_discrete(labels=c("Breeding"="Breeding\nmaterial", 
@@ -160,6 +153,7 @@ plot_data %>%
   labs(x=bquote("Effect size (adjusted "*R^2*")"))+
   guides(fill="none")+  
   theme_bw()
+p_dbrda
 ggsave("figures/dbRDA_per_stage.pdf", dpi=300)
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
