@@ -64,7 +64,9 @@ alpha <- alpha_average_df %>%
   rownames_to_column("Sample") %>% 
   select(-Observed) %>% 
   left_join(samdf %>% rownames_to_column("Sample")) %>% 
-  pivot_longer(c(-Sample, -Stage, -Breeding, -Sites, -Urbanisation), names_to = "Metric", values_to = "Diversity") %>%
+  pivot_longer(c(-Sample, -Stage, -Breeding, -Sites, 
+                 -Urbanisation, -breeding_urban), 
+               names_to = "Metric", values_to = "Diversity") %>%
   ggplot(aes(x=Stage, y=Diversity, color=Stage))+
   geom_boxplot(outlier.shape = NA)+
   geom_jitter(width=0.2)+
