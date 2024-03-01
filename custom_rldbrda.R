@@ -9,7 +9,7 @@ custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
     stop("No significant features found, cannot continue!")
   }
   
-  cumul <- get_cumul(distmat, meta[, sign_r2])
+  cumul <- get_cumul(distmat, meta %>% select(sign_r2))
   
   out <- combine_data(r2, cumul)
   
@@ -78,5 +78,46 @@ combine_data <- function(r2, cumul){
   all=all[order(all$RDAcumul_R2.adj),]
   
   return(all)
+}
+
+prepare_plot_data <- function(dbrda_data) {
+  # Define the order of the y-axis
+  plot_order = rev(row.names(dbrda_data))
+  
+  # Impute missing values in RDAcumul_R2.adj with the largest non-NA value
+  insignificant_features <- row.names(dbrda_data)[is.na(dbrda_data$RDAcumul_R2.adj)]
+  max_val <- max(dbrda_data$RDAcumul_R2.adj, na.rm = TRUE)
+  dbrda_data$RDAcumul_R2.adj[is.na(dbrda_data$RDAcumul_R2.adj)] <- max_val
+  
+  # Filter the data and reshape it to long form
+  plot_data = dbrda_data %>%    
+    rownames_to_column(var = "rowname") %>%
+    mutate(r2adj = as.numeric(r2adj),
+           rowname2=str_replace(rowname, "[0-9]", "")) %>%
+    filter(rowname2 != "<All variables>") %>%
+    select(r2adj, RDAcumul_R2.adj, Stage, rowname2, rowname) %>%
+    pivot_longer(c(-rowname, -rowname2, -Stage), names_to = "variable", values_to = "value") %>%
+    mutate(significant = ifelse(rowname %in% insignificant_features, 0, 1))
+  
+  plot_data$rowname <- factor(plot_data$rowname, levels = plot_order)
+  
+  return(plot_data)
+}
+
+plot_dbrda <- function(plot_data) {
+  # Plot the data as a horizontal bar plot
+  g <- ggplot(data = plot_data, aes(x = value, y = rowname2, fill = variable)) +
+    geom_bar(aes(alpha = significant), stat = 'identity', position = position_dodge2()) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+    xlab('Effect size') +
+    ylab('Feature') +
+    labs(fill = "") + # Hide title of the legend
+    guides(alpha="none") + # Hide alpha legend
+    scale_fill_manual(values=c("#60A68B", "#1F4068"),
+                      labels=c(bquote(R^2), bquote('Cumulative' ~ R^2))) +
+    scale_alpha_continuous(range = c(0.5, 1), limits = c(0, 1))
+  
+  return(g)
 }
 
