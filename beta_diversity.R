@@ -47,12 +47,13 @@ nmds_df <- data.frame(nmds.ord$points) %>%
   rownames_to_column("Sample") %>% 
   left_join(samdf %>% rownames_to_column("Sample"))
 
-ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
+p_nmds <- ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
   labs(x="NMDS1", y="NMDS2", shape="Breeding material/Urbanisation")+
   theme_bw()
+p_nmds
 
 ggsave("figures/NMDS.pdf", dpi=300)
 
@@ -155,6 +156,13 @@ p_dbrda <- plot_data %>%
   theme_bw()
 p_dbrda
 ggsave("figures/dbRDA_per_stage.pdf", dpi=300)
+
+# Combine pcoa + dbRDA plots
+p_pcoa / p_dbrda +
+  plot_layout(heights = c(4, 1))+ 
+  plot_annotation(tag_levels = 'A')&
+  theme(plot.tag = element_text(face="bold"))
+ggsave("figures/beta_diversity.pdf", dpi=300)
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
 #                         method="bray", by= "terms",na.rm=T)
