@@ -31,7 +31,7 @@ p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
   labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
-       shape="Breeding material/Urbanisation")+
+       shape="Breeding material/\nUrbanisation")+
   theme_bw()
 p_pcoa
 
@@ -51,7 +51,7 @@ p_nmds <- ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
-  labs(x="NMDS1", y="NMDS2", shape="Breeding material/Urbanisation")+
+  labs(x="NMDS1", y="NMDS2", shape="Breeding material/\nUrbanisation")+
   theme_bw()
 p_nmds
 
@@ -163,6 +163,22 @@ p_pcoa / p_dbrda +
   plot_annotation(tag_levels = 'A')&
   theme(plot.tag = element_text(face="bold"))
 ggsave("figures/beta_diversity.pdf", dpi=300)
+
+p1 <- alpha+
+  labs(x="")+
+  theme(legend.position = "none", 
+        axis.title.x = element_text(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+p2 <- (p_pcoa / p_dbrda) +
+  plot_layout(heights = c(4, 1))
+
+
+free(p1) + p2 +
+  plot_layout(widths = c(1, 2))+
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(face="bold"))
+ggsave("figures/combined_diversity.pdf", dpi=300)
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
 #                         method="bray", by= "terms",na.rm=T)
