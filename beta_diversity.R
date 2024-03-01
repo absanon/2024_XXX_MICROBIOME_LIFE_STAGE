@@ -72,14 +72,25 @@ adonis2(vegan_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
 
 adonis2(vegan_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
 
+CTRL <- how(plots=Plots(strata = meta$Stage, type="free"),
+            within=Within(type="free"),
+            nperm=999)
+set.seed(4)
+CTRL <- how(blocks=meta$Stage,
+            nperm=999)
+
+adonis2(vegan_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
+
 # db-RDA
 source("custom_rldbrda.R")
 
+meta_overall_rda  <- samdf %>% 
+  select(-Urbanisation, -breeding_urban) %>% 
+  filter(Breeding != "NC")
+
 rda <- custom_rldbrda(
   vegan_avgdist, 
-  samdf %>% 
-    select(-Urbanisation, -breeding_urban) %>% 
-    filter(Breeding != "NC")
+  meta_overall_rda
   )
 
 plot_data <- prepare_plot_data(rda)
@@ -96,6 +107,50 @@ g+
   theme_bw()
 
 ggsave("figures/dbRDA.pdf", dpi=300)
+
+
+#' # Per stage
+set.seed(12)
+final_rda <- data.frame(matrix(ncol = 14, nrow = 0))
+for (i in c("water", "larvae", "pupae", "adult")){
+  names <- samdf %>% 
+    filter(Breeding!="NC", 
+           Stage == i) %>% 
+    rownames_to_column("Sample") %>% 
+    pull(Sample)
+  
+  distm <- as.data.frame(as.matrix(vegan_avgdist)) %>% 
+    select(all_of(names)) %>% 
+    filter(rownames(.) %in% names) %>% 
+    as.dist(diag = T, upper = T)
+  
+  meta_rda <- meta_overall_rda %>% 
+    select(-Stage) %>% 
+    filter(rownames(.) %in% names)
+  
+  rda <- custom_rldbrda(
+    distm,
+    meta_rda
+  ) %>% 
+  mutate(Stage=i)
+    
+  final_rda <- rbind(final_rda, rda)
+}
+
+plot_data <- prepare_plot_data(final_rda)
+plot_data
+
+plot_data %>% 
+  filter(variable != "RDAcumul_R2.adj") %>% 
+  plot_dbrda()+
+  facet_wrap(~factor(Stage, levels = c("water", "larvae", "pupae", "adult")))+
+  scale_fill_grey(start = 0.4,
+                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
+  scale_y_discrete(labels=c("Breeding"="Breeding\nmaterial", 
+                            "Sites"="Location"))+
+  labs(x=bquote("Effect size (adjusted "~R^2~")"))+
+  guides(fill="none")+  
+  theme_bw()
 
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
