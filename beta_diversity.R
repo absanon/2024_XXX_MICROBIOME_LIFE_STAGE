@@ -110,7 +110,7 @@ ggsave("figures/dbRDA.pdf", dpi=300)
 
 
 #' # Per stage
-set.seed(12)
+set.seed(1234)
 final_rda <- data.frame(matrix(ncol = 14, nrow = 0))
 for (i in c("water", "larvae", "pupae", "adult")){
   names <- samdf %>% 
@@ -131,8 +131,17 @@ for (i in c("water", "larvae", "pupae", "adult")){
   rda <- custom_rldbrda(
     distm,
     meta_rda
-  ) %>% 
-  mutate(Stage=i)
+  )
+  
+  if (is.null(rda)){
+    rda <- data.frame(matrix(ncol = 14, nrow = 2))
+    colnames(rda) <- colnames(final_rda)
+    rownames(rda) <- c("Breeding", "Sites")
+    rda["Stage"] <- i
+  } else {
+    rda <- rda %>% 
+      mutate(Stage = i)
+  }
     
   final_rda <- rbind(final_rda, rda)
 }
@@ -148,10 +157,10 @@ plot_data %>%
                   labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
   scale_y_discrete(labels=c("Breeding"="Breeding\nmaterial", 
                             "Sites"="Location"))+
-  labs(x=bquote("Effect size (adjusted "~R^2~")"))+
+  labs(x=bquote("Effect size (adjusted "*R^2*")"))+
   guides(fill="none")+  
   theme_bw()
-
+ggsave("figures/dbRDA_per_stage.pdf", dpi=300)
 
 # permM<- adonis2(t(otu)~Sites*Stage,data= meta, permutations=999, 
 #                         method="bray", by= "terms",na.rm=T)

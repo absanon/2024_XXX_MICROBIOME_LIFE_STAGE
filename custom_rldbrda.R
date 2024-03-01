@@ -6,10 +6,11 @@ custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
   sign_r2 = rownames(r2[which(r2$padj < p_cutoff),]) # selects only variables significant in step 1
   
   if (length(sign_r2) < 1) {
-    stop("No significant features found, cannot continue!")
+    message("No significant features found!")
+    return(NULL)
   }
   
-  cumul <- get_cumul(distmat, meta %>% select(sign_r2))
+  cumul <- get_cumul(distmat, meta[sign_r2])
   
   out <- combine_data(r2, cumul)
   
@@ -18,7 +19,7 @@ custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
 
 get_r2_single <- function(distmat, meta, feature) {
   capsc <- capscale(distmat ~ meta[, feature], na.action=na.omit)
-  an <- anova.cca(capsc)
+  an <- anova.cca(capsc, permutations = 9999)
   
   Fa <- an["F"][[1]][[1]]
   r2 <- RsquareAdj(capsc)[[1]]
@@ -56,7 +57,7 @@ get_cumul <- function(distmat, meta) {
   
   attach(meta)
   
-  step.res<-ordiR2step(mod0, scope=formula(mod1), data=meta ,direction="forward", Pin = 1, R2scope = TRUE, pstep = 100, perm.max = 999, permutations=9999, trace = F) #forward stepwise dbRDA
+  step.res<-ordiR2step(mod0, scope=formula(mod1), data=meta ,direction="forward", Pin = 1, R2scope = TRUE, pstep = 100, permutations=9999, trace = F) #forward stepwise dbRDA
   res=step.res$anova
   
   
