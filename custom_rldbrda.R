@@ -104,7 +104,8 @@ prepare_plot_data <- function(dbrda_data) {
   plot_data = dbrda_data %>%    
     rownames_to_column(var = "rowname") %>%
     mutate(r2adj = as.numeric(r2adj),
-           rowname2=str_replace(rowname, "[0-9]", "")) %>%
+           rowname2=str_replace(rowname, "[0-9]", ""), 
+           RDAcumul_R2.adj=ifelse(padj <= 0.05, RDAcumul_R2.adj, NA)) %>%
     filter(rowname2 != "<All variables>") %>%
     select(r2adj, RDAcumul_R2.adj, Stage, rowname2, rowname) %>%
     pivot_longer(c(-rowname, -rowname2, -Stage), names_to = "variable", values_to = "value") %>%

@@ -144,15 +144,15 @@ plot_data <- prepare_plot_data(final_rda)
 plot_data
 
 p_dbrda <- plot_data %>% 
-  filter(variable != "RDAcumul_R2.adj") %>% 
+  #filter(variable != "RDAcumul_R2.adj") %>% 
   plot_dbrda()+
-  facet_wrap(~factor(Stage, levels = c("water", "larvae", "pupae", "adult")))+
-  scale_fill_grey(start = 0.4,
-                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
+  facet_wrap(~factor(Stage, levels = c("water", "larvae", "pupae", "adult")), nrow=1)+
+  #scale_fill_grey(start = 0.1, end=.85, 
+  #                labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
   scale_y_discrete(labels=c("Breeding"="Breeding\nmaterial", 
                             "Sites"="Location"))+
   labs(x=bquote("Effect size (adjusted "*R^2*")"))+
-  guides(fill="none")+  
+  #guides(fill="none")+  
   theme_bw()+
   theme(axis.title.y = element_blank())
 p_dbrda
