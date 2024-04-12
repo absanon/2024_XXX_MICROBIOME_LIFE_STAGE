@@ -26,7 +26,7 @@ ps.rel <- transform_sample_counts(SANON, function(x) x/sum(x)*100)
 glom <- tax_glom(ps.rel, taxrank = 'Family', NArm = FALSE)
 
 ps.melt <- psmelt(glom)
-ps.melt <- psmelt(ps.rel)
+#ps.melt <- psmelt(ps.rel)
 
 # change to character for easy-adjusted level
 ps.melt$Family <- as.character(ps.melt$Family)
@@ -121,6 +121,7 @@ p <- ggnested(rel_abundance_clean, aes(x = Sample, y = Abundance, main_group=cle
         panel.spacing.x = unit(.15, "lines"),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
+        axis.text.y = element_text(size=6),
         legend.text = element_markdown())
 p
 
@@ -150,6 +151,7 @@ p2 <- rel_abundance_clean %>%
         ggh4x.facet.nestline = element_line(color = "black", linewidth = .2),
         panel.spacing.x = unit(.15, "lines"),
         axis.text.x = element_blank(),
+        axis.text.y = element_text(size=6),
         axis.ticks.x = element_blank(),
         legend.text = element_markdown())
 
