@@ -26,10 +26,12 @@ ps.rel <- transform_sample_counts(SANON, function(x) x/sum(x)*100)
 glom <- tax_glom(ps.rel, taxrank = 'Family', NArm = FALSE)
 
 ps.melt <- psmelt(glom)
+ps.melt <- psmelt(ps.rel)
 
 # change to character for easy-adjusted level
 ps.melt$Family <- as.character(ps.melt$Family)
 
+# Clean up taxonomy
 ps.melt_clean <- ps.melt %>% 
   mutate(Family=gsub(".*unclassified.*", NA, Family),
          Order=gsub(".*unclassified.*", NA, Order),
@@ -46,23 +48,7 @@ ps.melt_clean <- ps.melt %>%
   mutate(Breeding=case_when(Breeding == "plas" ~ "plastic",
                             T ~ Breeding))
 
-## select group mean > 1
-#keep <- unique(ps.melt_clean$Family[ps.melt_clean$Abundance > 1])
-#
-#ps.melt_clean$Family[!(ps.melt_clean$Family %in% keep)] <- "< 1%"
-#ps.melt_clean$Phylum[!(ps.melt_clean$Family %in% keep)] <- "< 1%"
-#ps.melt_clean$Order[!(ps.melt_clean$Family %in% keep)] <- "< 1%"
-#
-###to get the same rows together
-##ps.melt_sum <- ps.melt_clean %>%
-##  group_by(Sample,Stage,Family) %>%
-##  summarise(Abundance=sum(Abundance))
-#
-#unique(ps.melt_clean$Family)
-#unique(ps.melt_clean$Phylum)
-#unique(ps.melt_clean$Order)
-
-
+# Calculate max relative abundance
 rel_abundance_df <- ps.melt_clean %>% 
   group_by(Sample, Phylum) %>% 
   mutate(phylum_abundance=sum(Abundance)) %>% 
@@ -83,6 +69,7 @@ rel_abundance_df <- ps.melt_clean %>%
   mutate(max_order_abundance=max(order_abundance)) %>% 
   ungroup()
 
+# Clean up Phylum, Order and Family names based on relative abundance
 rel_abundance_clean <- rel_abundance_df %>% 
   group_by(Phylum) %>% 
   mutate(clean_Phylum = case_when(max_phylum_abundance < 1 ~ "Others",
@@ -113,6 +100,7 @@ rel_abundance_clean$clean_Family <- factor(rel_abundance_clean$clean_Family,
                                            levels = c(sort(unique(rel_abundance_clean$clean_Family[!startsWith(rel_abundance_clean$clean_Family, "Other")])), 
                                              sort(unique(rel_abundance_clean$clean_Family[startsWith(rel_abundance_clean$clean_Family, "Other")]))))
 
+# Create relative abundance plot
 pal <- c(viridisLite::viridis(9, direction = -1), "grey90")
 
 strip <- strip_nested(text_x = elem_list_text(face=c(rep("bold", 4), rep("plain", 24)), size=rep(6, 28)))
@@ -142,7 +130,7 @@ addSmallLegend(p, spaceLegend = .1)+
 
 ggsave("figures/relative_abundance.pdf", dpi=300, width = 7, height = 5)
 
-#' ### Proteobacteria
+#' Create Proteobacteria plot
 pal <- c(viridisLite::viridis(10, direction = -1, option = "plasma"), "grey80")
 
 p2 <- rel_abundance_clean %>% 
