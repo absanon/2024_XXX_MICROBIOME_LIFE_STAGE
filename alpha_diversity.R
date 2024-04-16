@@ -22,13 +22,13 @@ load("Sanon_16S_DADA2_data.RData")
 alpha_rarefied <- function(ab_table, sequencing_depth) {
   df <- ab_table %>%
     t() %>% 
-    rrarefy(., sample=sequencing_depth) %>% # rrafefy samples from rows, not from columns!
+    vegan::rrarefy(., sample=sequencing_depth) %>% # rrafefy samples from rows, not from columns!
     as_tibble(rownames="sample") %>%
     group_by(sample) %>%
     pivot_longer(-sample) %>%
     summarize(Observed = specnumber(value),
-              Shannon = diversity(value, index="shannon"),
-              Simpson = diversity(value, index="simpson")
+              Shannon = vegan::diversity(value, index="shannon"),
+              Simpson = vegan::diversity(value, index="simpson")
     ) %>%
     as.data.frame() %>%
     column_to_rownames("sample")
@@ -38,7 +38,7 @@ alpha_rarefied <- function(ab_table, sequencing_depth) {
 #' ## Alpha diversity
 df <- as_tibble(sample_data(SANON))
 df$LibrarySize <- sample_sums(SANON)
-df<- df[order(df$LibrarySize),]
+df <- df[order(df$LibrarySize),]
 
 #threshold <- quantile(df$LibrarySize, 0.05)
 
