@@ -252,7 +252,7 @@ alluvial_plot <- alluvial_data %>%
   #scale_fill_brewer(type = "qual", palette = "Paired")+
   scale_fill_viridis_d(option="turbo")+
   geom_flow(decreasing = TRUE) +
-  geom_stratum(decreasing = TRUE) +
+  geom_stratum(decreasing = TRUE, linewidth=.1) +
   geom_vline(aes(xintercept = 2.25),
              linetype="dashed")+
   annotate("text", x=2.25, y=55, label="Larvae stop eating", 
