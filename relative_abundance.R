@@ -136,12 +136,13 @@ p <- ggnested(rel_abundance_clean,
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.y = element_text(size=6),
+        axis.title.x = element_blank(),
         legend.text = element_markdown())
 p
 
 rel_ab_plot <- addSmallLegend(p, spaceLegend = .1)+
   theme(legend.title = element_blank(),
-        axis.title = element_text(size=8))
+        axis.title.y = element_text(size=8))
 
 ggsave("figures/relative_abundance.pdf", dpi=300, width = 7, height = 5)
 
@@ -175,6 +176,7 @@ p2 <- rel_abundance_clean %>%
         strip.placement = "outside",
         ggh4x.facet.nestline = element_line(color = "black", linewidth = .2),
         panel.spacing.x = unit(.15, "lines"),
+        axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.text.y = element_text(size=6),
         axis.ticks.x = element_blank(),
@@ -183,7 +185,7 @@ p2 <- rel_abundance_clean %>%
 rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .1)+
   theme(legend.title = element_blank(),
         #legend.position = "right",
-        axis.title = element_text(size=8))
+        axis.title.y = element_text(size=8))
 
 ggsave("figures/relative_abundance_proteobacteria.pdf", dpi=300, width = 7, height = 5)
 
@@ -195,8 +197,8 @@ top_ASV <- asv_rel %>%
   filter(Stage == "adult") %>% 
   group_by(OTU, Breeding, Sites) %>% 
   summarise(mean=mean(Abundance), median=median(Abundance)) %>% 
-  group_by(Breeding, Sites) %>%
-  top_n(15, mean) %>% 
+  #group_by(Breeding, Sites) %>%
+  slice_max(order_by=mean, n=15, with_ties = F) %>% 
   pull(OTU) %>% 
   unique()
   
@@ -236,6 +238,25 @@ asv_rel %>%
 
 
 # Alluvial plot
+top_ASV_water <- asv_rel %>% 
+  filter(Stage == "water") %>% 
+  group_by(OTU) %>% 
+  summarise(mean = mean(Abundance), median = median(Abundance)) %>% 
+  ungroup() %>% 
+  slice_max(order_by = median, n = 15) %>%
+  pull(OTU)
+
+top_ASV_adult <- asv_rel %>% 
+  filter(Stage == "adult") %>% 
+  group_by(OTU) %>% 
+  summarise(mean = mean(Abundance), median = median(Abundance)) %>% 
+  ungroup() %>%
+  slice_max(order_by = median, n = 15) %>%
+  pull(OTU)
+
+top_ASV <- c(top_ASV_water, top_ASV_adult) %>% unique()
+
+
 alluvial_data <- asv_rel %>% 
   filter(OTU %in% top_ASV) %>% 
   group_by(OTU, Stage) %>% 
@@ -243,12 +264,15 @@ alluvial_data <- asv_rel %>%
   ungroup() %>% 
   select(OTU, Order, Stage, mean, median) %>%
   distinct() %>% 
-  mutate(median_water = if_else(Stage == "water", median, NA_real_)) %>%
-  mutate(OTU = fct_reorder(OTU, median_water, .na_rm = TRUE)) %>% 
-  select(-median_water)
+  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>%
+  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>% 
+  select(-mean_water)
 
 alluvial_plot <- alluvial_data %>% 
-  ggplot(aes(x = Stage, y = median, alluvium = OTU, stratum=OTU, fill=OTU)) +
+  #mutate(top50_ASV=case_when(OTU %in% intersect(top_ASV_adult, top_ASV_water) ~ "both",
+  #                         !OTU %in% top_ASV_adult ~"only water",
+  #                         !OTU %in% top_ASV_water ~"only adult")) %>% 
+  ggplot(aes(x = Stage, y = mean, alluvium = OTU, stratum=OTU, fill=OTU)) +
   #scale_fill_brewer(type = "qual", palette = "Paired")+
   scale_fill_viridis_d(option="turbo")+
   geom_flow(decreasing = TRUE) +
@@ -257,15 +281,16 @@ alluvial_plot <- alluvial_data %>%
              linetype="dashed")+
   annotate("text", x=2.25, y=55, label="Larvae stop eating", 
            angle=90, vjust = -1,hjust=1, size=2)+
-  labs(y="Median relative abundance (%)", x="")+
+  labs(y="Median relative abundance (%)")+
   scale_y_continuous(limits=c(0,NA), 
                      expand = expansion(add=c(0, 0.1)))+
   theme_classic()+
   theme(legend.position = "none",
         legend.title = element_blank(),
+        axis.title.x = element_blank(),
         axis.text.x = element_text(size=6),
         axis.text.y = element_text(size=6),
-        axis.title = element_text(size=8),
+        axis.title.y = element_text(size=8),
         legend.text = element_markdown())
 alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi=300, width=7, height = 4)
