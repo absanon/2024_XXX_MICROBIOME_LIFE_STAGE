@@ -38,6 +38,7 @@ p_pcoa
 ggsave("figures/PCoA.pdf", dpi=300)
 
 # NMDS
+source("custom_rldbrda.R")
 NMDS_scree(vegan_avgdist)
 
 # Scree plot shows that from 4 dimensions the stress is significantly reduced
@@ -76,7 +77,6 @@ CTRL <- how(blocks=meta$Stage,
 adonis2(vegan_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
 
 # db-RDA
-source("custom_rldbrda.R")
 
 meta_overall_rda  <- samdf %>% 
   select(-Urbanisation, -breeding_urban) %>% 
@@ -87,20 +87,20 @@ rda <- custom_rldbrda(
   meta_overall_rda
   )
 
-plot_data <- prepare_plot_data(rda)
-plot_data
-
-g <- plot_dbrda(plot_data)
-g+
-  labs(y="")+
-  scale_y_discrete(labels=c("Stage"="Mosquito\nlife stage", 
-                            "Breeding"="Breeding\nmaterial", 
-                            "Sites"="Location"))+
-  scale_fill_grey(start = .8, end=0.2,
-                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
-  theme_bw()
-
-ggsave("figures/dbRDA.pdf", dpi=300)
+#plot_data <- prepare_plot_data(rda)
+#plot_data
+#
+#g <- plot_dbrda(plot_data)
+#g+
+#  labs(y="")+
+#  scale_y_discrete(labels=c("Stage"="Mosquito\nlife stage", 
+#                            "Breeding"="Breeding\nmaterial", 
+#                            "Sites"="Location"))+
+#  scale_fill_grey(start = .8, end=0.2,
+#                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
+#  theme_bw()
+#
+#ggsave("figures/dbRDA.pdf", dpi=300)
 
 
 #' # Per stage
@@ -165,10 +165,10 @@ p_pcoa / p_dbrda +
   theme(plot.tag = element_text(face="bold"))
 ggsave("figures/beta_diversity.pdf", dpi=300)
 
-p1 <- alpha+
-  labs(x="")+
+p1 <- alpha +
+  #labs(x="")+
   theme(legend.position = "none", 
-        axis.title.x = element_text(),
+        axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 p2 <- (p_pcoa / p_dbrda) +
