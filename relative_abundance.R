@@ -251,6 +251,10 @@ alluvial_data %>%
   scale_fill_viridis_d(option="turbo")+
   geom_flow(decreasing = TRUE) +
   geom_stratum(decreasing = TRUE) +
+  geom_vline(aes(xintercept = 2.25),
+             linetype="dashed")+
+  annotate("text", x=2.25, y=47, label="Larvae stop eating", 
+           angle=90, vjust = -1, size=3)+
   labs(y="Median relative abundance (%)", x="")+
   scale_y_continuous(limits = c(0,NA), 
                      breaks = seq(0,50, by=10),
