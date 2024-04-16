@@ -7,6 +7,7 @@ library(ggh4x)
 library(RColorBrewer)
 library(ggtext)
 library(ggalluvial)
+library(patchwork)
 here::i_am("relative_abundance.R")
 load("Sanon_16S_DADA2_data.RData")
 
@@ -124,7 +125,7 @@ p <- ggnested(rel_abundance_clean,
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
-  scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
+  scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
   theme_classic() + 
   theme(legend.position = "bottom", 
         legend.title = element_blank(),
@@ -138,7 +139,7 @@ p <- ggnested(rel_abundance_clean,
         legend.text = element_markdown())
 p
 
-addSmallLegend(p, spaceLegend = .1)+
+rel_ab_plot <- addSmallLegend(p, spaceLegend = .1)+
   theme(legend.title = element_blank(),
         axis.title = element_text(size=8))
 
@@ -166,7 +167,7 @@ p2 <- rel_abundance_clean %>%
   labs(x="", y="Relative abundance (%)") +
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
                strip=strip, switch="x") +
-  scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
+  scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
   theme_classic() + 
   theme(legend.position = "bottom", 
         legend.title = element_blank(),
@@ -179,7 +180,7 @@ p2 <- rel_abundance_clean %>%
         axis.ticks.x = element_blank(),
         legend.text = element_markdown())
 
-addSmallLegend(p2, spaceLegend = .1)+
+rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .1)+
   theme(legend.title = element_blank(),
         #legend.position = "right",
         axis.title = element_text(size=8))
@@ -206,7 +207,7 @@ asv_rel %>%
   labs(x="Samples", y="Relative abundance (%)") +
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
                strip=strip, switch="x") +
-  scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
+  scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
   scale_fill_viridis_d()+
   theme_classic() + 
   theme(legend.position = "bottom", 
@@ -217,6 +218,7 @@ asv_rel %>%
         panel.spacing.x = unit(.15, "lines"),
         axis.text.x = element_blank(),
         axis.text.y = element_text(size=6),
+        axis.title.y = element_text(size=8),
         axis.ticks.x = element_blank(),
         legend.text = element_markdown())
 
@@ -245,7 +247,7 @@ alluvial_data <- asv_rel %>%
   mutate(OTU = fct_reorder(OTU, median_water, .na_rm = TRUE)) %>% 
   select(-median_water)
 
-alluvial_data %>% 
+alluvial_plot <- alluvial_data %>% 
   ggplot(aes(x = Stage, y = median, alluvium = OTU, stratum=OTU, fill=OTU)) +
   #scale_fill_brewer(type = "qual", palette = "Paired")+
   scale_fill_viridis_d(option="turbo")+
@@ -253,13 +255,25 @@ alluvial_data %>%
   geom_stratum(decreasing = TRUE) +
   geom_vline(aes(xintercept = 2.25),
              linetype="dashed")+
-  annotate("text", x=2.25, y=47, label="Larvae stop eating", 
-           angle=90, vjust = -1, size=3)+
+  annotate("text", x=2.25, y=55, label="Larvae stop eating", 
+           angle=90, vjust = -1,hjust=1, size=2)+
   labs(y="Median relative abundance (%)", x="")+
-  scale_y_continuous(limits = c(0,NA), 
-                     breaks = seq(0,50, by=10),
-                     expand = c(0, 0.1))+
+  scale_y_continuous(limits=c(0,NA), 
+                     expand = expansion(add=c(0, 0.1)))+
   theme_classic()+
-  theme(legend.position = "none")
-
+  theme(legend.position = "none",
+        legend.title = element_blank(),
+        axis.text.x = element_text(size=6),
+        axis.text.y = element_text(size=6),
+        axis.title = element_text(size=8),
+        legend.text = element_markdown())
+alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi=300, width=7, height = 4)
+
+#' combine plots
+
+rel_ab_plot / (((rel_ab_proteo_plot + free(alluvial_plot))+plot_layout(widths = c(1, .5))) / guide_area() + 
+                  plot_layout(guides = 'collect'))+
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(face="bold"))
+ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
