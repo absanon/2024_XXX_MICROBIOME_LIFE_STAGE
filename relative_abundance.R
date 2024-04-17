@@ -302,3 +302,65 @@ rel_ab_plot / (((rel_ab_proteo_plot + free(alluvial_plot))+plot_layout(widths = 
   plot_annotation(tag_levels = 'A') &
   theme(plot.tag = element_text(face="bold"))
 ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
+
+
+#' Compare ASVs only in adult and water per location/breeding material
+asv_stage_mean <- asv_rel %>% 
+  select(-Sample) %>% 
+  pivot_wider(names_from = Stage, values_from = Abundance, values_fn=mean) %>% 
+  group_by(OTU) %>% 
+  summarise(across(c(pupae, adult, water, larvae), \(x) mean(x, na.rm = TRUE)))
+
+water <- asv_stage_mean %>% 
+  filter(water > 0) %>% 
+  pull(OTU) %>% 
+  unique()
+
+larvae <- asv_stage_mean %>% 
+  filter(water == 0 & larvae > 0) %>% 
+  pull(OTU) %>% 
+  unique()
+
+pupae <- asv_stage_mean %>% 
+  filter(water == 0 & larvae == 0 & pupae > 0) %>% 
+  pull(OTU) %>% 
+  unique()
+
+adult <- asv_stage_mean %>% 
+  filter(adult > 0 & water == 0 & larvae == 0 & pupae == 0) %>% 
+  pull(OTU) %>% 
+  unique()
+
+ASV_subset <- c(only_adult, only_water)
+
+stage_relative_ab <- asv_rel %>% 
+  mutate(fill_color=case_when(OTU %in% water ~ "water", 
+                              OTU %in% larvae ~ "larvae", 
+                              OTU %in% pupae ~ "pupae",
+                              OTU %in% adult ~ "adult")) %>% 
+  group_by(fill_color, Sample, Stage, Breeding, Sites) %>% 
+  summarise(Abundance=sum(Abundance), .groups = "drop") %>% 
+  mutate(fill_color=factor(fill_color, levels = c("water", "larvae", "pupae", "adult")))
+
+stage_relative_ab %>% 
+  #filter(Stage != "water") %>% 
+  ggplot(aes(x = Sample, y = Abundance, fill=fill_color)) + 
+  geom_bar(stat = "identity") + 
+  labs(x="", y="Relative abundance (%)") +
+  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+               strip = strip, switch="x",
+               nest_line = element_line(color = "black", linewidth = .2)) +
+  scale_y_continuous(limits = c(0,101), expand = c(0, 0))+
+  scale_fill_brewer(palette = "Oranges", name="ASVs present from following stage:")+
+  theme_classic() + 
+  theme(legend.position = "bottom", 
+        strip.background = element_blank(),
+        strip.placement = "outside",
+        #ggh4x.facet.nestline = element_line(color = list("orange", rep("black", 11)), linewidth = .2),
+        panel.spacing.x = unit(.15, "lines"),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_text(size=6),
+        axis.title.x = element_blank(),
+        legend.text = element_markdown())
+ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
