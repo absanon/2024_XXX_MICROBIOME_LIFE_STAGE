@@ -125,7 +125,7 @@ p <- ggnested(rel_abundance_clean,
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
-  scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
+  scale_y_continuous(limits = c(0,NA), expand = c(0, 0.1))+
   theme_classic() + 
   theme(legend.position = "bottom", 
         legend.title = element_blank(),
@@ -350,8 +350,8 @@ stage_relative_ab %>%
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
-  scale_y_continuous(limits = c(0,101), expand = c(0, 0))+
-  scale_fill_brewer(palette = "Oranges", name="ASVs present from following stage:")+
+  scale_y_continuous(limits = c(0,NA), expand = c(0, 0))+
+  scale_fill_brewer(palette = "Oranges", name="ASVs present starting from:")+
   theme_classic() + 
   theme(legend.position = "bottom", 
         strip.background = element_blank(),
