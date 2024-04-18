@@ -281,7 +281,7 @@ alluvial_plot <- alluvial_data %>%
              linetype="dashed")+
   annotate("text", x=2.25, y=55, label="Larvae stop eating", 
            angle=90, vjust = -1,hjust=1, size=2)+
-  labs(y="Median relative abundance (%)")+
+  labs(y="Mean relative abundance (%)")+
   scale_y_continuous(limits=c(0,NA), 
                      expand = expansion(add=c(0, 0.1)))+
   theme_classic()+
