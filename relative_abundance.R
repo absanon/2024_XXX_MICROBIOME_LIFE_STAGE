@@ -25,32 +25,49 @@ addSmallLegend <- function(myPlot, pointSize = 0.75, textSize = 6, spaceLegend =
 ps.rel <- transform_sample_counts(SANON, function(x) x/sum(x)*100)
 
 # agglomerate taxa
-glom <- tax_glom(ps.rel, taxrank = 'Family', NArm = FALSE)
+#glom <- tax_glom(ps.rel, taxrank = 'Family', NArm = FALSE)
 
-ps.melt <- psmelt(glom)
-#ps.melt <- psmelt(ps.rel)
-
-# change to character for easy-adjusted level
-ps.melt$Family <- as.character(ps.melt$Family)
+#ps.melt <- psmelt(glom)
+ps.melt <- psmelt(ps.rel)
 
 # Clean up taxonomy
-# TODO: unitalicize non-family names for the unclassified instances
 
-ps.melt_clean <- ps.melt %>% 
-  mutate(Family=gsub(".*unclassified.*", NA, Family),
-         Order=gsub(".*unclassified.*", NA, Order),
-         Class=gsub(".*unclassified.*", NA, Class),
-         Phylum=gsub(".*unclassified.*", NA, Phylum),
-         Domain=gsub(".*unclassified.*", NA, Domain),
-         Family=ifelse(is.na(Family),
-                       glue("unclassified <i>{coalesce(Order, Class, Phylum)}</i>"),
-                       glue("<i>{Family}</i>"))
-         ) %>% 
+# Define a function to replace "unclassified" values with NA
+replace_unclassified <- function(x) {
+  ifelse(grepl(".*unclassified.*", x), NA, x)
+}
+
+
+# Define a function to replace "unclassified NA" with a specified string
+replace_unclassified_na <- function(x, replacement) {
+  str_replace(x, "unclassified NA", replacement)
+}
+
+ps.melt_clean_tax <- ps.melt %>% 
+  # Replace "unclassified" values with NA
+  mutate(Family = replace_unclassified(Family),
+         Order = replace_unclassified(Order),
+         Class = replace_unclassified(Class),
+         Phylum = replace_unclassified(Phylum),
+         Domain = replace_unclassified(Domain)) %>% 
+  # Create a new column "Family" with appropriate values
+  mutate(Family = ifelse(is.na(Family), glue("unclassified {coalesce(Order, Class, Phylum)}"), glue("<i>{Family}</i>"))) %>%
+  # Replace NA values in Domain, Phylum, Class, and Order with values from Family
   mutate(across(c(Domain, Phylum, Class, Order), ~ if_else(is.na(.), Family, .))) %>%
-  mutate(across(c(Domain, Phylum, Class, Order, Family), ~str_replace(., "unclassified <i>NA</i>", glue("unclassified Bacteria ({OTU})")))) %>% 
-  mutate(Phylum=if_else(startsWith(Family, "unclassified Bacteria"), "Others", Phylum)) %>% 
-  mutate(Breeding=case_when(Breeding == "plas" ~ "plastic",
-                            T ~ Breeding))
+  # Replace "unclassified NA" with "unclassified Bacteria ({OTU})"
+  mutate(across(c(Domain, Phylum, Class, Order, Family), ~ replace_unclassified_na(., glue("unclassified Bacteria ({OTU})")))) %>%
+  # Replace Phylum values if Family starts with "unclassified Bacteria"
+  mutate(Phylum = if_else(startsWith(Family, "unclassified Bacteria"), "Others", Phylum)) %>%
+  # Replace "plas" with "plastic" in the Breeding column
+  mutate(Breeding = case_when(Breeding == "plas" ~ "plastic", TRUE ~ Breeding))
+
+ps.melt_sum <- ps.melt_clean_tax %>% 
+  group_by(Sample, Family, Genus) %>% 
+  mutate(F_Abundance=sum(Abundance)) %>% 
+  ungroup()
+
+ps.melt_clean <- ps.melt_sum
+
 
 # Calculate max relative abundance
 rel_abundance_df <- ps.melt_clean %>% 
@@ -77,10 +94,10 @@ rel_abundance_df <- ps.melt_clean %>%
 rel_abundance_clean <- rel_abundance_df %>% 
   group_by(Phylum) %>% 
   mutate(clean_Phylum = case_when(max_phylum_abundance < 1 ~ "Others",
-                                T ~ Phylum),
+                                  T ~ Phylum),
          clean_Family = case_when(max_family_abundance < 5 & 
                                     max_family_abundance < max(max_family_abundance) ~ glue("Other {Phylum}"),
-                                T ~ Family)) %>% 
+                                  T ~ Family)) %>% 
   mutate(clean_Family = if_else(clean_Phylum == "Others",
                                 "Others", clean_Family)) %>% 
   ungroup() %>% 
@@ -95,31 +112,32 @@ rel_abundance_clean <- rel_abundance_df %>%
 # Setting factor levels
 rel_abundance_clean$Stage <- factor(rel_abundance_clean$Stage, levels = c("water", "larvae", "pupae", "adult"))
 rel_abundance_clean$clean_Phylum <- factor(rel_abundance_clean$clean_Phylum, 
-                                     levels = c(sort(unique(rel_abundance_clean$clean_Phylum[rel_abundance_clean$clean_Phylum!="Others"])), 
-                                                                            "Others"))
-rel_abundance_clean$clean_Order <- factor(rel_abundance_clean$clean_Order, 
-                                           levels = c(sort(unique(rel_abundance_clean$clean_Order[rel_abundance_clean$clean_Order!="Others"])), 
+                                           levels = c(sort(unique(rel_abundance_clean$clean_Phylum[rel_abundance_clean$clean_Phylum!="Others"])), 
                                                       "Others"))
+rel_abundance_clean$clean_Order <- factor(rel_abundance_clean$clean_Order, 
+                                          levels = c(sort(unique(rel_abundance_clean$clean_Order[rel_abundance_clean$clean_Order!="Others"])), 
+                                                     "Others"))
 rel_abundance_clean$clean_Family <- factor(rel_abundance_clean$clean_Family, 
                                            levels = c(sort(unique(rel_abundance_clean$clean_Family[!startsWith(rel_abundance_clean$clean_Family, "Other")])), 
-                                             sort(unique(rel_abundance_clean$clean_Family[startsWith(rel_abundance_clean$clean_Family, "Other")]))))
+                                                      sort(unique(rel_abundance_clean$clean_Family[startsWith(rel_abundance_clean$clean_Family, "Other")]))))
 
 # Create relative abundance plot
-# TODO: color facet lines on life stage
 pal <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Phylum))-1, 
   direction = -1), "grey90")
 
 strip <- strip_nested(text_x = elem_list_text(face=c(rep("bold", 4), rep("plain", 24)), size=rep(6, 28)))
 
-p <- ggnested(rel_abundance_clean, 
-              aes(x = Sample, 
-                  y = Abundance, 
+p <- rel_abundance_clean %>% 
+  select(-OTU, -Abundance) %>% 
+  distinct() %>% 
+  ggnested(aes(x = Sample, 
+                  y = F_Abundance, 
                   main_group=clean_Phylum, 
                   sub_group = clean_Family),
-         main_palette = pal,
-         gradient_type = "tints",
-         max_l = 1) + 
+              main_palette = pal,
+              gradient_type = "tints",
+              max_l = 1) + 
   geom_bar(stat = "identity") + 
   labs(x="", y="Relative abundance (%)") +
   facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
@@ -150,6 +168,8 @@ ggsave("figures/relative_abundance.pdf", dpi=300, width = 7, height = 5)
 
 # TODO: Replace "Other Proteobacteria" with Order name
 # TODO: add max family to order
+
+# TODO: change everyting to new dataframe
 
 pal <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Order[rel_abundance_clean$Phylum=="Proteobacteria"]))-1, 
@@ -201,7 +221,7 @@ top_ASV <- asv_rel %>%
   slice_max(order_by=mean, n=15, with_ties = F) %>% 
   pull(OTU) %>% 
   unique()
-  
+
 asv_rel %>% 
   filter(OTU %in% top_ASV) %>% 
   ggplot(aes(x=Sample, y=Abundance, fill=OTU))+
