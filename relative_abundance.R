@@ -295,15 +295,6 @@ alluvial_plot <- alluvial_data %>%
 alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi=300, width=7, height = 4)
 
-#' combine plots
-
-rel_ab_plot / (((rel_ab_proteo_plot + free(alluvial_plot))+plot_layout(widths = c(1, .5))) / guide_area() + 
-                  plot_layout(guides = 'collect'))+
-  plot_annotation(tag_levels = 'A') &
-  theme(plot.tag = element_text(face="bold"))
-ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
-
-
 #' Compare ASVs only in adult and water per location/breeding material
 asv_stage_mean <- asv_rel %>% 
   select(-Sample) %>% 
@@ -342,7 +333,7 @@ stage_relative_ab <- asv_rel %>%
   summarise(Abundance=sum(Abundance), .groups = "drop") %>% 
   mutate(fill_color=factor(fill_color, levels = c("water", "larvae", "pupae", "adult")))
 
-stage_relative_ab %>% 
+ASV_ra_per_stage_p <- stage_relative_ab %>% 
   #filter(Stage != "water") %>% 
   ggplot(aes(x = Sample, y = Abundance, fill=fill_color)) + 
   geom_bar(stat = "identity") + 
@@ -353,6 +344,8 @@ stage_relative_ab %>%
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0))+
   scale_fill_brewer(palette = "Oranges", name="ASVs present starting from:")+
   theme_classic() + 
+  guides(shape = guide_legend(override.aes = list(size = .75)),
+         color = guide_legend(override.aes = list(size = .75))) +
   theme(legend.position = "bottom", 
         strip.background = element_blank(),
         strip.placement = "outside",
@@ -362,5 +355,17 @@ stage_relative_ab %>%
         axis.ticks.x = element_blank(),
         axis.text.y = element_text(size=6),
         axis.title.x = element_blank(),
-        legend.text = element_markdown())
+        axis.title.y = element_text(size=8),
+        legend.title = element_markdown(size = 6), 
+        legend.text  = element_markdown(size = 6),
+        legend.key.size = unit(.5, "lines"))
+ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
+
+#' combine plots
+
+rel_ab_plot / ((free(alluvial_plot)+ASV_ra_per_stage_p)+plot_layout(widths = c(.5, 1)))+
+  plot_layout(heights = c(1, .5))+
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(face="bold"))
+ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
