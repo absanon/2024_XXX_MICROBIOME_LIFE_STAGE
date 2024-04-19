@@ -160,7 +160,8 @@ p
 
 rel_ab_plot <- addSmallLegend(p, spaceLegend = .5)+
   theme(legend.title = element_blank(),
-        axis.title.y = element_text(size=8))
+        axis.title.y = element_text(size=8),
+        legend.box.spacing = unit(0, "pt"))
 
 ggsave("figures/relative_abundance.pdf", dpi=300, width = 7, height = 5)
 
@@ -207,7 +208,8 @@ p2 <- rel_abundance_clean %>%
 rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .5)+
   theme(legend.title = element_blank(),
         #legend.position = "right",
-        axis.title.y = element_text(size=8))
+        axis.title.y = element_text(size=8),
+        legend.box.spacing = unit(0, "pt"))
 
 ggsave("figures/relative_abundance_proteobacteria.pdf", dpi=300, width = 7, height = 5)
 
@@ -412,7 +414,8 @@ ASV_ra_per_stage_p <- stage_relative_ab %>%
         axis.title.y = element_text(size=8),
         legend.title = element_markdown(size = 6), 
         legend.text  = element_markdown(size = 6),
-        legend.key.size = unit(.5, "lines"))
+        legend.key.size = unit(.5, "lines"),
+        legend.box.spacing = unit(0, "pt"))
 ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
 
