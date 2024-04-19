@@ -259,7 +259,7 @@ asv_rel %>%
 
 
 
-# Alluvial plot
+#' Relative abundance per stage
 top_ASV_water <- asv_rel %>% 
   filter(Stage == "water") %>% 
   group_by(OTU) %>% 
@@ -278,6 +278,7 @@ top_ASV_adult <- asv_rel %>%
 
 top_ASV <- c(top_ASV_water, top_ASV_adult) %>% unique()
 
+#' Venn diagram
 venn_result <- VennDiagram::venn.diagram(
   x = list(top_ASV_water, top_ASV_adult),
   category.names = c("water" , "adult"),
@@ -290,24 +291,26 @@ venn_result <- VennDiagram::venn.diagram(
   resolution = 300,
   #compression = "lzw",
   main="Shared top ASVs",
+  main.cex = .4,
+  main.pos=c(.5, .95),
+  main.fontfamily = "sans",
   lwd = 1,
   col=c("steelblue", "#D94701"),
   fill = scales::alpha(c("steelblue", "#D94701"), .2),
   # Numbers
-  cex = .5,
-  main.cex = .5,
-  main.pos=c(.5, .9),
+  cex = .4,
+  
   cat.default.pos="text",
-  cat.cex=.5,
-  cat.pos=c(0, 0),
+  cat.cex=.4,
+  cat.pos=c(15, 345),
   cat.dist=c(0.1, 0.1),
+  cat.fontfamily="sans",
   cat.col=c("steelblue", "#D94701"),
-  label.col=c("steelblue", "#976559", "#D94701")
+  label.col=c("steelblue", "#976559", "#D94701"),
+  fontfamily="sans"
 )
 
-grid::grid.newpage()
-grid::grid.draw(venn_result)
-
+# Alluvial plot
 alluvial_data <- asv_rel %>% 
   filter(OTU %in% top_ASV) %>% 
   group_by(OTU, Stage) %>% 
@@ -417,9 +420,9 @@ ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=
  
 rel_ab_plot / ((free(alluvial_plot)+
                        inset_element(venn_result, 
-                                     0.05,
+                                     0.02,
                                      .5, 
-                                     .3,
+                                     .32,
                                      .9,
                                      ignore_tag = T)+
                   ASV_ra_per_stage_p)+
