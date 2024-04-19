@@ -158,7 +158,7 @@ p <- rel_abundance_clean %>%
         legend.text = element_markdown())
 p
 
-rel_ab_plot <- addSmallLegend(p, spaceLegend = .1)+
+rel_ab_plot <- addSmallLegend(p, spaceLegend = .5)+
   theme(legend.title = element_blank(),
         axis.title.y = element_text(size=8))
 
@@ -177,8 +177,10 @@ pal <- c(viridisLite::viridis(
 
 p2 <- rel_abundance_clean %>% 
   filter(Phylum=="Proteobacteria") %>% 
+  select(-OTU, -Abundance) %>% 
+  distinct() %>% 
   ggnested(aes(x = Sample, 
-               y = Abundance, 
+               y = F_Abundance, 
                main_group=clean_Order, 
                sub_group = clean_Family),
            main_palette = pal,
@@ -202,7 +204,7 @@ p2 <- rel_abundance_clean %>%
         axis.ticks.x = element_blank(),
         legend.text = element_markdown())
 
-rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .1)+
+rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .5)+
   theme(legend.title = element_blank(),
         #legend.position = "right",
         axis.title.y = element_text(size=8))
@@ -276,6 +278,35 @@ top_ASV_adult <- asv_rel %>%
 
 top_ASV <- c(top_ASV_water, top_ASV_adult) %>% unique()
 
+venn_result <- VennDiagram::venn.diagram(
+  x = list(top_ASV_water, top_ASV_adult),
+  category.names = c("water" , "adult"),
+  scaled=F,
+  filename = NULL, #"figures/venn_diagram.tiff",
+  #imagetype = "tiff",
+  disable.logging=T,
+  height = 480,
+  width = 480,
+  resolution = 300,
+  #compression = "lzw",
+  main="Shared top ASVs",
+  lwd = 1,
+  col=c("steelblue", "#D94701"),
+  fill = scales::alpha(c("steelblue", "#D94701"), .2),
+  # Numbers
+  cex = .5,
+  main.cex = .5,
+  main.pos=c(.5, .9),
+  cat.default.pos="text",
+  cat.cex=.5,
+  cat.pos=c(0, 0),
+  cat.dist=c(0.1, 0.1),
+  cat.col=c("steelblue", "#D94701"),
+  label.col=c("steelblue", "#976559", "#D94701")
+)
+
+grid::grid.newpage()
+grid::grid.draw(venn_result)
 
 alluvial_data <- asv_rel %>% 
   filter(OTU %in% top_ASV) %>% 
@@ -383,8 +414,16 @@ ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
 
 #' combine plots
-
-rel_ab_plot / ((free(alluvial_plot)+ASV_ra_per_stage_p)+plot_layout(widths = c(.5, 1)))+
+ 
+rel_ab_plot / ((free(alluvial_plot)+
+                       inset_element(venn_result, 
+                                     0.05,
+                                     .5, 
+                                     .3,
+                                     .9,
+                                     ignore_tag = T)+
+                  ASV_ra_per_stage_p)+
+                 plot_layout(widths = c(.7, 1)))+
   plot_layout(heights = c(1, .5))+
   plot_annotation(tag_levels = 'A') &
   theme(plot.tag = element_text(face="bold"))
