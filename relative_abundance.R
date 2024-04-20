@@ -176,10 +176,22 @@ pal <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Order[rel_abundance_clean$Phylum=="Proteobacteria"]))-1, 
   direction = -1, option = "plasma"), "grey80")
 
-p2 <- rel_abundance_clean %>% 
+rel_abundance_protebacteria <- rel_abundance_clean %>% 
   filter(Phylum=="Proteobacteria") %>% 
+  mutate(clean_Family=case_when(family_abundance > 1 ~ Family, 
+                                str_detect(clean_Family, "Other") & clean_Order != "Others" ~ paste("Other", clean_Order),
+                                T ~ clean_Family),
+         clean_Family=as.character(clean_Family),
+         ) %>%
   select(-OTU, -Abundance) %>% 
-  distinct() %>% 
+  distinct() 
+
+rel_abundance_protebacteria$clean_Family <- factor(rel_abundance_protebacteria$clean_Family, 
+                                           levels = c(sort(unique(rel_abundance_protebacteria$clean_Family[!startsWith(rel_abundance_protebacteria$clean_Family, "Other")])), 
+                                                      sort(unique(rel_abundance_protebacteria$clean_Family[startsWith(rel_abundance_protebacteria$clean_Family, "Other")]))))
+
+
+p2 <- rel_abundance_protebacteria %>% 
   ggnested(aes(x = Sample, 
                y = F_Abundance, 
                main_group=clean_Order, 
@@ -292,7 +304,7 @@ venn_result <- VennDiagram::venn.diagram(
   width = 480,
   resolution = 300,
   #compression = "lzw",
-  main="Shared top ASVs",
+  main="Top 15 ASVs",
   main.cex = .4,
   main.pos=c(.5, .95),
   main.fontfamily = "sans",
