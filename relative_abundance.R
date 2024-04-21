@@ -431,6 +431,40 @@ ASV_ra_per_stage_p <- stage_relative_ab %>%
 ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
 
+# Which taxonomy for per stage ASVs?
+pal <- c(viridisLite::viridis(
+  length(unique(rel_abundance_clean$clean_Phylum))-1, 
+  direction = -1), "grey90")
+
+rel_abundance_clean %>% 
+  filter(OTU %in% larvae) %>% 
+  distinct() %>% 
+  ggnested(aes(x = Sample, 
+               y = Abundance, 
+               main_group=clean_Phylum, 
+               sub_group = clean_Family),
+           main_palette = pal,
+           gradient_type = "tints",
+           max_l = 1) + 
+  geom_bar(stat = "identity") + 
+  labs(x="", y="Relative abundance (%)") +
+  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+               strip = strip, switch="x",
+               nest_line = element_line(color = "black", linewidth = .2)) +
+  scale_y_continuous(limits = c(0,NA), expand = c(0, 0.1))+
+  theme_classic() + 
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(),
+        strip.background = element_blank(),
+        strip.placement = "outside",
+        #ggh4x.facet.nestline = element_line(color = list("orange", rep("black", 11)), linewidth = .2),
+        panel.spacing.x = unit(.15, "lines"),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_text(size=6),
+        axis.title.x = element_blank(),
+        legend.text = element_markdown())
+
 #' combine plots
  
 rel_ab_plot / ((free(alluvial_plot)+
