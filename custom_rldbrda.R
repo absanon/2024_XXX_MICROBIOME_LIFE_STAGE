@@ -20,7 +20,7 @@ custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
     return(NULL)
   }
   
-  cumul <- get_cumul(distmat, meta[sign_r2])
+  cumul <- get_cumul(distmat, meta[, sign_r2, drop=F])
   
   out <- combine_data(r2, cumul)
   

@@ -8,12 +8,13 @@ load("Sanon_16S_DADA2_data.RData")
 
 df <- as_tibble(sample_data(SANON))
 df$LibrarySize <- sample_sums(SANON)
-df<- df[order(df$LibrarySize),]
+df <- df[order(df$LibrarySize),]
 
 min_depth <- df %>% 
   select(LibrarySize) %>% 
   min()
 
+set.seed(1234)
 vegan_avgdist <- avgdist(as.data.frame(t(otu_table(SANON))), 
                          sample=min_depth, iterations = 1000)
 
