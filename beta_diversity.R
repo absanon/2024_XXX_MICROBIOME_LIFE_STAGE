@@ -21,6 +21,16 @@ vegan_avgdist <- avgdist(as.data.frame(t(otu_table(SANON))),
 # PCoA
 pcoa.ord <- ape::pcoa(vegan_avgdist)
 
+## Plot loadings on PCoA plot
+#vf <- vegan::envfit(pcoa.ord$vectors, meta[1:3])
+#
+## Select factors you want to plot
+#spp.scrs <- as.data.frame(scores(vf, display = "factors"))
+#spp.scrs$Group <- rownames(spp.scrs)
+#
+#spp.scrs <- spp.scrs %>% 
+#  mutate(Group=gsub("Stage|Breeding|Sites", "", Group))
+
 pcoa_df <- data.frame(pcoa.ord$vectors) %>% 
   rownames_to_column("Sample") %>% 
   left_join(samdf %>% rownames_to_column("Sample"))
@@ -31,6 +41,11 @@ p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
   scale_shape_manual(values=c(15, 16, 17, 8))+
+  #geom_segment(data = spp.scrs,
+  #             aes(x = 0, xend = Axis.1, y = 0, yend = Axis.2), linetype=2,
+  #             arrow = arrow(length = unit(0.25, "cm")), colour = "grey") + 
+  #geom_text(data = spp.scrs, aes(x = Axis.1, y = Axis.2, label = Group), colour="black",
+  #          size = 3, nudge_y = .01)+
   labs(x=glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y=glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
        shape="Breeding material/\nUrbanisation")+
   theme_bw()
