@@ -15,7 +15,7 @@ min_depth <- df %>%
   min()
 
 set.seed(1234)
-vegan_avgdist <- avgdist(as.data.frame(t(otu_table(SANON))), 
+vegan_avgdist <- vegan::avgdist(as.data.frame(t(otu_table(SANON))), 
                          sample=min_depth, iterations = 1000)
 
 # PCoA
@@ -40,7 +40,7 @@ pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
-  scale_shape_manual(values=c(15, 16, 17, 8))+
+  scale_shape_manual(values=c(0, 15, 1, 16))+
   #geom_segment(data = spp.scrs,
   #             aes(x = 0, xend = Axis.1, y = 0, yend = Axis.2), linetype=2,
   #             arrow = arrow(length = unit(0.25, "cm")), colour = "grey") + 
@@ -58,7 +58,7 @@ source("custom_rldbrda.R")
 NMDS_scree(vegan_avgdist)
 
 # Scree plot shows that from 4 dimensions the stress is significantly reduced
-nmds.ord <- metaMDS(vegan_avgdist, k=4)
+nmds.ord <- vegan::metaMDS(vegan_avgdist, k=4)
 
 nmds_df <- data.frame(nmds.ord$points) %>% 
   rownames_to_column("Sample") %>% 
@@ -67,7 +67,7 @@ nmds_df <- data.frame(nmds.ord$points) %>%
 p_nmds <- ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
   scale_color_brewer(palette = "Oranges")+
-  scale_shape_manual(values=c(15, 16, 17, 8))+
+  scale_shape_manual(values=c(0, 15, 1, 16))+
   labs(x="NMDS1", y="NMDS2", shape="Breeding material/\nUrbanisation")+
   theme_bw()
 p_nmds
@@ -75,22 +75,22 @@ p_nmds
 ggsave("figures/NMDS.pdf", dpi=300)
 
 
-# PERMANOVA
-
-meta <- data.frame(sample_data(SANON))
-
-adonis2(vegan_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
-
-adonis2(vegan_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
-
-CTRL <- how(plots=Plots(strata = meta$Stage, type="free"),
-            within=Within(type="free"),
-            nperm=999)
-set.seed(4)
-CTRL <- how(blocks=meta$Stage,
-            nperm=999)
-
-adonis2(vegan_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
+## PERMANOVA
+#
+#meta <- data.frame(sample_data(SANON))
+#
+#adonis2(vegan_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
+#
+#adonis2(vegan_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
+#
+#CTRL <- how(plots=Plots(strata = meta$Stage, type="free"),
+#            within=Within(type="free"),
+#            nperm=999)
+#set.seed(4)
+#CTRL <- how(blocks=meta$Stage,
+#            nperm=999)
+#
+#adonis2(vegan_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
 
 # db-RDA
 
