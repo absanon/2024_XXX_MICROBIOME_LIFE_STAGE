@@ -59,7 +59,9 @@ ps.melt_clean_tax <- ps.melt %>%
   # Replace Phylum values if Family starts with "unclassified Bacteria"
   mutate(Phylum = if_else(startsWith(Family, "unclassified Bacteria"), "Others", Phylum)) %>%
   # Replace "plas" with "plastic" in the Breeding column
-  mutate(Breeding = case_when(Breeding == "plas" ~ "plastic", TRUE ~ Breeding))
+  mutate(Breeding = case_when(Breeding == "plas" ~ "plastic", TRUE ~ Breeding),
+         Urbanisation = case_when(Urbanisation == "urban" ~ "U",
+                                  Urbanisation == "peri-urban" ~ "PU"))
 
 ps.melt_sum <- ps.melt_clean_tax %>% 
   group_by(Sample, Family, Genus) %>% 
@@ -140,7 +142,7 @@ p <- rel_abundance_clean %>%
               max_l = 1) + 
   geom_bar(stat = "identity") + 
   labs(x="", y="Relative abundance (%)") +
-  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+  facet_nested(~Stage+Breeding+Urbanisation, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0.1))+
@@ -201,7 +203,7 @@ p2 <- rel_abundance_protebacteria %>%
            max_l = 1) + 
   geom_bar(stat = "identity") + 
   labs(x="", y="Relative abundance (%)") +
-  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+  facet_nested(~Stage+Breeding+Urbanisation, scales= "free_x", 
                strip=strip, switch="x") +
   scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
   theme_classic() + 
@@ -227,9 +229,8 @@ ggsave("figures/relative_abundance_proteobacteria.pdf", dpi=300, width = 7, heig
 
 #' ### Longitudinal top ASVs
 # TODO: do we see top ASV's from adult in other stages?
-asv_rel <- psmelt(ps.rel)
 
-top_ASV <- asv_rel %>% 
+top_ASV <- ps.melt_clean %>% 
   filter(Stage == "adult") %>% 
   group_by(OTU, Breeding, Sites) %>% 
   summarise(mean=mean(Abundance), median=median(Abundance)) %>% 
@@ -238,29 +239,7 @@ top_ASV <- asv_rel %>%
   pull(OTU) %>% 
   unique()
 
-asv_rel %>% 
-  filter(OTU %in% top_ASV) %>% 
-  ggplot(aes(x=Sample, y=Abundance, fill=OTU))+
-  geom_bar(stat = "identity") + 
-  labs(x="Samples", y="Relative abundance (%)") +
-  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
-               strip=strip, switch="x") +
-  scale_y_continuous(limits = c(0,100), expand = c(0, 0.1))+
-  scale_fill_viridis_d()+
-  theme_classic() + 
-  theme(legend.position = "bottom", 
-        legend.title = element_blank(),
-        strip.background = element_blank(),
-        ggh4x.facet.nestline = element_line(color = "black", linewidth = .2),
-        strip.placement = "outside",
-        panel.spacing.x = unit(.15, "lines"),
-        axis.text.x = element_blank(),
-        axis.text.y = element_text(size=6),
-        axis.title.y = element_text(size=8),
-        axis.ticks.x = element_blank(),
-        legend.text = element_markdown())
-
-asv_rel %>% 
+ps.melt_clean %>% 
   filter(OTU %in% top_ASV) %>% 
   group_by(Stage, Breeding, Sites) %>% 
   mutate(mean=mean(Abundance), median=median(Abundance)) %>% 
@@ -271,10 +250,8 @@ asv_rel %>%
   scale_color_viridis_d()+
   theme_bw()
 
-
-
 #' Relative abundance per stage
-top_ASV_water <- asv_rel %>% 
+top_ASV_water <- ps.melt_clean %>% 
   filter(Stage == "water") %>% 
   group_by(OTU) %>% 
   summarise(mean = mean(Abundance), median = median(Abundance)) %>% 
@@ -282,7 +259,7 @@ top_ASV_water <- asv_rel %>%
   slice_max(order_by = median, n = 15) %>%
   pull(OTU)
 
-top_ASV_adult <- asv_rel %>% 
+top_ASV_adult <- ps.melt_clean %>% 
   filter(Stage == "adult") %>% 
   group_by(OTU) %>% 
   summarise(mean = mean(Abundance), median = median(Abundance)) %>% 
@@ -325,7 +302,7 @@ venn_result <- VennDiagram::venn.diagram(
 )
 
 # Alluvial plot
-alluvial_data <- asv_rel %>% 
+alluvial_data <- ps.melt_clean %>% 
   filter(OTU %in% top_ASV) %>% 
   group_by(OTU, Stage) %>% 
   mutate(mean=mean(Abundance), median=median(Abundance)) %>% 
@@ -364,7 +341,7 @@ alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi=300, width=7, height = 4)
 
 #' Compare ASVs only in adult and water per location/breeding material
-asv_stage_mean <- asv_rel %>% 
+asv_stage_mean <- ps.melt_clean %>% 
   select(-Sample) %>% 
   pivot_wider(names_from = Stage, values_from = Abundance, values_fn=mean) %>% 
   group_by(OTU) %>% 
@@ -390,14 +367,12 @@ adult <- asv_stage_mean %>%
   pull(OTU) %>% 
   unique()
 
-ASV_subset <- c(only_adult, only_water)
-
-stage_relative_ab <- asv_rel %>% 
+stage_relative_ab <- ps.melt_clean %>% 
   mutate(fill_color=case_when(OTU %in% water ~ "water", 
                               OTU %in% larvae ~ "larvae", 
                               OTU %in% pupae ~ "pupae",
                               OTU %in% adult ~ "adult")) %>% 
-  group_by(fill_color, Sample, Stage, Breeding, Sites) %>% 
+  group_by(fill_color, Sample, Stage, Breeding, Urbanisation) %>% 
   summarise(Abundance=sum(Abundance), .groups = "drop") %>% 
   mutate(fill_color=factor(fill_color, levels = c("water", "larvae", "pupae", "adult")))
 
@@ -406,7 +381,7 @@ ASV_ra_per_stage_p <- stage_relative_ab %>%
   ggplot(aes(x = Sample, y = Abundance, fill=fill_color)) + 
   geom_bar(stat = "identity") + 
   labs(x="", y="Relative abundance (%)") +
-  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+  facet_nested(~Stage+Breeding+Urbanisation, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0))+
@@ -437,7 +412,7 @@ pal <- c(viridisLite::viridis(
   direction = -1), "grey90")
 
 rel_abundance_clean %>% 
-  filter(OTU %in% larvae) %>% 
+  filter(OTU %in% c(larvae, pupae, adult)) %>% 
   distinct() %>% 
   ggnested(aes(x = Sample, 
                y = Abundance, 
@@ -448,7 +423,7 @@ rel_abundance_clean %>%
            max_l = 1) + 
   geom_bar(stat = "identity") + 
   labs(x="", y="Relative abundance (%)") +
-  facet_nested(~Stage+Breeding+Sites, scales= "free_x", 
+  facet_nested(~Stage+Breeding+Urbanisation, scales= "free_x", 
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0.1))+
@@ -466,7 +441,7 @@ rel_abundance_clean %>%
         legend.text = element_markdown())
 
 #' combine plots
- 
+
 rel_ab_plot / ((free(alluvial_plot)+
                        inset_element(venn_result, 
                                      0.02,
