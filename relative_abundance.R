@@ -368,7 +368,7 @@ df_alluvial %>%
   geom_stratum(decreasing = TRUE, linewidth=.1) +
   geom_vline(aes(xintercept = 2.25),
              linetype="dashed")+
-  annotate("text", x=2.25, y=55, label="Larvae stop eating", 
+  annotate("text", x=2.25, y=60, label="Larvae stop eating", 
            angle=90, vjust = -1,hjust=1, size=2)+
   facet_grid2(vars(Urbanisation),vars(Breeding), axes = "x")+
   labs(y="Mean relative abundance (%)")+
