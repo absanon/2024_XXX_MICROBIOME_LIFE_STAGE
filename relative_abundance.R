@@ -377,6 +377,7 @@ df_alluvial %>%
   theme_classic()+
   theme(legend.position = "none",
         strip.background = element_rect(fill="lightgrey", linetype = 0),
+        strip.text = element_text(size=8),
         legend.title = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(size=6),
