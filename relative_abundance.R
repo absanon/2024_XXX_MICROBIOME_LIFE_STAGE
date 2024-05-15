@@ -429,7 +429,7 @@ alluvial_grid <- df_alluvial %>%
              color="black", show.legend = F)+
   geom_smooth(data = filter(df_alluvial, OTU %in% top_ASV_adult), 
               method = "lm", se = T, aes(y=mean*10, group = 1),
-              color="blue", fill="blue", show.legend = F) +
+              color="blue", fill="grey", show.legend = F) +
   facet_grid2(vars(Urbanisation),vars(Breeding), axes = "all", scales = "free_y")+
   labs(y="Mean relative abundance (%)")+
   scale_y_continuous(limits=c(0,NA), 
