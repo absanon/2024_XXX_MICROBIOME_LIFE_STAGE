@@ -394,7 +394,7 @@ venn <- VennDiagram::venn.diagram(
   #cat.pos=c(15, 345),
   cat.dist=c(0.2, 0.2, 0.1, 0.1),
   cat.fontfamily="sans",
-  cat.col= c("#3B9AB2", "#F2E191", "#F21A00", "#7A0403FF"),
+  cat.col= c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
   #label.col=c("steelblue", "#976559", "#D94701"),
   fontfamily="sans"
 )
