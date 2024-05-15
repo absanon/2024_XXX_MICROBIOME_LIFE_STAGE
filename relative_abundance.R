@@ -128,6 +128,8 @@ pal <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Phylum))-1, 
   direction = -1), "grey90")
 
+names(pal) <- levels(rel_abundance_clean$clean_Phylum)
+
 strip <- strip_nested(text_x = elem_list_text(face=c(rep("bold", 4), rep("plain", 24)), size=rep(6, 28)))
 
 p <- rel_abundance_clean %>% 
@@ -174,9 +176,9 @@ ggsave("figures/relative_abundance.pdf", dpi=300, width = 7, height = 5)
 
 # TODO: change everything to new dataframe
 
-pal <- c(viridisLite::viridis(
+pal2 <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Order[rel_abundance_clean$Phylum=="Proteobacteria"]))-1, 
-  direction = -1, option = "plasma"), "grey80")
+  direction = -1, option = "plasma"), "grey90")
 
 rel_abundance_protebacteria <- rel_abundance_clean %>% 
   filter(Phylum=="Proteobacteria") %>% 
@@ -198,7 +200,7 @@ p2 <- rel_abundance_protebacteria %>%
                y = F_Abundance, 
                main_group=clean_Order, 
                sub_group = clean_Family),
-           main_palette = pal,
+           main_palette = pal2,
            gradient_type = "tints",
            max_l = 1) + 
   geom_bar(stat = "identity") + 
@@ -306,7 +308,7 @@ alluvial_data <- ps.melt_clean %>%
   group_by(OTU, Stage) %>% 
   mutate(mean=mean(Abundance), median=median(Abundance)) %>% 
   ungroup() %>% 
-  select(OTU, Order, Stage, mean, median) %>%
+  select(OTU, Phylum, Stage, mean, median) %>%
   distinct() %>% 
   mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>%
   mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>% 
@@ -340,12 +342,12 @@ alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi=300, width=7, height = 4)
 
 #' Alluvial plot of top ASVs per metadata variables
-#' PROBLEM: ASVs should be present for all stages to create alluvial plot
-test <- ps.melt_clean %>% 
+#' TODO: rename test dfs
+test <- rel_abundance_clean %>% 
   group_by(OTU, Stage, Breeding, Urbanisation) %>%
   mutate(mean=mean(Abundance), median=median(Abundance)) %>% 
   ungroup() %>% 
-  select(OTU, Order, Stage, Breeding, Urbanisation, mean, median) %>%
+  select(OTU, clean_Phylum, Stage, Breeding, Urbanisation, mean, median) %>%
   distinct()
 
 test2 <- test %>% 
@@ -353,37 +355,109 @@ test2 <- test %>%
   slice_max(median, n = 15) %>% 
   pull(OTU) %>% 
   unique()
+
+get_top_ASV_stage <- function(df, stage){
+  df %>% 
+    group_by(Stage, Breeding, Urbanisation) %>%
+    slice_max(median, n = 15) %>% 
+    filter(Stage == stage) %>% 
+    pull(OTU) %>% 
+    unique()
+}
   
+stage_list <- lapply(c("water", "larvae", "pupae", "adult"), function(stage) get_top_ASV_stage(test, stage))
+
+#' Venn diagram
+venn <- VennDiagram::venn.diagram(
+  x = stage_list,
+  category.names = c("water", "larvae", "pupae", "adult"),
+  scaled=F,
+  filename = NULL, #"figures/venn_diagram.tiff",
+  #imagetype = "tiff",
+  disable.logging=T,
+  height = 480,
+  width = 480,
+  resolution = 300,
+  #compression = "lzw",
+  main="Top ASV distribution",
+  main.cex = .4,
+  main.pos=c(.5, .95),
+  main.fontfamily = "sans",
+  lwd = 1,
+  col= c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+  fill = scales::alpha(c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"), .2),
+  # Numbers
+  cex = .4,
+
+  cat.default.pos="text",
+  cat.cex=.4,
+  #cat.pos=c(15, 345),
+  cat.dist=c(0.2, 0.2, 0.1, 0.1),
+  cat.fontfamily="sans",
+  cat.col= c("#3B9AB2", "#F2E191", "#F21A00", "#7A0403FF"),
+  #label.col=c("steelblue", "#976559", "#D94701"),
+  fontfamily="sans"
+)
+grid::grid.newpage()
+grid::grid.draw(venn)
+
 df_alluvial <- test %>% 
   filter(OTU %in% test2) %>% 
   mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>% 
   mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>%
   select(-mean_water)
 
-df_alluvial %>% 
-  ggplot(aes(x = Stage, y = mean, alluvium = OTU, stratum=OTU, fill=OTU)) +
-  #scale_fill_brewer(type = "qual", palette = "Paired")+
-  scale_fill_viridis_d(option="turbo")+
+#TODO: fill color based on phylum, use colors of rel abundance plot
+alluvial_grid <- df_alluvial %>% 
+  ggplot(aes(x = Stage, 
+             y = mean, 
+             alluvium = OTU, 
+             stratum=OTU, 
+             fill=clean_Phylum
+             #fill=as.integer(OTU)
+             )) +
+  #scale_fill_viridis_c(option="turbo")+
+  scale_fill_manual(values = pal)+
+  #scale_fill_gradientn(colors=c("#3B9AB2", "#F2E191", "#F21A00"))+
   geom_flow(decreasing = TRUE) +
   geom_stratum(decreasing = TRUE, linewidth=.1) +
   geom_vline(aes(xintercept = 2.25),
              linetype="dashed")+
-  annotate("text", x=2.25, y=60, label="Larvae stop eating", 
+  annotate("text", x=2.25, y=61, label="Larvae stop eating", 
            angle=90, vjust = -1,hjust=1, size=2)+
-  facet_grid2(vars(Urbanisation),vars(Breeding), axes = "x")+
+  geom_point(data = filter(df_alluvial, OTU %in% top_ASV_adult), aes(y = mean * 10),
+             color="black", show.legend = F)+
+  geom_smooth(data = filter(df_alluvial, OTU %in% top_ASV_adult), 
+              method = "lm", se = T, aes(y=mean*10, group = 1),
+              color="blue", fill="blue", show.legend = F) +
+  facet_grid2(vars(Urbanisation),vars(Breeding), axes = "all", scales = "free_y")+
   labs(y="Mean relative abundance (%)")+
   scale_y_continuous(limits=c(0,NA), 
-                     expand = expansion(add=c(0, 0.1)))+
+                     expand = expansion(add=c(0, 1)), 
+                     sec.axis = sec_axis(~./10, name="Mean relative abundance of top adult ASVs (%)",
+                                         guide = guide_axis_color(color="blue")))+
   theme_classic()+
-  theme(legend.position = "none",
+  theme(legend.position = "bottom",
         strip.background = element_rect(fill="lightgrey", linetype = 0),
+        strip.placement = "outside",
         strip.text = element_text(size=8),
+        strip.switch.pad.grid = unit(.5, "cm"),
         legend.title = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(size=6),
         axis.text.y = element_text(size=6),
         axis.title.y = element_text(size=8),
+        axis.title.y.right = element_text(color="blue", vjust = -17),
         legend.text = element_markdown())
+
+alluvial_grid+
+  inset_element(venn, 
+                0.55,
+                .75, 
+                .75,
+                1,
+                ignore_tag = T)
+
 ggsave("figures/alluvial_grid.pdf", height = 7, width = 7)
 
 #' Compare ASVs only in adult and water per location/breeding material
@@ -519,3 +593,17 @@ rel_ab_plot / ((free(alluvial_plot)+
   plot_annotation(tag_levels = 'A') &
   theme(plot.tag = element_text(face="bold"))
 ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
+
+
+rel_ab_plot / ((free(alluvial_grid)+
+                  inset_element(venn, 
+                                0.55,
+                                .55, 
+                                .65,
+                                .9,
+                                ignore_tag = T)+
+                  ASV_ra_per_stage_p)+
+                 plot_layout(widths = c(1, 1)))+
+  plot_layout(heights = c(1, .7))+
+  plot_annotation(tag_levels = 'A') &
+  theme(plot.tag = element_text(face="bold"))
