@@ -3,6 +3,7 @@ library(vegan)
 library(glue)
 library(RLdbRDA)
 library(patchwork)
+library(phyloseq)
 here::i_am("beta_diversity.R")
 load("Sanon_16S_DADA2_data.RData")
 
@@ -15,11 +16,11 @@ min_depth <- df %>%
   min()
 
 set.seed(1234)
-vegan_avgdist <- vegan::avgdist(as.data.frame(t(otu_table(SANON))), 
+bray_avgdist <- vegan::avgdist(as.data.frame(t(otu_table(SANON))), 
                          sample=min_depth, iterations = 1000)
 
 # PCoA
-pcoa.ord <- ape::pcoa(vegan_avgdist)
+pcoa.ord <- ape::pcoa(bray_avgdist)
 
 ## Plot loadings on PCoA plot
 #vf <- vegan::envfit(pcoa.ord$vectors, meta[1:3])
@@ -39,7 +40,8 @@ pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 
 p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
-  scale_color_brewer(palette = "Oranges")+
+  #scale_color_brewer(palette = "Oranges")+
+  scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"))+
   scale_shape_manual(values=c(0, 15, 1, 16))+
   #geom_segment(data = spp.scrs,
   #             aes(x = 0, xend = Axis.1, y = 0, yend = Axis.2), linetype=2,
@@ -55,10 +57,10 @@ ggsave("figures/PCoA.pdf", dpi=300)
 
 # NMDS
 source("custom_rldbrda.R")
-NMDS_scree(vegan_avgdist)
+NMDS_scree(bray_avgdist)
 
 # Scree plot shows that from 4 dimensions the stress is significantly reduced
-nmds.ord <- vegan::metaMDS(vegan_avgdist, k=4)
+nmds.ord <- vegan::metaMDS(bray_avgdist, k=4)
 
 nmds_df <- data.frame(nmds.ord$points) %>% 
   rownames_to_column("Sample") %>% 
@@ -66,7 +68,8 @@ nmds_df <- data.frame(nmds.ord$points) %>%
 
 p_nmds <- ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
   geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
-  scale_color_brewer(palette = "Oranges")+
+  #scale_color_brewer(palette = "Oranges")+
+  scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"))+
   scale_shape_manual(values=c(0, 15, 1, 16))+
   labs(x="NMDS1", y="NMDS2", shape="Breeding material/\nUrbanisation")+
   theme_bw()
@@ -79,9 +82,9 @@ ggsave("figures/NMDS.pdf", dpi=300)
 #
 #meta <- data.frame(sample_data(SANON))
 #
-#adonis2(vegan_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
+#adonis2(bray_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
 #
-#adonis2(vegan_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
+#adonis2(bray_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
 #
 #CTRL <- how(plots=Plots(strata = meta$Stage, type="free"),
 #            within=Within(type="free"),
@@ -90,37 +93,43 @@ ggsave("figures/NMDS.pdf", dpi=300)
 #CTRL <- how(blocks=meta$Stage,
 #            nperm=999)
 #
-#adonis2(vegan_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
+#adonis2(bray_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
 
-# db-RDA
-
+# db-RDA on all explanatory variables
+set.seed(1234)
 meta_overall_rda  <- samdf %>% 
   select(-Urbanisation, -breeding_urban) %>% 
   filter(Breeding != "NC")
 
 rda <- custom_rldbrda(
-  vegan_avgdist, 
+  bray_avgdist, 
   meta_overall_rda
   )
 
-#plot_data <- prepare_plot_data(rda)
-#plot_data
-#
-#g <- plot_dbrda(plot_data)
-#g+
-#  labs(y="")+
-#  scale_y_discrete(labels=c("Stage"="Mosquito\nlife stage", 
-#                            "Breeding"="Breeding\nmaterial", 
-#                            "Sites"="Location"))+
-#  scale_fill_grey(start = .8, end=0.2,
-#                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
-#  theme_bw()
-#
-#ggsave("figures/dbRDA.pdf", dpi=300)
+plot_data <- RLdbRDA::prepare_plot_data(rda)
+plot_data
+
+g <- RLdbRDA::plot_dbrda(plot_data)
+g+
+  labs(y="")+
+  scale_y_discrete(labels=c("Stage"="Mosquito\nlife stage", 
+                            "Breeding"="Breeding\nmaterial", 
+                            "Sites"="Location"))+
+  scale_fill_grey(start = .8, end=0.2,
+                  labels=c(bquote(R^2), bquote('Cumulative' ~ R^2)))+
+  theme_bw()
+
+ggsave("figures/dbRDA.pdf", dpi=300)
 
 
 #' # Per stage
 set.seed(1234)
+
+rda <- custom_rldbrda(
+  bray_avgdist, 
+  meta_overall_rda
+)
+
 final_rda <- data.frame(matrix(ncol = 14, nrow = 0))
 for (i in c("water", "larvae", "pupae", "adult")){
   names <- samdf %>% 
@@ -129,7 +138,7 @@ for (i in c("water", "larvae", "pupae", "adult")){
     rownames_to_column("Sample") %>% 
     pull(Sample)
   
-  distm <- as.data.frame(as.matrix(vegan_avgdist)) %>% 
+  distm <- as.data.frame(as.matrix(bray_avgdist)) %>% 
     select(all_of(names)) %>% 
     filter(rownames(.) %in% names) %>% 
     as.dist(diag = T, upper = T)
