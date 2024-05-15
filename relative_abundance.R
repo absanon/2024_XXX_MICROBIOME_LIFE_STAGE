@@ -505,7 +505,10 @@ ASV_ra_per_stage_p <- stage_relative_ab %>%
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0))+
-  scale_fill_brewer(palette = "Oranges", name="ASVs present starting from:")+
+  #scale_fill_brewer(palette = "Oranges", name="ASVs present starting from:")+
+  scale_fill_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+                    breaks = c("water", "larvae", "pupae", "adult"),
+                    name="ASVs present starting from:")+
   theme_classic() + 
   guides(shape = guide_legend(override.aes = list(size = .75)),
          color = guide_legend(override.aes = list(size = .75))) +
@@ -557,7 +560,8 @@ p3 <- rel_abundance_clean %>%
                strip = strip, switch="x",
                nest_line = element_line(color = "black", linewidth = .2)) +
   scale_y_continuous(limits = c(0,NA), expand = c(0, 0.1))+
-  scale_color_brewer(palette="Oranges")+ 
+  #scale_color_brewer(palette="Oranges")+ 
+  scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"))+
   theme_classic() + 
   theme(legend.position = "bottom", 
         legend.title = element_blank(),
@@ -593,17 +597,3 @@ rel_ab_plot / ((free(alluvial_plot)+
   plot_annotation(tag_levels = 'A') &
   theme(plot.tag = element_text(face="bold"))
 ggsave("figures/combined_relative_abundance.pdf", dpi=300, width=7, height = 8)
-
-
-rel_ab_plot / ((free(alluvial_grid)+
-                  inset_element(venn, 
-                                0.55,
-                                .55, 
-                                .65,
-                                .9,
-                                ignore_tag = T)+
-                  ASV_ra_per_stage_p)+
-                 plot_layout(widths = c(1, 1)))+
-  plot_layout(heights = c(1, .7))+
-  plot_annotation(tag_levels = 'A') &
-  theme(plot.tag = element_text(face="bold"))
