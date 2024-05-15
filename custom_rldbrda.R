@@ -1,10 +1,10 @@
 #NMDS scree plot
 NMDS_scree <- function(x) { #where x is the name of the data frame variable
-  plot(rep(1, 10), replicate(10, metaMDS(x, autotransform = F, k = 1, trace = F)$stress),
+  plot(rep(1, 10), replicate(10, vegan::metaMDS(x, autotransform = F, k = 1, trace = F)$stress),
        xlim = c(1, 10),ylim = c(0, 0.30), xlab = "# of Dimensions", ylab = "Stress",
        main = "NMDS stress plot")
   for (i in 1:10) {
-    points(rep(i + 1,10),replicate(10, metaMDS(x, autotransform = F, k = i + 1, trace=F)$stress))
+    points(rep(i + 1,10),replicate(10, vegan::metaMDS(x, autotransform = F, k = i + 1, trace=F)$stress))
   }
 }
 
@@ -28,12 +28,12 @@ custom_rldbrda <- function(distmat, meta, p_cutoff=0.05) {
 }
 
 get_r2_single <- function(distmat, meta, feature) {
-  capsc <- capscale(distmat ~ meta[, feature], na.action=na.omit)
-  an <- anova.cca(capsc, permutations = 9999)
+  capsc <- vegan::capscale(distmat ~ meta[, feature], na.action=na.omit)
+  an <- vegan::anova.cca(capsc, permutations = 9999)
   
   Fa <- an["F"][[1]][[1]]
-  r2 <- RsquareAdj(capsc)[[1]]
-  r2adj <- RsquareAdj(capsc)[[2]]
+  r2 <- vegan::RsquareAdj(capsc)[[1]]
+  r2adj <- vegan::RsquareAdj(capsc)[[2]]
   N <- nrow(na.exclude(meta[,feature,drop=FALSE]))
   pval <- an["Pr(>F)"][[1]][[1]]
   
@@ -61,13 +61,13 @@ get_r2 <- function(distmat, meta) {
 }
 
 get_cumul <- function(distmat, meta) {
-  mod0=capscale(distmat ~ 1) #H0: unconstrained ordination
-  mod1=capscale(distmat ~ ., data=meta) #H1: full constrained ordination, all metadata
+  mod0=vegan::capscale(distmat ~ 1) #H0: unconstrained ordination
+  mod1=vegan::capscale(distmat ~ ., data=meta) #H1: full constrained ordination, all metadata
   
   
   attach(meta)
   
-  step.res<-ordiR2step(mod0, scope=formula(mod1), data=meta ,direction="forward", Pin = 1, R2scope = TRUE, pstep = 100, permutations=9999, trace = F) #forward stepwise dbRDA
+  step.res<-vegan::ordiR2step(mod0, scope=formula(mod1), data=meta ,direction="forward", Pin = 1, R2scope = TRUE, pstep = 100, permutations=9999, trace = F) #forward stepwise dbRDA
   res=step.res$anova
   
   
