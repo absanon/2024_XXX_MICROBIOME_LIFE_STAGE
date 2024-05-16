@@ -374,7 +374,7 @@ venn <- VennDiagram::venn.diagram(
   scaled=F,
   filename = NULL, #"figures/venn_diagram.tiff",
   #imagetype = "tiff",
-  disable.logging=T,
+  disable.logging=T, 
   height = 480,
   width = 480,
   resolution = 300,
@@ -428,8 +428,8 @@ alluvial_grid <- df_alluvial %>%
   geom_point(data = filter(df_alluvial, OTU %in% top_ASV_adult), aes(y = mean * 10),
              color="black", show.legend = F)+
   geom_smooth(data = filter(df_alluvial, OTU %in% top_ASV_adult), 
-              method = "lm", se = T, aes(y=mean*10, group = 1),
-              color="blue", fill="grey", show.legend = F) +
+              method = "lm", se = T, aes(x=Stage, y=mean*10, group = 1),
+              color="blue", fill="grey", show.legend = F, inherit.aes = F) +
   facet_grid2(vars(Urbanisation),vars(Breeding), axes = "all", scales = "free_y")+
   labs(y="Mean relative abundance (%)")+
   scale_y_continuous(limits=c(0,NA), 
@@ -450,7 +450,12 @@ alluvial_grid <- df_alluvial %>%
         axis.title.y.right = element_text(color="blue", vjust = -17),
         legend.text = element_markdown())
 
-alluvial_grid+
+ag <-  addSmallLegend(alluvial_grid, spaceLegend = .5)+
+  theme(legend.title = element_blank(),
+        axis.title.y = element_text(size=8),
+        legend.box.spacing = unit(0, "pt")) 
+
+ag +
   inset_element(venn, 
                 0.55,
                 .75, 
@@ -530,10 +535,6 @@ ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi=300, width=7, height=5)
 
 # Which taxonomy for per stage ASVs?
-pal <- c(viridisLite::viridis(
-  length(unique(rel_abundance_clean$clean_Phylum))-1, 
-  direction = -1), "grey90")
-
 p3 <- rel_abundance_clean %>% 
   filter(OTU %in% c(larvae, pupae, adult)) %>% 
   distinct() %>% 
