@@ -39,7 +39,7 @@ pcoa_df <- data.frame(pcoa.ord$vectors) %>%
 pcoa_rel_eig <- round(pcoa.ord$values$Relative_eig*100, digits = 2)
 
 p_pcoa <- ggplot(pcoa_df, aes(x=Axis.1, y=Axis.2))+
-  geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
+  geom_point(aes(color=Stage, shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), size=2.5)+
   #scale_color_brewer(palette = "Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"))+
   scale_shape_manual(values=c(0, 15, 1, 16))+
@@ -67,7 +67,7 @@ nmds_df <- data.frame(nmds.ord$points) %>%
   left_join(samdf %>% rownames_to_column("Sample"))
 
 p_nmds <- ggplot(nmds_df, aes(x=MDS1, y=MDS2))+
-  geom_point(aes(color=Stage, shape=breeding_urban), size=2.5)+
+  geom_point(aes(color=Stage, shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), size=2.5)+
   #scale_color_brewer(palette = "Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"))+
   scale_shape_manual(values=c(0, 15, 1, 16))+
@@ -79,21 +79,6 @@ ggsave("figures/NMDS.pdf", dpi=300)
 
 
 ## PERMANOVA
-#
-#meta <- data.frame(sample_data(SANON))
-#
-#adonis2(bray_avgdist~Sites+Stage+Breeding, data=meta, permutations=999)
-#
-#adonis2(bray_avgdist ~ Sites + Sites:Breeding + Sites:Breeding:Stage, data = meta, permutations = 999)
-#
-#CTRL <- how(plots=Plots(strata = meta$Stage, type="free"),
-#            within=Within(type="free"),
-#            nperm=999)
-#set.seed(4)
-#CTRL <- how(blocks=meta$Stage,
-#            nperm=999)
-#
-#adonis2(bray_avgdist~Sites+Breeding, data=meta, permutations=CTRL)
 
 # db-RDA on all explanatory variables
 set.seed(1234)
