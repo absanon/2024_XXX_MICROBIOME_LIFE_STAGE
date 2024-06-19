@@ -51,7 +51,7 @@ p_pcoa <- ggplot(pcoa_df, aes(x = Axis.1, y = Axis.2)) +
   #          size = 3, nudge_y = .01)+
   labs(
     x = glue("PCoA1 ({pcoa_rel_eig[1]}%)"), y = glue("PCoA2 ({pcoa_rel_eig[2]}%)"),
-    shape = "Breeding material/\nUrbanisation"
+    shape = "Breeding material/\nLocation"
   ) +
   theme_bw()
 p_pcoa
@@ -74,7 +74,7 @@ p_nmds <- ggplot(nmds_df, aes(x = MDS1, y = MDS2)) +
   # scale_color_brewer(palette = "Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
   scale_shape_manual(values = c(0, 15, 1, 16)) +
-  labs(x = "NMDS1", y = "NMDS2", shape = "Breeding material/\nUrbanisation") +
+  labs(x = "NMDS1", y = "NMDS2", shape = "Breeding material/\nLocation") +
   theme_bw()
 p_nmds
 
