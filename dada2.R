@@ -176,7 +176,7 @@ samdf
 
 
 ##########################################################################
-##### Built the Phylosequ file
+##### Built the Phyloseq file
 rownames(samdf)
 ps <- phyloseq(
   otu_table(t(seqtab.nochim), taxa_are_rows = T),
