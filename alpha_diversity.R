@@ -91,3 +91,35 @@ alpha <- alpha_average_df %>%
 alpha
 
 ggsave("figures/alpha_diversity.pdf", dpi = 300)
+
+# Plot shape based on location/breeding material
+alpha_shape <- alpha_average_df %>%
+  rownames_to_column("Sample") %>%
+  select(-Observed) %>%
+  left_join(samdf %>% rownames_to_column("Sample")) %>%
+  pivot_longer(
+    c(
+      -Sample, -Stage, -Breeding, -Sites,
+      -Urbanisation, -breeding_urban
+    ),
+    names_to = "Metric", values_to = "Diversity"
+  ) %>%
+  ggplot(aes(x = Stage, y = Diversity, color = Stage)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
+  facet_wrap(~Metric, nrow = 1, scales = "free_y") +
+  theme_bw() +
+  theme(
+    strip.text.x = element_text(size = 10),
+    axis.title.x = element_blank(),
+    legend.text.align = 0
+  ) +
+  # scale_color_brewer(palette="Oranges")+
+  scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
+  scale_shape_manual(values = c(0, 15, 1, 16)) +
+  labs(shape = "Breeding material/\nLocation")+
+  stat_pwc(
+    method = "wilcox.test", p.adjust.method = "BH",
+    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+  )
+alpha_shape
