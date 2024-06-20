@@ -98,19 +98,20 @@ plot_data <- RLdbRDA::prepare_plot_data(rda)
 plot_data
 
 g <- RLdbRDA::plot_dbrda(plot_data)
-g +
+g2 <- g +
   labs(y = "") +
   scale_y_discrete(labels = c(
     "Stage" = "Mosquito\nlife stage",
     "Breeding" = "Breeding\nmaterial",
     "Sites" = "Location"
   )) +
-  scale_fill_grey(
-    start = .8, end = 0.2,
-    labels = c(bquote(R^2), bquote("Cumulative" ~ R^2))
-  ) +
+  #scale_fill_grey(
+  #  start = .8, end = 0.2,
+  #  labels = c(bquote(R^2), bquote("Cumulative" ~ R^2))
+  #) +
+  labs(x = bquote("Effect size (adjusted " * R^2 * ")")) +
   theme_bw()
-
+g2
 ggsave("figures/dbRDA.pdf", dpi = 300)
 
 
@@ -159,8 +160,18 @@ for (i in c("water", "larvae", "pupae", "adult")) {
   final_rda <- rbind(final_rda, rda)
 }
 
-plot_data <- prepare_plot_data(final_rda)
+final_rda2 <- final_rda %>% 
+  mutate(r2adj=if_else(padj > 0.05, NA, r2adj))
+
+plot_data <- prepare_plot_data(final_rda2)
 plot_data
+
+plot_data <- plot_data %>% 
+  group_by(Stage) %>% 
+  mutate(value = case_when(any(significant == 0) & variable == "RDAcumul_R2.adj" ~ NA_real_, 
+                           TRUE ~ value)) %>%
+  ungroup()
+  
 
 p_dbrda <- plot_data %>%
   # filter(variable != "RDAcumul_R2.adj") %>%
@@ -203,3 +214,26 @@ free(p1) + p2 +
   plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(face = "bold"))
 ggsave("figures/combined_diversity.pdf", dpi = 300, width = 10, height = 6)
+
+# Combine alpha (shape), beta and all dbRDA
+p1 <- alpha_shape +
+  # labs(x="")+
+  theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+p2 <- (p1/g2+theme(legend.position = "none"))+
+  plot_layout(heights = c(2, 1))
+
+p3 <- (free(p1) | p_pcoa)
+
+p4 <- (free(g2+theme(legend.position = "none")) | p_dbrda)
+
+(p3/p4)+
+  plot_layout(heights =  c(4, 1))+
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(face = "bold"))
+
+ggsave("figures/combined_diversity2.pdf", dpi = 300, width = 10, height = 6)
