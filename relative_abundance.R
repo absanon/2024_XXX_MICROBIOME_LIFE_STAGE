@@ -152,6 +152,13 @@ rel_abundance_clean$clean_Family <- factor(rel_abundance_clean$clean_Family,
   )
 )
 
+# Create table with percentages per phylum
+phylum_table <- rel_abundance_clean %>% 
+  group_by(clean_Phylum, Sample) %>% 
+  summarize(clean_phylum_sum=round(sum(Abundance), 2)) %>% 
+  pivot_wider(names_from = Sample, values_from = clean_phylum_sum)
+write_delim(phylum_table, "data/phylum_relative_abundance.tsv", delim = "\t", col_names = T)
+
 # Create relative abundance plot
 pal <- c(viridisLite::viridis(
   length(unique(rel_abundance_clean$clean_Phylum)) - 1,
@@ -468,6 +475,10 @@ df_alluvial <- test %>%
   mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>%
   mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>%
   select(-mean_water)
+
+weird_top_asv <- ps.melt_clean %>% 
+  filter(OTU %in% stage_list[[1]],
+         Phylum %in% c("Actinobacteriota", "Bacteroidota"))
 
 # TODO: fill color based on phylum, use colors of rel abundance plot
 alluvial_grid <- df_alluvial %>%
