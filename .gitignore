@@ -6,3 +6,5 @@
 *.RData
 
 .DS_Store
+data/240708_16qPCR bacteria_SA.eds
+data/20210312-16SqPCR-Sanon_result_analysis_23072024.xls
