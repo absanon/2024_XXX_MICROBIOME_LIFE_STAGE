@@ -123,3 +123,35 @@ alpha_shape <- alpha_average_df %>%
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
   )
 alpha_shape
+ggsave("figures/alpha_diversity_shape.pdf", dpi = 300, height=7, width=9)
+
+# Alpha diversity per breeding/urbanisation
+
+alpha_average_df %>%
+  rownames_to_column("Sample") %>%
+  select(-Observed) %>%
+  left_join(samdf %>% rownames_to_column("Sample")) %>%
+  pivot_longer(
+    c(
+      -Sample, -Stage, -Breeding, -Sites,
+      -Urbanisation, -breeding_urban
+    ),
+    names_to = "Metric", values_to = "Diversity"
+  ) %>%
+  filter(Metric == "Simpson") %>%
+  ggplot(aes(x = Urbanisation, y = Diversity, color = Urbanisation)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
+  facet_nested_wrap(~Stage, nrow=2, scales = "free_y") +
+  theme_bw() +
+  theme(
+    strip.text.x = element_text(size = 10),
+    axis.title.x = element_blank(),
+    legend.text.align = 0
+  ) +
+  scale_shape_manual(values = c(0, 15, 1, 16)) +
+  labs(shape = "Breeding material/\nLocation")+
+  stat_pwc(
+    method = "wilcox.test", p.adjust.method = "BH",
+    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+  )
