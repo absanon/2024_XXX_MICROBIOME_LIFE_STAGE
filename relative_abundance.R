@@ -47,7 +47,7 @@ replace_unclassified_na <- function(x, replacement) {
   str_replace(x, "unclassified NA", replacement)
 }
 
-ps.melt_clean_tax <- ps.melt %>%
+ps.melt_clean_tax <- ps.melt |>
   # Replace "unclassified" values with NA
   mutate(
     Family = replace_unclassified(Family),
@@ -55,15 +55,15 @@ ps.melt_clean_tax <- ps.melt %>%
     Class = replace_unclassified(Class),
     Phylum = replace_unclassified(Phylum),
     Domain = replace_unclassified(Domain)
-  ) %>%
+  ) |>
   # Create a new column "Family" with appropriate values
-  mutate(Family = ifelse(is.na(Family), glue("unclassified {coalesce(Order, Class, Phylum)}"), glue("<i>{Family}</i>"))) %>%
+  mutate(Family = ifelse(is.na(Family), glue("unclassified {coalesce(Order, Class, Phylum)}"), glue("<i>{Family}</i>"))) |>
   # Replace NA values in Domain, Phylum, Class, and Order with values from Family
-  mutate(across(c(Domain, Phylum, Class, Order), ~ if_else(is.na(.), Family, .))) %>%
+  mutate(across(c(Domain, Phylum, Class, Order), ~ if_else(is.na(.), Family, .))) |>
   # Replace "unclassified NA" with "unclassified Bacteria ({OTU})"
-  mutate(across(c(Domain, Phylum, Class, Order, Family), ~ replace_unclassified_na(., glue("unclassified Bacteria ({OTU})")))) %>%
+  mutate(across(c(Domain, Phylum, Class, Order, Family), ~ replace_unclassified_na(., glue("unclassified Bacteria ({OTU})")))) |>
   # Replace Phylum values if Family starts with "unclassified Bacteria"
-  mutate(Phylum = if_else(startsWith(Family, "unclassified Bacteria"), "Others", Phylum)) %>%
+  mutate(Phylum = if_else(startsWith(Family, "unclassified Bacteria"), "Others", Phylum)) |>
   # Replace "plas" with "plastic" in the Breeding column
   mutate(
     Breeding = case_when(Breeding == "plas" ~ "plastic", TRUE ~ Breeding),
@@ -73,38 +73,38 @@ ps.melt_clean_tax <- ps.melt %>%
     )
   )
 
-ps.melt_sum <- ps.melt_clean_tax %>%
-  group_by(Sample, Family, Genus) %>%
-  mutate(F_Abundance = sum(Abundance)) %>%
+ps.melt_sum <- ps.melt_clean_tax |>
+  group_by(Sample, Family, Genus) |>
+  mutate(F_Abundance = sum(Abundance)) |>
   ungroup()
 
 ps.melt_clean <- ps.melt_sum
 
 
 # Calculate max relative abundance
-rel_abundance_df <- ps.melt_clean %>%
-  group_by(Sample, Phylum) %>%
-  mutate(phylum_abundance = sum(Abundance)) %>%
-  ungroup() %>%
-  group_by(Phylum) %>%
-  mutate(max_phylum_abundance = max(phylum_abundance)) %>%
-  ungroup() %>%
-  group_by(Sample, Phylum, Family) %>%
-  mutate(family_abundance = sum(Abundance)) %>%
-  ungroup() %>%
-  group_by(Family) %>%
-  mutate(max_family_abundance = max(family_abundance)) %>%
-  ungroup() %>%
-  group_by(Sample, Phylum, Order) %>%
-  mutate(order_abundance = sum(Abundance)) %>%
-  ungroup() %>%
-  group_by(Order) %>%
-  mutate(max_order_abundance = max(order_abundance)) %>%
+rel_abundance_df <- ps.melt_clean |>
+  group_by(Sample, Phylum) |>
+  mutate(phylum_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Phylum) |>
+  mutate(max_phylum_abundance = max(phylum_abundance)) |>
+  ungroup() |>
+  group_by(Sample, Phylum, Family) |>
+  mutate(family_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Family) |>
+  mutate(max_family_abundance = max(family_abundance)) |>
+  ungroup() |>
+  group_by(Sample, Phylum, Order) |>
+  mutate(order_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Order) |>
+  mutate(max_order_abundance = max(order_abundance)) |>
   ungroup()
 
 # Clean up Phylum, Order and Family names based on relative abundance
-rel_abundance_clean <- rel_abundance_df %>%
-  group_by(Phylum) %>%
+rel_abundance_clean <- rel_abundance_df |>
+  group_by(Phylum) |>
   mutate(
     clean_Phylum = case_when(
       max_phylum_abundance < 1 ~ "Others",
@@ -115,20 +115,20 @@ rel_abundance_clean <- rel_abundance_df %>%
         max_family_abundance < max(max_family_abundance) ~ glue("Other {Phylum}"),
       T ~ Family
     )
-  ) %>%
+  ) |>
   mutate(clean_Family = if_else(clean_Phylum == "Others",
     "Others", clean_Family
-  )) %>%
-  ungroup() %>%
-  group_by(Order) %>%
+  )) |>
+  ungroup() |>
+  group_by(Order) |>
   mutate(clean_Order = case_when(
     max_order_abundance < 1 ~ "Others",
     T ~ Order
-  )) %>%
+  )) |>
   mutate(clean_Order = if_else(clean_Phylum == "Others" &
     (!startsWith(Order, "unclassified Bacteria") | max_family_abundance < 5),
   "Others", clean_Order
-  )) %>%
+  )) |>
   ungroup()
 
 # Setting factor levels
@@ -153,9 +153,9 @@ rel_abundance_clean$clean_Family <- factor(rel_abundance_clean$clean_Family,
 )
 
 # Create table with percentages per phylum
-phylum_table <- rel_abundance_clean %>% 
-  group_by(clean_Phylum, Sample) %>% 
-  summarize(clean_phylum_sum=round(sum(Abundance), 2)) %>% 
+phylum_table <- rel_abundance_clean |> 
+  group_by(clean_Phylum, Sample) |> 
+  summarize(clean_phylum_sum=round(sum(Abundance), 2)) |> 
   pivot_wider(names_from = Sample, values_from = clean_phylum_sum)
 write_delim(phylum_table, "data/phylum_relative_abundance.tsv", delim = "\t", col_names = T)
 
@@ -169,9 +169,9 @@ names(pal) <- levels(rel_abundance_clean$clean_Phylum)
 
 strip <- strip_nested(text_x = elem_list_text(face = c(rep("bold", 4), rep("plain", 24)), size = rep(6, 28)))
 
-p <- rel_abundance_clean %>%
-  select(-OTU, -Abundance) %>%
-  distinct() %>%
+p <- rel_abundance_clean |>
+  select(-OTU, -Abundance) |>
+  distinct() |>
   ggnested(
     aes(
       x = Sample,
@@ -228,8 +228,8 @@ pal2 <- c(viridisLite::viridis(
   direction = -1, option = "plasma"
 ), "grey90")
 
-rel_abundance_protebacteria <- rel_abundance_clean %>%
-  filter(Phylum == "Proteobacteria") %>%
+rel_abundance_protebacteria <- rel_abundance_clean |>
+  filter(Phylum == "Proteobacteria") |>
   mutate(
     clean_Family = case_when(
       family_abundance > 1 ~ Family,
@@ -237,8 +237,8 @@ rel_abundance_protebacteria <- rel_abundance_clean %>%
       T ~ clean_Family
     ),
     clean_Family = as.character(clean_Family),
-  ) %>%
-  select(-OTU, -Abundance) %>%
+  ) |>
+  select(-OTU, -Abundance) |>
   distinct()
 
 rel_abundance_protebacteria$clean_Family <- factor(rel_abundance_protebacteria$clean_Family,
@@ -249,7 +249,7 @@ rel_abundance_protebacteria$clean_Family <- factor(rel_abundance_protebacteria$c
 )
 
 
-p2 <- rel_abundance_protebacteria %>%
+p2 <- rel_abundance_protebacteria |>
   ggnested(
     aes(
       x = Sample,
@@ -295,20 +295,20 @@ ggsave("figures/relative_abundance_proteobacteria.pdf", dpi = 300, width = 7, he
 
 #' ### Longitudinal top ASVs
 
-top_ASV <- ps.melt_clean %>%
-  filter(Stage == "adult") %>%
-  group_by(OTU, Breeding, Sites) %>%
-  summarise(mean = mean(Abundance), median = median(Abundance)) %>%
-  # group_by(Breeding, Sites) %>%
-  slice_max(order_by = mean, n = 15, with_ties = F) %>%
-  pull(OTU) %>%
+top_ASV <- ps.melt_clean |>
+  filter(Stage == "adult") |>
+  group_by(OTU, Breeding, Sites) |>
+  summarise(mean = mean(Abundance), median = median(Abundance)) |>
+  # group_by(Breeding, Sites) |>
+  slice_max(order_by = mean, n = 15, with_ties = F) |>
+  pull(OTU) |>
   unique()
 
-ps.melt_clean %>%
-  filter(OTU %in% top_ASV) %>%
-  group_by(Stage, Breeding, Sites) %>%
-  mutate(mean = mean(Abundance), median = median(Abundance)) %>%
-  ungroup() %>%
+ps.melt_clean |>
+  filter(OTU %in% top_ASV) |>
+  group_by(Stage, Breeding, Sites) |>
+  mutate(mean = mean(Abundance), median = median(Abundance)) |>
+  ungroup() |>
   ggplot(aes(x = Stage, y = mean)) +
   geom_smooth(aes(group = -1), method = "lm", color = "grey40") +
   geom_point(aes(shape = Sites, color = Breeding)) +
@@ -316,23 +316,23 @@ ps.melt_clean %>%
   theme_bw()
 
 #' Relative abundance per stage
-top_ASV_water <- ps.melt_clean %>%
-  filter(Stage == "water") %>%
-  group_by(OTU) %>%
-  summarise(mean = mean(Abundance), median = median(Abundance)) %>%
-  ungroup() %>%
-  slice_max(order_by = median, n = 15) %>%
+top_ASV_water <- ps.melt_clean |>
+  filter(Stage == "water") |>
+  group_by(OTU) |>
+  summarise(mean = mean(Abundance), median = median(Abundance)) |>
+  ungroup() |>
+  slice_max(order_by = median, n = 15) |>
   pull(OTU)
 
-top_ASV_adult <- ps.melt_clean %>%
-  filter(Stage == "adult") %>%
-  group_by(OTU) %>%
-  summarise(mean = mean(Abundance), median = median(Abundance)) %>%
-  ungroup() %>%
-  slice_max(order_by = median, n = 15) %>%
+top_ASV_adult <- ps.melt_clean |>
+  filter(Stage == "adult") |>
+  group_by(OTU) |>
+  summarise(mean = mean(Abundance), median = median(Abundance)) |>
+  ungroup() |>
+  slice_max(order_by = median, n = 15) |>
   pull(OTU)
 
-top_ASV <- c(top_ASV_water, top_ASV_adult) %>% unique()
+top_ASV <- c(top_ASV_water, top_ASV_adult) |> unique()
 
 #' Venn diagram
 venn_result <- VennDiagram::venn.diagram(
@@ -366,21 +366,21 @@ venn_result <- VennDiagram::venn.diagram(
 )
 
 # Alluvial plot
-alluvial_data <- ps.melt_clean %>%
-  filter(OTU %in% top_ASV) %>%
-  group_by(OTU, Stage) %>%
-  mutate(mean = mean(Abundance), median = median(Abundance)) %>%
-  ungroup() %>%
-  select(OTU, Phylum, Stage, mean, median) %>%
-  distinct() %>%
-  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>%
-  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>%
+alluvial_data <- ps.melt_clean |>
+  filter(OTU %in% top_ASV) |>
+  group_by(OTU, Stage) |>
+  mutate(mean = mean(Abundance), median = median(Abundance)) |>
+  ungroup() |>
+  select(OTU, Phylum, Stage, mean, median) |>
+  distinct() |>
+  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) |>
+  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) |>
   select(-mean_water)
 
-alluvial_plot <- alluvial_data %>%
+alluvial_plot <- alluvial_data |>
   # mutate(top50_ASV=case_when(OTU %in% intersect(top_ASV_adult, top_ASV_water) ~ "both",
   #                         !OTU %in% top_ASV_adult ~"only water",
-  #                         !OTU %in% top_ASV_water ~"only adult")) %>%
+  #                         !OTU %in% top_ASV_water ~"only adult")) |>
   ggplot(aes(x = Stage, y = mean, alluvium = OTU, stratum = OTU, fill = OTU)) +
   # scale_fill_brewer(type = "qual", palette = "Paired")+
   scale_fill_viridis_d(option = "turbo") +
@@ -411,31 +411,30 @@ alluvial_plot <- alluvial_data %>%
 alluvial_plot
 ggsave("figures/alluvial_plot_top15asv.pdf", dpi = 300, width = 7, height = 4)
 
-#' Alluvial plot of top ASVs per metadata variables
-#' TODO: rename test dfs
-test <- rel_abundance_clean %>%
-  group_by(OTU, Stage, Breeding, Urbanisation) %>%
-  mutate(mean = mean(Abundance), median = median(Abundance)) %>%
-  ungroup() %>%
-  select(OTU, clean_Phylum, Stage, Breeding, Urbanisation, mean, median) %>%
+# Alluvial plot of top ASVs per metadata variables
+grouped_relabund <- rel_abundance_clean |>
+  group_by(OTU, Stage, Breeding, Urbanisation) |>
+  mutate(mean = mean(Abundance), median = median(Abundance)) |>
+  ungroup() |>
+  select(OTU, clean_Phylum, Stage, Breeding, Urbanisation, mean, median) |>
   distinct()
 
-test2 <- test %>%
-  group_by(Stage, Breeding, Urbanisation) %>%
-  slice_max(median, n = 15) %>%
-  pull(OTU) %>%
+grouped_relabund2 <- grouped_relabund |>
+  group_by(Stage, Breeding, Urbanisation) |>
+  slice_max(median, n = 15) |>
+  pull(OTU) |>
   unique()
 
 get_top_ASV_stage <- function(df, stage) {
-  df %>%
-    group_by(Stage, Breeding, Urbanisation) %>%
-    slice_max(median, n = 15) %>%
-    filter(Stage == stage) %>%
-    pull(OTU) %>%
+  df |>
+    group_by(Stage, Breeding, Urbanisation) |>
+    slice_max(median, n = 15) |>
+    filter(Stage == stage) |>
+    pull(OTU) |>
     unique()
 }
 
-stage_list <- lapply(c("water", "larvae", "pupae", "adult"), function(stage) get_top_ASV_stage(test, stage))
+stage_list <- lapply(c("water", "larvae", "pupae", "adult"), function(stage) get_top_ASV_stage(grouped_relabund, stage))
 
 #' Venn diagram
 venn <- VennDiagram::venn.diagram(
@@ -470,18 +469,21 @@ venn <- VennDiagram::venn.diagram(
 grid::grid.newpage()
 grid::grid.draw(venn)
 
-df_alluvial <- test %>%
-  filter(OTU %in% test2) %>%
-  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) %>%
-  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE)) %>%
+df_alluvial <- grouped_relabund |>
+  filter(OTU %in% grouped_relabund2) |> 
+  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) |>
+  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE),
+        Urbanisation=case_when(Urbanisation == "U" ~ "urban",
+                              Urbanisation == "PU" ~ "peri-urban",
+                              T ~ Urbanisation)) |>
   select(-mean_water)
 
-weird_top_asv <- ps.melt_clean %>% 
+weird_top_asv <- ps.melt_clean |> 
   filter(OTU %in% stage_list[[1]],
          Phylum %in% c("Actinobacteriota", "Bacteroidota"))
 
 # TODO: fill color based on phylum, use colors of rel abundance plot
-alluvial_grid <- df_alluvial %>%
+alluvial_grid <- df_alluvial |> 
   ggplot(aes(
     x = Stage,
     y = mean,
@@ -556,45 +558,45 @@ ag +
 ggsave("figures/alluvial_grid.pdf", height = 7, width = 7)
 
 #' Compare ASVs only in adult and water per location/breeding material
-asv_stage_mean <- ps.melt_clean %>%
-  select(-Sample) %>%
-  pivot_wider(names_from = Stage, values_from = Abundance, values_fn = mean) %>%
-  group_by(OTU) %>%
+asv_stage_mean <- ps.melt_clean |>
+  select(-Sample) |>
+  pivot_wider(names_from = Stage, values_from = Abundance, values_fn = mean) |>
+  group_by(OTU) |>
   summarise(across(c(pupae, adult, water, larvae), \(x) mean(x, na.rm = TRUE)))
 
-water <- asv_stage_mean %>%
-  filter(water > 0) %>%
-  pull(OTU) %>%
+water <- asv_stage_mean |>
+  filter(water > 0) |>
+  pull(OTU) |>
   unique()
 
-larvae <- asv_stage_mean %>%
-  filter(water == 0 & larvae > 0) %>%
-  pull(OTU) %>%
+larvae <- asv_stage_mean |>
+  filter(water == 0 & larvae > 0) |>
+  pull(OTU) |>
   unique()
 
-pupae <- asv_stage_mean %>%
-  filter(water == 0 & larvae == 0 & pupae > 0) %>%
-  pull(OTU) %>%
+pupae <- asv_stage_mean |>
+  filter(water == 0 & larvae == 0 & pupae > 0) |>
+  pull(OTU) |>
   unique()
 
-adult <- asv_stage_mean %>%
-  filter(adult > 0 & water == 0 & larvae == 0 & pupae == 0) %>%
-  pull(OTU) %>%
+adult <- asv_stage_mean |>
+  filter(adult > 0 & water == 0 & larvae == 0 & pupae == 0) |>
+  pull(OTU) |>
   unique()
 
-stage_relative_ab <- ps.melt_clean %>%
+stage_relative_ab <- ps.melt_clean |>
   mutate(fill_color = case_when(
     OTU %in% water ~ "water",
     OTU %in% larvae ~ "larvae",
     OTU %in% pupae ~ "pupae",
     OTU %in% adult ~ "adult"
-  )) %>%
-  group_by(fill_color, Sample, Stage, Breeding, Urbanisation) %>%
-  summarise(Abundance = sum(Abundance), .groups = "drop") %>%
+  )) |>
+  group_by(fill_color, Sample, Stage, Breeding, Urbanisation) |>
+  summarise(Abundance = sum(Abundance), .groups = "drop") |>
   mutate(fill_color = factor(fill_color, levels = c("water", "larvae", "pupae", "adult")))
 
-ASV_ra_per_stage_p <- stage_relative_ab %>%
-  # filter(Stage != "water") %>%
+ASV_ra_per_stage_p <- stage_relative_ab |>
+  # filter(Stage != "water") |>
   ggplot(aes(x = Sample, y = Abundance, fill = fill_color)) +
   geom_bar(stat = "identity") +
   labs(x = "", y = "Relative abundance (%)") +
@@ -635,9 +637,9 @@ ASV_ra_per_stage_p
 ggsave("figures/ASV_relative_abundance_per_stage.pdf", dpi = 300, width = 7, height = 5)
 
 # Which taxonomy for per stage ASVs?
-p3 <- rel_abundance_clean %>%
-  filter(OTU %in% c(larvae, pupae, adult)) %>%
-  distinct() %>%
+p3 <- rel_abundance_clean |>
+  filter(OTU %in% c(larvae, pupae, adult)) |>
+  distinct() |>
   mutate(
     stage_present = case_when(
       OTU %in% larvae ~ "larvae",
@@ -645,12 +647,12 @@ p3 <- rel_abundance_clean %>%
       OTU %in% adult ~ "adult"
     ),
     stage_present = factor(stage_present, levels = c("larvae", "pupae", "adult"))
-  ) %>%
-  group_by(Sample, Stage, Breeding, clean_Phylum, Urbanisation, clean_Family, stage_present) %>%
-  summarise(ab = sum(Abundance)) %>%
-  ungroup() %>%
-  select(Sample, Stage, Breeding, clean_Phylum, Urbanisation, clean_Family, ab, stage_present) %>%
-  distinct() %>%
+  ) |>
+  group_by(Sample, Stage, Breeding, clean_Phylum, Urbanisation, clean_Family, stage_present) |>
+  summarise(ab = sum(Abundance)) |>
+  ungroup() |>
+  select(Sample, Stage, Breeding, clean_Phylum, Urbanisation, clean_Family, ab, stage_present) |>
+  distinct() |>
   ggnested(
     aes(
       x = Sample,
@@ -713,3 +715,228 @@ rel_ab_plot / ((free(alluvial_plot) +
   plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(face = "bold"))
 ggsave("figures/combined_relative_abundance.pdf", dpi = 300, width = 7, height = 8)
+
+# Absolute quantification with 16S qPCR
+#qpcr <- read_tsv("data/16S_qPCR_results.tsv")
+qpcr <- read_csv("data/16S_qPCR_results.csv") |> 
+  mutate(Sample=gsub(" ", "-", Sample)) |> 
+  filter(Task!="Standard")
+
+copies_per_stage <- qpcr |> 
+  left_join(samdf |> rownames_to_column("Sample")) |> 
+  filter(!is.na(Stage)) |> 
+  ggplot(aes(x=Stage, y=Quantity, color=Stage))+
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
+  theme_bw() +
+  theme(
+    strip.text.x = element_text(size = 10),
+    axis.title.x = element_blank(),
+    legend.text.align = 0
+  ) +
+  scale_y_log10()+
+  scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
+  scale_shape_manual(values = c(0, 15, 1, 16)) +
+  labs(shape = "Breeding material/\nLocation", y="copies/µl")+
+  stat_pwc(
+    method = "wilcox.test", p.adjust.method = "BH",
+    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+  )
+ggsave("figures/copies_per_stage.pdf", dpi=300, height=7, width=5)
+
+qpcr |> 
+  left_join(samdf |> rownames_to_column("Sample")) |> 
+  filter(!is.na(Stage)) |> 
+  ggplot(aes(x=Breeding, y=Quantity, color=Breeding))+
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
+  theme_bw() +
+  theme(
+    strip.text.x = element_text(size = 10),
+    axis.title.x = element_blank(),
+    legend.text.align = 0
+  ) +
+  scale_y_log10()+
+  labs(shape = "Breeding material/\nLocation")+
+  facet_wrap(~Stage, ncol=2, nrow = 2)+
+  scale_shape_manual(values = c(0, 15, 1, 16)) +
+  stat_pwc(
+    method = "wilcox.test", p.adjust.method = "BH",
+    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+  )
+
+top_ASV_abs_quant <- rel_abundance_clean |> 
+  left_join(qpcr) |> 
+  mutate(abs_quantity=(Abundance/100)*Quantity) |> 
+  group_by(OTU, Stage, Breeding, Urbanisation) |> 
+  mutate(mean = mean(abs_quantity), median = median(abs_quantity)) |> 
+  ungroup() |> 
+  select(OTU, clean_Phylum, Stage, Breeding, Urbanisation, mean, median) |> 
+  distinct() |> 
+  filter(OTU %in% stage_list[[4]]) |>
+  mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) |>
+  mutate(OTU = fct_reorder(OTU, mean_water, .na_rm = TRUE),
+        Urbanisation=case_when(Urbanisation == "U" ~ "urban",
+                              Urbanisation == "PU" ~ "peri-urban",
+                              T ~ Urbanisation)) |>
+  select(-mean_water) |> 
+  ggplot(aes(
+    x = Stage,
+    y = mean,
+    alluvium = OTU,
+    stratum = OTU,
+    fill = clean_Phylum
+    # fill=as.integer(OTU)
+  )) +
+  # scale_fill_viridis_c(option="turbo")+
+  scale_fill_manual(values = pal) +
+  # scale_fill_gradientn(colors=c("#3B9AB2", "#F2E191", "#F21A00"))+
+  geom_flow(decreasing = TRUE) +
+  geom_stratum(decreasing = TRUE, linewidth = .1) +
+  geom_vline(aes(xintercept = 2.25),
+    linetype = "dashed"
+  ) +
+  #annotate("text",
+  #  x = 2.25, y = 61, label = "Larvae stop eating",
+  #  angle = 90, vjust = -1, hjust = 1, size = 2
+  #) +
+  facet_grid2(vars(Urbanisation), vars(Breeding), axes = "all", scales = "free", independent = "all") +
+  labs(y = "Mean absolute abundance (copies/µl)") +
+  scale_y_continuous(
+    limits = c(0, NA),
+    expand = expansion(add = c(0, 1))
+    )+
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "lightgrey", linetype = 0),
+    strip.placement = "outside",
+    strip.text = element_text(size = 8),
+    strip.switch.pad.grid = unit(.5, "cm"),
+    legend.title = element_blank(),
+    axis.title.x = element_blank(),
+    legend.text = element_markdown()
+  )
+
+ggsave("figures/absolute_quantity_top_adult_asv.pdf", dpi=300, width=10, height=7)
+
+
+(free(addSmallLegend(copies_per_stage)+
+  theme(legend.position = "bottom",
+        # legend.title = element_text(vjust = 1),
+        legend.box.just = "left",
+        axis.text.x = element_text(angle=45, hjust=1),
+        legend.box = "vertical",
+        legend.box.spacing = unit(1, "mm"),
+        legend.spacing = unit(1, "mm"),
+        legend.margin = margin(t = 0.1, unit='cm')))+
+  guides(
+          color = guide_legend(nrow = 2, title.position = "top"),  # Number of rows for Group 1 legend
+          shape = guide_legend(nrow = 2, title.position = "top")   # Number of rows for Group 2 legend
+        ) | 
+  addSmallLegend(top_ASV_abs_quant)+theme(legend.key.size = unit(2, "mm"),legend.margin = margin(0, 0, 0, 0))+
+  theme(legend.title = element_blank())) +
+  plot_layout(widths = c(.5, 1)) +
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(face = "bold"))
+
+ggsave("figures/absolute_combined.pdf", dpi=300, width = 7.4, height=5)
+
+# Venn all ASVs
+
+get_ASV_stage <- function(df, stage, abundance_filter) {
+  df |>
+    filter(Abundance > abundance_filter, Stage == stage) |>
+    pull(OTU) |>
+    unique()
+}
+  
+venn_list <- lapply(c("water", "larvae", "pupae", "adult"), function(stage) get_ASV_stage(ps.melt, stage, 0))
+
+venn_0 <- VennDiagram::venn.diagram(
+  x = venn_list,
+  category.names = c("water", "larvae", "pupae", "adult"),
+  scaled = F,
+  filename = NULL, # "figures/venn_diagram.tiff",
+  # print.mode = c("raw", "percent"),
+  # imagetype = "tiff",
+  disable.logging = T,
+  height = 480,
+  width = 480,
+  resolution = 300,
+  # compression = "lzw",
+  main = "ASV distribution",
+  main.cex = .4,
+  main.pos = c(.5, .95),
+  main.fontfamily = "sans",
+  lwd = 1,
+  col = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+  fill = scales::alpha(c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"), .2),
+  # Numbers
+  cex = .4,
+  cat.default.pos = "text",
+  cat.cex = .4,
+  # cat.pos=c(15, 345),
+  cat.dist = c(0.2, 0.2, 0.1, 0.1),
+  cat.fontfamily = "sans",
+  cat.col = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+  # label.col=c("steelblue", "#976559", "#D94701"),
+  fontfamily = "sans"
+)
+
+venn_list <- lapply(c("water", "larvae", "pupae", "adult"), function(stage) get_ASV_stage(ps.melt, stage, 1))
+
+venn_1 <- VennDiagram::venn.diagram(
+  x = venn_list,
+  category.names = c("water", "larvae", "pupae", "adult"),
+  scaled = F,
+  filename = NULL, # "figures/venn_diagram.tiff",
+  # print.mode = c("raw", "percent"),
+  # imagetype = "tiff",
+  disable.logging = T,
+  height = 480,
+  width = 480,
+  resolution = 300,
+  # compression = "lzw",
+  main = "ASV distribution",
+  main.cex = .4,
+  main.pos = c(.5, .95),
+  main.fontfamily = "sans",
+  lwd = 1,
+  col = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+  fill = scales::alpha(c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"), .2),
+  # Numbers
+  cex = .4,
+  cat.default.pos = "text",
+  cat.cex = .4,
+  # cat.pos=c(15, 345),
+  cat.dist = c(0.2, 0.2, 0.1, 0.1),
+  cat.fontfamily = "sans",
+  cat.col = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF"),
+  # label.col=c("steelblue", "#976559", "#D94701"),
+  fontfamily = "sans"
+)
+
+for (i in 9:23) {
+  venn_0[[i]]$label <- paste0(venn_0[[i]]$label, "\n(", venn_1[[i]]$label, ")")
+}
+
+# Convert the Venn diagram to a grob
+venn_grob <- grid::grobTree(venn_0)
+
+# Wrap the Venn diagram into a ggplot object using annotation_custom()
+venn_plot <- ggplot() +
+  annotation_custom(venn_grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
+  theme_void() 
+
+rel_ab_plot / ((
+  ASV_ra_per_stage_p +
+  free(venn_plot)
+  ) +
+  plot_layout(widths = c(1, .7))) +
+  plot_layout(heights = c(1, .5)) +
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(face = "bold"))
+
+ggsave("figures/combined_relative_abundance.pdf", dpi = 300, width = 7, height = 8)
+
