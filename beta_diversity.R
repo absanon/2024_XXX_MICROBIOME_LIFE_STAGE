@@ -56,7 +56,7 @@ p_pcoa <- ggplot(pcoa_df, aes(x = Axis.1, y = Axis.2)) +
   theme_bw()
 p_pcoa
 
-ggsave("figures/PCoA.pdf", dpi = 300)
+ggsave("figures/PCoA.pdf", dpi = 300, width=180, height=120, units = "mm")
 
 # NMDS
 source("custom_rldbrda.R")
@@ -78,7 +78,7 @@ p_nmds <- ggplot(nmds_df, aes(x = MDS1, y = MDS2)) +
   theme_bw()
 p_nmds
 
-ggsave("figures/NMDS.pdf", dpi = 300)
+ggsave("figures/NMDS.pdf", dpi = 300, width=180, height=120, units = "mm")
 
 
 ## PERMANOVA
@@ -112,10 +112,10 @@ g2 <- g +
   labs(x = bquote("Effect size (adjusted " * R^2 * ")")) +
   theme_bw()
 g2
-ggsave("figures/dbRDA.pdf", dpi = 300)
+ggsave("figures/dbRDA.pdf", dpi = 300, width=180, height=120, units = "mm")
 
 
-#' # Per stage
+# Per stage
 set.seed(1234)
 
 rda <- custom_rldbrda(
@@ -188,14 +188,14 @@ p_dbrda <- plot_data %>%
   theme_bw() +
   theme(axis.title.y = element_blank())
 p_dbrda
-ggsave("figures/dbRDA_per_stage.pdf", dpi = 300)
+ggsave("figures/dbRDA_per_stage.pdf", dpi = 300, width=180, height=120, units = "mm")
 
 # Combine pcoa + dbRDA plots
 p_pcoa / p_dbrda +
   plot_layout(heights = c(4, 1)) +
   plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(face = "bold"))
-ggsave("figures/beta_diversity.pdf", dpi = 300)
+ggsave("figures/beta_diversity.pdf", dpi = 300, width=180, height=120, units = "mm")
 
 p1 <- alpha +
   # labs(x="")+
