@@ -276,5 +276,20 @@ phyloseq::tax_table(SANON)[1:6]
 abou <- phyloseq::tax_table(SANON)
 abou
 
+# Add prevalence filter
+## Calculate prevalence of each taxon
+#prev <- apply(otu_table(SANON), 1, function(x) sum(x > 0) / length(x))
+#
+## Define prevalence threshold (5% prevalence)
+#prevalence_threshold <- 0.1
+#
+## Identify taxa with prevalence greater than or equal to 5%
+#taxa_to_keep <- names(prev[prev >= prevalence_threshold])
+#
+## Prune the phyloseq object to only keep those taxa
+#physeq_filtered <- prune_taxa(taxa_to_keep, SANON)
+#
+#SANON <- physeq_filtered
+
 # Save your workspace to a .RData file
 save.image(file = "Sanon_16S_DADA2_data.RData")
