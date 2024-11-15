@@ -112,15 +112,14 @@ rel_abundance_clean <- rel_abundance_df |>
     ),
     clean_Family = case_when(
       max_family_abundance < 5 & 
-        max_family_abundance < max(max_family_abundance) ~ glue::glue("Other {Phylum}"),
+      max_family_abundance < max(max_family_abundance) & 
+      !startsWith(Family, "unclassified Bacteria") ~ glue::glue("Other {Phylum}"),
       clean_Phylum == "Others" & startsWith(Family, "unclassified Bacteria") ~ "unclassified Bacteria",
-      T ~ Family
-    )
-  ) |>
+      T ~ Family)) |> 
   mutate(clean_Family = if_else(clean_Phylum == "Others" & clean_Family != "unclassified Bacteria",
     "Others", clean_Family
   )) |>
-  ungroup() |>
+  ungroup() |> 
   group_by(Order) |>
   mutate(clean_Order = case_when(
     max_order_abundance < 1 ~ "Others",
@@ -216,6 +215,20 @@ rel_ab_plot <- addSmallLegend(p, spaceLegend = .5) +
   )
 
 ggsave("figures/relative_abundance.pdf", dpi = 300, width = 169, height = 120, units = "mm")
+
+# Look at 'human activity' hypothesis in plastic urban (Others classified ASVs)
+rel_abundance_clean |> 
+  filter(Breeding == "plastic" & Urbanisation == "U",
+        clean_Phylum == "Others") |> 
+  select(-OTU, -Abundance) |> 
+  distinct() |> 
+  mutate(Domain=ifelse(startsWith(Domain, "unclassified Bacteria"), "unclassified Bacteria", Domain)) |> 
+  ggplot(aes(
+    x = Sample,
+    y = F_Abundance, 
+    fill=Domain))+
+  geom_bar(stat = "identity")
+ggsave("test.pdf", dpi = 300, width = 169, height = 120, units = "mm")
 
 # Create Proteobacteria plot
 
