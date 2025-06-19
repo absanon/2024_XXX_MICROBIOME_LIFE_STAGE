@@ -84,7 +84,7 @@ alpha <- alpha_average_df %>%
   ) +
   # scale_color_brewer(palette="Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
-  stat_pwc(
+  ggpubr::stat_pwc(
     method = "wilcox.test", p.adjust.method = "BH",
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
   )
@@ -118,7 +118,7 @@ alpha_shape <- alpha_average_df %>%
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
   scale_shape_manual(values = c(0, 15, 1, 16)) +
   labs(shape = "Breeding material/\nLocation")+
-  stat_pwc(
+  ggpubr::stat_pwc(
     method = "wilcox.test", p.adjust.method = "BH",
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
   )
@@ -151,7 +151,7 @@ alpha_average_df %>%
   ) +
   scale_shape_manual(values = c(0, 15, 1, 16)) +
   labs(shape = "Breeding material/\nLocation")+
-  stat_pwc(
+  ggpubr::stat_pwc(
     method = "wilcox.test", p.adjust.method = "BH",
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
   )
