@@ -449,3 +449,251 @@ ggsave(
 
 
 save.image("16S_Aeg_public/hery/hery_dada2.RData")
+
+group_vars <- c("life_stage", "geographic_location")
+
+# Ensure variables exist
+if (!all(group_vars %in% colnames(sample_data(ps)))) {
+  stop("One or more grouping variables not found in sample_data.")
+}
+
+# Create a combined group column in sample_data
+sample_data(ps)$GroupID <- apply(
+  sample_data(ps)[, group_vars],
+  1,
+  paste,
+  collapse = "_"
+)
+
+ps_merged <- merge_samples(ps, group = "GroupID")
+
+ps_group_rel <- transform_sample_counts(ps_merged, function(x) x / sum(x) * 100)
+
+ps.melt_group <- psmelt(ps_group_rel)
+
+ps.melt_clean_tax <- ps.melt_group |>
+  select(
+    -geographic_location,
+    -life_stage,
+    -sample_name,
+    -isolation_source,
+    -container
+  ) |>
+  tidyr::separate_wider_delim(
+    cols = Sample,
+    delim = "_",
+    names = c("life_stage", "geographic_location"),
+    cols_remove = FALSE
+  ) |>
+  # Replace "unclassified" values with NA
+  mutate(
+    Family = replace_unclassified(Family),
+    Order = replace_unclassified(Order),
+    Class = replace_unclassified(Class),
+    Phylum = replace_unclassified(Phylum),
+    Domain = replace_unclassified(Domain)
+  ) |>
+  # Create a new column "Family" with appropriate values
+  mutate(
+    Family = ifelse(
+      is.na(Family),
+      glue("unclassified {coalesce(Order, Class, Phylum)}"),
+      glue("<i>{Family}</i>")
+    )
+  ) |>
+  # Replace NA values in Domain, Phylum, Class, and Order with values from Family
+  mutate(across(
+    c(Domain, Phylum, Class, Order),
+    ~ if_else(is.na(.), Family, .)
+  )) |>
+  # Replace "unclassified NA" with "unclassified Bacteria ({OTU})"
+  mutate(across(
+    c(Domain, Phylum, Class, Order, Family),
+    ~ replace_unclassified_na(., glue("unclassified Bacteria ({OTU})"))
+  )) |>
+  # Replace Phylum values if Family starts with "unclassified Bacteria"
+  mutate(
+    Phylum = if_else(
+      startsWith(Family, "unclassified Bacteria"),
+      "Others",
+      Phylum
+    )
+  )
+
+ps.melt_sum <- ps.melt_clean_tax |>
+  group_by(Sample, Family, Genus) |>
+  mutate(F_Abundance = sum(Abundance)) |>
+  ungroup()
+
+ps.melt_clean <- ps.melt_sum
+
+# Calculate max relative abundance
+rel_abundance_df <- ps.melt_clean |>
+  filter(!is.na(Abundance)) %>%
+  group_by(Sample, Phylum) |>
+  mutate(phylum_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Phylum) |>
+  mutate(max_phylum_abundance = max(phylum_abundance)) |>
+  ungroup() |>
+  group_by(Sample, Phylum, Family) |>
+  mutate(family_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Family) |>
+  mutate(max_family_abundance = max(family_abundance)) |>
+  ungroup() |>
+  group_by(Sample, Phylum, Order) |>
+  mutate(order_abundance = sum(Abundance)) |>
+  ungroup() |>
+  group_by(Order) |>
+  mutate(max_order_abundance = max(order_abundance)) |>
+  ungroup()
+
+# Clean up Phylum, Order and Family names based on relative abundance
+rel_abundance_clean <- rel_abundance_df |>
+  group_by(Phylum) |>
+  mutate(
+    clean_Phylum = case_when(
+      max_phylum_abundance < 1 ~ "Others",
+      T ~ Phylum
+    ),
+    clean_Family = case_when(
+      max_family_abundance < 5 &
+        max_family_abundance < max(max_family_abundance) &
+        !startsWith(Family, "unclassified Bacteria") ~
+        glue::glue("Other {Phylum}"),
+      clean_Phylum == "Others" & startsWith(Family, "unclassified Bacteria") ~
+        "unclassified Bacteria",
+      T ~ Family
+    )
+  ) |>
+  mutate(
+    clean_Family = if_else(
+      clean_Phylum == "Others" & clean_Family != "unclassified Bacteria",
+      "Others",
+      clean_Family
+    )
+  ) |>
+  ungroup() |>
+  group_by(Order) |>
+  mutate(
+    clean_Order = case_when(
+      max_order_abundance < 1 ~ "Others",
+      T ~ Order
+    )
+  ) |>
+  mutate(
+    clean_Order = if_else(
+      clean_Phylum == "Others" &
+        (!startsWith(Order, "unclassified Bacteria") |
+          max_family_abundance < 5),
+      "Others",
+      clean_Order
+    )
+  ) |>
+  ungroup()
+
+# Setting factor levels
+rel_abundance_clean$life_stage <- factor(
+  rel_abundance_clean$life_stage,
+  levels = c("water", "larvae")
+)
+rel_abundance_clean$clean_Phylum <- factor(
+  rel_abundance_clean$clean_Phylum,
+  levels = c(
+    sort(unique(rel_abundance_clean$clean_Phylum[
+      rel_abundance_clean$clean_Phylum != "Others"
+    ])),
+    "Others"
+  )
+)
+rel_abundance_clean$clean_Order <- factor(
+  rel_abundance_clean$clean_Order,
+  levels = c(
+    sort(unique(rel_abundance_clean$clean_Order[
+      rel_abundance_clean$clean_Order != "Others"
+    ])),
+    "Others"
+  )
+)
+rel_abundance_clean$clean_Family <- factor(
+  rel_abundance_clean$clean_Family,
+  levels = c(
+    sort(unique(rel_abundance_clean$clean_Family[
+      !startsWith(rel_abundance_clean$clean_Family, "Other")
+    ])),
+    sort(unique(rel_abundance_clean$clean_Family[startsWith(
+      rel_abundance_clean$clean_Family,
+      "Other"
+    )]))
+  )
+)
+
+# Create relative abundance plot
+pal <- c(
+  viridisLite::viridis(
+    length(unique(rel_abundance_clean$clean_Phylum)) - 1,
+    direction = -1
+  ),
+  "grey70"
+)
+
+names(pal) <- levels(rel_abundance_clean$clean_Phylum)
+
+p <- rel_abundance_clean |>
+  select(-OTU, -Abundance) |>
+  distinct() %>%
+  #  group_by(container, geographic_location, collection_date) %>%
+  #  filter(all(c("water", "larvae") %in% life_stage)) |>
+  #  ungroup() %>%
+  ggnested(
+    aes(
+      x = Sample,
+      y = F_Abundance,
+      main_group = clean_Phylum,
+      sub_group = clean_Family
+    ),
+    main_palette = pal,
+    gradient_type = "tints",
+    max_l = 1
+  ) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Relative abundance (%)") +
+  facet_nested(
+    ~ geographic_location + life_stage,
+    scales = "free_x",
+    space = "free",
+    switch = "x",
+    nest_line = element_line(color = "black", linewidth = .2)
+  ) +
+  scale_y_continuous(limits = c(0, NA), expand = c(0, 0.1)) +
+  ggtitle("Hery et al. (2020)") +
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    strip.background = element_blank(),
+    strip.placement = "outside",
+    strip.text = element_text(size = 6),
+    # ggh4x.facet.nestline = element_line(color = list("orange", rep("black", 11)), linewidth = .2),
+    panel.spacing.x = unit(.15, "lines"),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.text.y = element_text(size = 6),
+    axis.title.x = element_blank(),
+    legend.text = element_markdown(),
+    plot.title = element_text(size = 8)
+  )
+addSmallLegend(p, spaceLegend = .5) +
+  theme(
+    legend.title = element_blank(),
+    axis.title.y = element_text(size = 8),
+    legend.box.spacing = unit(0, "pt")
+  )
+ggsave(
+  "16S_Aeg_public/hery_grouped.pdf",
+  dpi = 300,
+  width = 169,
+  height = 200,
+  units = "mm"
+)
