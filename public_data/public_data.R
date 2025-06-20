@@ -82,7 +82,8 @@ alpha_bennett <- alpha_average_df %>%
     label = "p.adj.format",
     hide.ns = "p.adj",
     show.legend = F,
-    tip.length = 0.01
+    tip.length = 0.01,
+    label.size = 3
   )
 alpha_bennett
 ggsave("bennett_alpha.pdf", dpi = 300, width = 7, height = 5)
@@ -139,7 +140,8 @@ alpha_hernandez <- alpha_average_df %>%
     label = "p.adj.format",
     hide.ns = "p.adj",
     show.legend = F,
-    tip.length = 0.01
+    tip.length = 0.01,
+    label.size = 3
   )
 alpha_hernandez
 ggsave("hernandez_alpha.pdf", dpi = 300, width = 7, height = 5)
@@ -199,7 +201,8 @@ alpha_rodpai <- alpha_average_df %>%
     label = "p.adj.format",
     hide.ns = "p.adj",
     show.legend = F,
-    tip.length = 0.01
+    tip.length = 0.01,
+    label.size = 3
   )
 alpha_rodpai
 ggsave("rodpai_alpha.pdf", dpi = 300, width = 7, height = 10)
@@ -249,7 +252,8 @@ alpha_hery <- alpha_average_df %>%
     label = "p.adj.format",
     hide.ns = "p.adj",
     show.legend = F,
-    tip.length = 0.01
+    tip.length = 0.01,
+    label.size = 3
   )
 alpha_hery
 ggsave("hery_alpha.pdf", dpi = 300, width = 7, height = 5)
