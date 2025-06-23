@@ -244,7 +244,7 @@ p <- rel_abundance_clean |>
     nest_line = element_line(color = "black", linewidth = .2)
   ) +
   scale_y_continuous(limits = c(0, NA), expand = c(0, 0.1)) +
-  ggtitle("Bennett, et al. (2019)") +
+  ggtitle("Bennett et al. (2019)") +
   theme_classic() +
   theme(
     legend.position = "bottom",

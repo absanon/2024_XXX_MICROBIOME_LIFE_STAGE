@@ -244,7 +244,7 @@ p <- rel_abundance_clean |>
     nest_line = element_line(color = "black", linewidth = .2)
   ) +
   scale_y_continuous(limits = c(0, NA), expand = c(0, 0.1)) +
-  ggtitle("Hernandez, et al. (2024)") +
+  ggtitle("Hernandez et al. (2024)") +
   theme_classic() +
   theme(
     legend.position = "bottom",
@@ -354,7 +354,7 @@ alluvial_grid <- df_alluvial |>
     axis.text.y = element_text(size = 6),
     axis.title.y = element_text(size = 8, color = "grey50"),
     axis.title.y.right = element_text(color = "blue", vjust = -17),
-    legend.text = element_markdown()
+    legend.text = element_markdown(),
   )
 addSmallLegend(alluvial_grid, spaceLegend = .5) +
   theme(

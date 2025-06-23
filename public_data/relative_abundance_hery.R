@@ -255,7 +255,7 @@ p <- rel_abundance_clean |>
     nest_line = element_line(color = "black", linewidth = .2)
   ) +
   scale_y_continuous(limits = c(0, NA), expand = c(0, 0.1)) +
-  ggtitle("Hery, et al. (2020)") +
+  ggtitle("Hery et al. (2021)") +
   theme_classic() +
   theme(
     legend.position = "bottom",
@@ -667,7 +667,7 @@ p <- rel_abundance_clean |>
     nest_line = element_line(color = "black", linewidth = .2)
   ) +
   scale_y_continuous(limits = c(0, NA), expand = c(0, 0.1)) +
-  ggtitle("Hery et al. (2020)") +
+  ggtitle("Hery et al. (2021)") +
   theme_classic() +
   theme(
     legend.position = "bottom",
@@ -694,6 +694,6 @@ ggsave(
   "16S_Aeg_public/hery_grouped.pdf",
   dpi = 300,
   width = 169,
-  height = 200,
+  height = 140,
   units = "mm"
 )
