@@ -1,0 +1,307 @@
+Experiment	sample_name	isolation_source	collection_date	geographic_location	lat_lon	sample_size	metagenome
+SRR11035393	STC9E	water 100_bucket	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035394	STC8E	water 99_drum	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035395	STC7E	water 98_gutter manhole	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035396	STC6E	water 97_tire	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035397	STC5E	water 96_tire	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035398	STC4E	water 95_tire	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035399	STC3E	water 94_drum	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035400	STC2E	water 93_citern	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035401	STC1E	water 92_drum	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035402	STC10E	water 91_drum	2017-06-01	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035403	ABY9E	water 10_drum	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035404	SF9E	water 90_drum	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035405	SF8E	water 89_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035406	SF7E	water 88_plants container	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035407	SF6E	water 87_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035408	SF5E	water 86_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035409	SF4E	water 85_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035410	SF3E	water 84_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035411	SF2E	water 83_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035412	SF1E	water 82_bucket	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035413	SF10E	water 81_drum	2017-05-30	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035414	ABY8E	water 9_bucket	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035415	PC6E	water 80_drum	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035416	PC5E	water 79_drum	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035417	PC4E	water 78_drum	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035418	PC3E	water 77_bucket	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035419	PB9E	water 76_drum	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035420	PB8E	water 75_drum	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035421	PB7E	water 74_drum	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035422	PB6E	water 73_tire	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035423	PB5E	water 72_tire	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035424	PB4E	water 71_tire	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035425	ABY7E	water 8_bucket	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035426	PB3E	water 70_bucket	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035427	PB2E	water 69_bucket	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035428	PB1E	water 68_bucket	2017-05-22	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035429	PB10E	water 67_bucket	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035430	PAP5E	water 66_drum	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035431	PAP4E	water 65_bucket	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035432	PAP3E	water 64_bucket	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035433	PAP2E	water 63_drum	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035434	PAP1E	water 62_tire	2017-05-26	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035435	MOULE9E	water 61_bucket	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035436	ABY6E	water 7_drum	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035437	MOULE8E	water 60_tire	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035438	MOULE7E	water 59_tire	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035439	MOULE6E	water 58_freezer	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035440	MOULE5E	water 57_bucket	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035441	MOULE4E	water 56_tire	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035442	MOULE3E	water 55_drum	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035443	MOULE2E	water 54_drum	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035444	MOULE1E	water 53_drum	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035445	MOULE16062E	water 52_bucket	2017-06-16	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035446	MOULE16061E	water 51_bucket	2017-06-16	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035447	ABY5E	water 6_bucket	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035448	MOULE10E	water 50_tire	2017-05-29	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035449	MOULE07069E	water 49_bucket	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035450	MOULE07068E	water 48_plants container	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035451	MOULE07067E	water 47_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035452	MOULE07066E	water 46_bucket	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035453	MOULE07065E	water 45_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035454	MOULE07064E	water 44_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035455	MOULE07063E	water 43_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035456	MOULE07062E	water 42_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035457	MOULE07061E	water 41_freezer	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035458	ABY4E	water 5_drum	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035459	MOULE070610E	water 40_drum	2017-06-07	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035460	LAM9E	water 39_bucket	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035461	LAM8E	water 38_bucket	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035462	LAM7E	water 37_drum	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035463	LAM6E	water 36_drum	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035464	LAM5E	water 35_drum	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035465	LAM4E	water 34_tire	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035466	LAM3E	water 33_tin can	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035467	LAM2E	water 32_bucket	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035468	L97	larvae97_tin can	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035469	L96	larvae96_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035470	L95	larvae95_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035471	L94	larvae94_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035472	L91	larvae91_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035473	L90	larvae90_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035474	LAM1E	water 31_plants container	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035475	ABY3E	water 4_drum	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035476	L89	larvae89_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035477	L88	larvae88_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035478	L86	larvae86_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035479	L81	larvae81_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035480	L77	larvae77_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035481	L73	larvae73_boat	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035482	L71	larvae71_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035483	L6	larvae6_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035484	L68	larvae68_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035485	L62	larvae62_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035486	LAM10E	water 30_drum	2017-05-23	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035487	L59	larvae59_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035488	L57	larvae57_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035489	L53	larvae53_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035490	L4	larvae4_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035491	L49	larvae49_boat	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035492	L46	larvae46_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035493	L45	larvae45_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035494	L3	larvae3_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035495	L37	larvae37_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035496	L36	larvae36_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035497	GOSIER2E	water 29_tire	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035498	L33	larvae33_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035499	L32	larvae32_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035500	L28	larvae28_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035501	L24	larvae24_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035502	L23	larvae23_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035503	L19	larvae19_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035504	L18	larvae18_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035505	L17	larvae17_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035506	L16	larvae16_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035507	L141	larvae141_trough	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035508	GOSIER1E	water 28_drum	2017-07-15	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035509	L13	larvae13_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035510	L139	larvae139_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035511	L137	larvae137_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035512	L132	larvae132_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035513	L131	larvae131_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035514	L11	larvae11_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035515	L119	larvae119_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035516	L118	larvae118_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035517	L116	larvae116_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035518	L115	larvae115_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035519	CPTR7E	water 27_plants container	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035520	L114b	larvae114b_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035521	L113	larvae113_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035522	L112	larvae112_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035523	L111	larvae111_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035524	L109	larvae109_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035525	L108	larvae108_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035526	L107	larvae107_bucket	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035527	L106	larvae106_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035528	L105	larvae105_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035529	L104	larvae104_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035530	CPTR6E	water 26_plants container	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035531	L103	larvae103_tire	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035532	L102	larvae102_drum	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035533	L101	larvae101_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035534	L100	larvae100_freezer	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035535	STC9L	larvae87_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035536	STC8L	larvae86_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035537	STC7L	larvae85_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035538	STC6L	larvae84_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035539	STC5L	larvae83_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035540	STC4L	larvae82_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035541	CPTR5E	water 25_plants container	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035542	STC2L	larvae81_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035543	STC1L	larvae80_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035544	STC10L	larvae79_Guadeloupe	2017-06-01	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035545	SF9L	larvae78_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035546	SF8L	larvae77_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035547	SF7L	larvae76_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035548	SF6L	larvae75_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035549	SF5L	larvae74_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035550	SF4L	larvae73_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035551	SF1L	larvae72_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035552	CPTR4E	water 24_bucket	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035553	SF10L	larvae71_Guadeloupe	2017-05-30	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035554	PC7L	larvae70_Guadeloupe	2017-07-15	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035555	PC6L	larvae69_Guadeloupe	2017-07-15	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035556	PC3L	larvae68_Guadeloupe	2017-07-15	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035557	PB9L	larvae67_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035558	PB8L	larvae66_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035559	PB7L	larvae65_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035560	PB6L	larvae64_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035561	PB5L	larvae63_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035562	PB4L	larvae62_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035563	CPTR3E	water 23_plants container	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035564	PB3L	larvae61_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035565	PB2L	larvae60_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035566	PB1L	larvae59_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035567	PB10L	larvae58_Guadeloupe	2017-05-22	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035568	PAP5L	larvae57_Guadeloupe	2017-05-26	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035569	PAP4L	larvae56_Guadeloupe	2017-05-26	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035570	PAP3L	larvae55_Guadeloupe	2017-05-26	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035571	PAP2L	larvae54_Guadeloupe	2017-05-26	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035572	PAP1L	larvae53_Guadeloupe	2017-05-26	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035573	MOULE9L	larvae52_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035574	CPTR2E	water 22_bucket	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035575	MOULE8L	larvae51_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035576	MOULE7L	larvae50_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035577	MOULE6L	larvae49_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035578	MOULE3L	larvae48_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035579	MOULE1L	larvae47_Guadeloupe	2017-05-29	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035580	MOULE16062L	larvae46_Guadeloupe	2017-06-16	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035581	MOULE16061L	larvae45_Guadeloupe	2017-06-16	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035582	MOULE07069L	larvae44_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035583	MOULE07068L	larvae43_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035584	MOULE07067L	larvae42_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035585	CPTR1E	water 21_drum	2017-06-08	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035586	ABY2E	water 3_tire	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035587	MOULE07066L	larvae41_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035588	MOULE07065L	larvae40_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035589	MOULE07064L	larvae39_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035590	MOULE07063L	larvae38_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035591	MOULE07062L	larvae37_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035592	MOULE07061L	larvae36_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035593	MOULE070610L	larvae35_Guadeloupe	2017-06-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035594	LAM9L	larvae34_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035595	LAM8L	larvae33_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035596	LAM7L	larvae32_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035597	BM9E	water 20_bucket	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035598	LAM6L	larvae31_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035599	LAM5L	larvae30_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035600	LAM4L	larvae29_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035601	LAM3L	larvae28_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035602	LAM2L	larvae27_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035603	LAM1L	larvae26_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035604	LAM10L	larvae25_Guadeloupe	2017-05-23	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035605	GOSIER2L	larvae24_Guadeloupe	2017-07-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035606	GOSIER1L	larvae23_Guadeloupe	2017-07-07	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035607	CPTR7L	larvae22_Guadeloupe	2017-06-08	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035608	BM8E	water 19_gutter manhole	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035609	CPTR1L	larvae21_Guadeloupe	2017-06-08	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035610	BM9L	larvae20_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035611	BM8L	larvae19_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035612	BM7L	larvae18_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035613	BM6L	larvae17_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035614	BM5L	larvae16_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035615	BM4L	larvae15_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035616	BM3L	larvae14_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035617	BM2L	larvae13_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035618	BM1L	larvae12_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035619	BM7E	water 18_plants container	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035620	BM10L	larvae11_Guadeloupe	2017-06-02	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035621	ABY9L	larvae10_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035622	ABY8L	larvae9_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035623	ABY7L	larvae8_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035624	ABY6L	larvae7_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035625	ABY5L	larvae6_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035626	ABY4L	larvae5_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035627	ABY3L	larvae4_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035628	ABY2L	larvae3_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035629	ABY1L	larvae2_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035630	BM6E	water 17_bucket	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035631	ABY10L	larvae1_Guadeloupe	2017-05-24	Guadeloupe	16.2 N 61.4 W	1 pool of 30 larvae	Metagenome or environmental
+SRR11035632	E97	water 6_pD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035633	E96	water 97_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035634	E95	water 96_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035635	E94	water 95_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035636	E91	water 94_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035637	E90	water 91_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035638	E89	water 90_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035639	E88	water 89_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035640	E86	water 88_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035641	BM5E	water 16_freezer	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035642	E81	water 86_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035643	E77	water 81_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035644	E73	water 77_E	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035645	E71	water 73_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035646	E6	water 71_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035647	E68	water 68_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035648	E62	water 62_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035649	E59	water 59_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035650	E57	water 57_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035651	E53	water 53_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035652	BM4E	water 15_drum	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035653	E4	water 4_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035654	E49	water 49_E	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035655	E46	water 46_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035656	E45	water 45_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035657	E37	water 37_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035658	E36	water 36_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035659	E33	water 33_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035660	E32	water 32_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035661	E28	water 28_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035662	E24	water 24_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035663	BM3E	water 14_drum	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035664	E23	water 23_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035665	E19	water 19_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035666	E18	water 18_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035667	E17	water 17_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035668	E16	water 16_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035669	E141	water 141_Abv	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035670	E13	water 13_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035671	E139	water 139_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035672	E137	water 137_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035673	E132	water 132_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035674	BM2E	water 13_bucket	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035675	E131	water 131_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035676	E11	water 11_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035677	E119	water 119_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035678	E118	water 118_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035679	E116	water 116_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035680	E115	water 115_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035681	E114b	water 114b_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035682	E113	water 113_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035683	E112	water 112_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035684	E111	water 111_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035685	BM1E	water 12_bucket	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035686	E109	water 109_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035687	E108	water 108_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035688	E107	water 107_R	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035689	E106	water 106_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035690	E105	water 105_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035691	E104	water 104_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035692	E103	water 103_P	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035693	E102	water 102_inf250	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035694	E101	water 101_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035695	E100	water 100_gD	2017-10-05/2017-10-30	French Guiana	3.56 N 53.7 W	700 ml	Metagenome or environmental
+SRR11035696	BM10E	water 11_drum	2017-06-02	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035697	ABY1E	water 2_tire	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental
+SRR11035698	ABY10E	water 1_drum	2017-05-24	Guadeloupe	16.2 N 61.4 W	700 ml	Metagenome or environmental

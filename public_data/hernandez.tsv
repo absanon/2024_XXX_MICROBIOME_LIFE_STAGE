@@ -1,0 +1,15 @@
+Experiment	sample_name	collection_date	broad_env	local_env	body	geographic_location	host	lat_lon	altitude	age	part	life_stage	tissue	temperature	survey	migs
+SRR19146816	16s_males_s1	2018-06-26	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6236 N 99.1578 W	863	missing field	gut	adult	male	guts	29.6	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146817	16s_females_s5	2018-07-10	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6030 N 99.3819 W	865	missing field	gut	adult	female	guts	26.5	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146818	16s_females_s4	2018-07-03	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6247 N 99.3239 W	917	missing field	gut	adult	female	guts	31.4	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146819	16s_females_s3	2018-06-26	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6865 N 99.1177 W	869	missing field	gut	adult	female	guts	25.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146820	16s_females_s2	2018-07-10	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6089 N 99.1836 W	864	missing field	gut	adult	female	guts	32.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146821	16s_females_s1	2018-06-26	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6236 N 99.1578 W	863	missing field	gut	adult	female	guts	29.6	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146822	16s_larves_s2	2018-07-10	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6089 N 99.1836 W	864	missing field	gut	larves	pooled male and female	guts	32.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146823	16s_larves_s1	2018-06-26	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6236 N 99.1578 W	863	missing field	gut	larves	pooled male and female	guts	29.6	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146824	16s_males_s5	2018-07-10	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6030 N 99.3819 W	865	missing field	gut	adult	male	guts	26.5	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146825	16s_males_s4	2018-07-03	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6247 N 99.3239 W	917	missing field	gut	adult	male	guts	31.4	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146826	16s_males_s3	2018-06-26	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6865 N 99.1177 W	869	missing field	gut	adult	male	guts	25.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146827	16s_males_s2	2018-07-10	gut	gut	gut	Mexico: Morelos	Aedes aegypti	18.6089 N 99.1836 W	864	missing field	gut	adult	male	guts	32.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146828	16s_eggs_s2	2018-06-06	complete material	complete material	complete material	Mexico: Morelos	Aedes aegypti	18.6089 N 99.1836 W	864	0	field	eggs	eggs	not applicable	complete material	32.3	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated
+SRR19146829	16s_eggs_s1	2018-06-06	complete material	complete material	complete material	Mexico: Morelos	Aedes aegypti	18.6236 N 99.1578 W	863	0	field	eggs	Eggs	not applicable	complete material	29.6	MIMARKS.survey	MIGS/MIMS/MIMARKS.host-associated

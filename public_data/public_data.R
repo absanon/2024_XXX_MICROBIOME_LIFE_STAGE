@@ -278,3 +278,57 @@ alpha_plot <- ((alpha_bennett +
   )
 
 ggsave("alpha_plot.pdf", alpha_plot, dpi = 300, width = 7, height = 8)
+
+bmeta <- read_tsv("public_data/bennett.tsv")
+bmeta |>
+  select(Sample_name, life_stage, lat_lon, env_medium) |>
+  group_by(life_stage, lat_lon, env_medium) |>
+  summarise(n = n(), .groups = "drop") |>
+  ggplot(aes(x = life_stage, y = lat_lon)) +
+  geom_point(aes(size = n)) +
+  facet_wrap(~env_medium, scales = "free_y")
+
+hery_meta <- read_tsv("public_data/hery.tsv")
+hery_meta |>
+  separate(
+    isolation_source,
+    into = c("life_stage", "container"),
+    sep = "_",
+    remove = FALSE
+  ) %>%
+  mutate(
+    life_stage = str_remove_all(life_stage, "[0-9[:space:]b]"),
+    container = str_remove_all(container, "[0-9[:space:]]")
+  ) |>
+  select(sample_name, life_stage, lat_lon, container) |>
+  group_by(life_stage, lat_lon, container) |>
+  summarise(n = n(), .groups = "drop") |>
+  ggplot(aes(x = life_stage, y = lat_lon)) +
+  geom_point(aes(size = n)) +
+  facet_wrap(~container, scales = "free_y")
+
+hern_meta <- read_tsv("public_data/hernandez.tsv")
+hern_meta |>
+  select(sample_name, life_stage, lat_lon, collection_date) |>
+  group_by(life_stage, lat_lon, collection_date) |>
+  summarise(n = n(), .groups = "drop") |>
+  ggplot(aes(x = life_stage, y = lat_lon)) +
+  geom_point(aes(size = n)) +
+  facet_wrap(~collection_date, scales = "free_y")
+
+rodpai_meta <- read_tsv("public_data/rodpai.tsv")
+rodpai_meta |>
+  mutate(
+    life_stage = case_when(
+      isolation_source == "Mosquito abdomen" ~ "Adult",
+      isolation_source == "Mosquito larvae" ~ "Larvae",
+      isolation_source == "Mosquito larvae habitat water" ~ "Water",
+      T ~ isolation_source
+    )
+  ) |>
+  select(sample_name, life_stage, lat_lon, collection_date) |>
+  group_by(life_stage, lat_lon, collection_date) |>
+  summarise(n = n(), .groups = "drop") |>
+  ggplot(aes(x = life_stage, y = lat_lon)) +
+  geom_point(aes(size = n)) +
+  facet_wrap(~collection_date, scales = "free_y")

@@ -1,0 +1,165 @@
+Experiment	Sample_name	alias	host	isolation_source	collection_date	life_stage	storage	geographic_location	province	lat_lon	container_description	env_medium	temp	ph	metagenome
+SRR9615545	CN3.19S.A.AE.P3	CN3.19S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Colon	Portobelo	9.15493 N 80.3044 W	Plastic sheet	plastic	26.46	8.69	Metagenome or environmental
+SRR9615548	LS1.29S.A.AE.P4	LS1.29S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic sheet	plastic	29.53	7.6	Metagenome or environmental
+SRR9615549	LS1.29S.A.AE.P5	LS1.29S.A.AE.P5	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9615553	P.AS10.A.AE.P2	P.AS10.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Taller Dadym	8.929222 N 79.701722 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR9615555	LS5.22S.A.AE.P2	LS5.22S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9615556	LS1.25S.A.AE2	LS1.25S.A.AE2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93236111 N 80.41925 W	Small plastic tank	plastic	28.17	6.65	Metagenome or environmental
+SRR9615558	LS1.26S.A.AE.P1	LS1.26S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93236111 N 80.41925 W	Plastic sheet	plastic	30.23	6.69	Metagenome or environmental
+SRR9615559	LS1.26S.A.AE1	LS1.26S.A.AE1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93236111 N 80.41925 W	Plastic sheet	plastic	30.23	6.69	Metagenome or environmental
+SRR9615560	LS1.26S.A.AE2	LS1.26S.A.AE2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93236111 N 80.41925 W	Plastic sheet	plastic	30.23	6.69	Metagenome or environmental
+SRR9615561	LS1.28S.A.AE1	LS1.28S.A.AE1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93563888 N 80.42216666 W	Plastic container	plastic	26.9	6.67	Metagenome or environmental
+SRR9615562	LS1.28S.A.AE2	LS1.28S.A.AE2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93563888 N 80.42216666 W	Plastic container	plastic	26.9	6.67	Metagenome or environmental
+SRR9615564	P.AS9.A.AE.P2	P.AS9.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Monterico	9.10666 N 79.36527 W	Tyre	rubber	30.13	5.97	Metagenome or environmental
+SRR9615565	P1.16S.A.AE.P1	P1.16S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Princesa Mia	8.97333333 N 79.7 W	Pool	plastic	33.81	5.72	Metagenome or environmental
+SRR9615570	LS2.22S.A.AE10	LS2.22S.A.AE10	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9615571	LS2.22S.A.AE.P5	LS2.22S.A.AE.P5	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR9615572	LS2.24S.A.AE2	LS2.24S.A.AE2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Small plastic tank	plastic	29.03	7.46	Metagenome or environmental
+SRR9615573	LS2.24S.A.AE1	LS2.24S.A.AE1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Small plastic tank	plastic	29.03	7.46	Metagenome or environmental
+SRR9615576	P.AS12.A.AE.P1	P.AS12.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR9615577	LS1.25S.A.AE1	LS1.25S.A.AE1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93236111 N 80.41925 W	Small plastic tank	plastic	28.17	6.65	Metagenome or environmental
+SRR9615578	CH7.21S.A.AE.P1	CH7.21S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Chiriqui	David	8.421805 N 82.425909 W	Tyre	rubber	25.2	10.43	Metagenome or environmental
+SRR9615580	P.AS12.A.AE10	P.AS12.A.AE10	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR9615582	BT5.3S.A.AE.P1	BT5.3S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR9615583	BT5.3S.A.AE.P3	BT5.3S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR9615586	P8.1S.A.AE.P2	P8.1S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Felipillo	9.09888 N 79.305 W	Tyre	rubber	30.11	6.12	Metagenome or environmental
+SRR9615587	LS1.22S.A.AE.P4	LS1.22S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.62841666 N 80.17741666 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9615589	PA.AS13.A.AE.P1	PA.AS13.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	San Carlos	9.03994 N 79.46021 W	Tyre	rubber	27.27	10.81	Metagenome or environmental
+SRR9615590	BT5.6S.A.AE.P1	BT5.6S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.34173 N 82.24285 W	Plastic container	plastic	27.13	8.47	Metagenome or environmental
+SRR9598435	BT5.7S.L.AE.P1	BT5.7S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Isla Colon	9.36262 N 82.23995 W	Tyre	rubber	26.27	8.17	Metagenome or environmental
+SRR9598436	BT5.6S.A.AE.P2	BT5.6S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.34173 N 82.24285 W	Plastic container	plastic	27.13	8.47	Metagenome or environmental
+SRR9598311	BT1.24S.L.AE.P4	BT1.24S.L.AE.P4	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR9598312	BT1.24S.L.AE.P3	BT1.24S.L.AE.P3	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR9598313	P.AS6.A.AE.P1	P.AS6.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Cabra	9.11305 N 79.36444 W	Tyre	rubber	28.3	6.29	Metagenome or environmental
+SRR9598319	P.AS12.A.AE9	P.AS12.A.AE9	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR9598323	BT5.3S.A.AE.P2	BT5.3S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR9598324	BT4.24S.A.AE.P1	BT4.24S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	28.87	9.34	Metagenome or environmental
+SRR9598325	BT3.24S.L.AE.P3	BT3.24S.L.AE.P3	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	29.6	9.28	Metagenome or environmental
+SRR9598326	BT3.24S.L.AE.P2	BT3.24S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	29.6	9.28	Metagenome or environmental
+SRR9598329	LS2.22S.A.AE.P4	LS2.22S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598330	LS2.22S.A.AE.P6	LS2.22S.A.AE.P6	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598331	LS2.22S.A.AE.P7	LS2.22S.A.AE.P7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR9598332	LS2.22S.A.AE7	LS2.22S.A.AE7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598333	LS2.22S.A.AE8	LS2.22S.A.AE8	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598334	LS2.22S.A.AE9	LS2.22S.A.AE9	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598338	LS1.29S.A.AE.P3	LS1.29S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598339	LS2.22S.A.AE.P1	LS2.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR9598343	LS1.29S.A.AE.P2	LS1.29S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic sheet	plastic	29.53	7.6	Metagenome or environmental
+SRR9598344	LS1.29S.A.AE.P1	LS1.29S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598345	LS2.22S.A.AE.P3	LS2.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR9598346	LS2.22S.A.AE.P2	LS2.22S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR9598347	LS1.23S.A.AE.P3	LS1.23S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598348	LS1.23S.L.AE.P1	LS1.23S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Plastic container	plastic	26.87	6.72	Metagenome or environmental
+SRR9598349	LS1.22S.A.AE.P3	LS1.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598350	LS1.22S.A.AE.P5	LS1.22S.A.AE.P5	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598351	LS1.22S.A.AE.P1	LS1.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR9598352	LS1.22S.A.AE.P2	LS1.22S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Small plastic tank	plastic	27.1	6.46	Metagenome or environmental
+SRR9598355	LS1.23S.L.AE.P2	LS1.23S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Small container	plastic	26.87	6.72	Metagenome or environmental
+SRR9598359	CN3.19S.A.AE.P2	CN3.19S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Colon	Portobelo	9.15493 N 80.3044 W	Plastic sheet	plastic	26.46	8.69	Metagenome or environmental
+SRR9598360	CN3.19S.A.AE.P1	CN3.19S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Colon	Portobelo	9.15493 N 80.3044 W	Plastic sheet	plastic	26.46	8.69	Metagenome or environmental
+SRR9598361	CN1.17S.L.AE.P2	CN1.17S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Colon	Miguel de la Borda	9.15283 N 80.30654 W	Tyre	rubber	30	8.61	Metagenome or environmental
+SRR9598362	DA4.16S.A.AE.P1	DA4.16S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Bajo Iglesia	8.39833 N 78.00944 W	Tank	plastic	26.53	7.39	Metagenome or environmental
+SRR9598363	DA2.26S.A.AE.P2	DA2.26S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Meteti	8.4975 N 77.98138 W	Tank	plastic	29.38	6.24	Metagenome or environmental
+SRR9598364	DA2.26S.A.AE.P1	DA2.26S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Meteti	8.4975 N 77.98138 W	Tank	plastic	29.38	6.24	Metagenome or environmental
+SRR9598366	H.AS2.A.AE.P2	H.AS2.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Herrera	S. J. Bautista	7.970167 N 80.423528 W	Tyre	rubber	30.2	6.58	Metagenome or environmental
+SRR9598367	H.AS2.A.AE.P1	H.AS2.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Herrera	S. J. Bautista	7.970167 N 80.423528 W	Tyre	rubber	30.2	6.58	Metagenome or environmental
+SRR9598374	P.AS10.A.AE.P1	P.AS10.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Taller Dadym	8.929222 N 79.701722 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR9598375	P.AS10.A.AE.P3	P.AS10.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Taller Dadym	8.929222 N 79.701722 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR9598378	BT5.7S.L.AE.P1	BT5.7S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Isla Colon	9.36262 N 82.23995 W	Tyre	rubber	26.27	8.17	Metagenome or environmental
+SRR9598379	BT5.3S.A.AE.P4	BT5.3S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR9598381	P.AS9.A.AE.P3	P.AS9.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Monterico	9.10666 N 79.36527 W	Tyre	rubber	30.13	5.97	Metagenome or environmental
+SRR9598382	P.AS9.A.AE.P1	P.AS9.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Monterico	9.10666 N 79.36527 W	Tyre	rubber	30.13	5.97	Metagenome or environmental
+SRR9598383	P.AS6.A.AE.P2	P.AS6.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Cabra	9.11305 N 79.36444 W	Tyre	rubber	28.3	6.29	Metagenome or environmental
+SRR9598384	BT1.24S.L.AE.P2	BT1.24S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR9598385	BT1.24S.L.AE.P1	BT1.24S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR9598386	P.AS12.A.AE8	P.AS12.A.AE8	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR9598387	P.AS12.A.AE7	P.AS12.A.AE7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR9598388	P.AS11.A.AE.P2	P.AS11.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	S. Punto Real	9.102667 N 79.362028 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR9598389	P.AS11.A.AE.P1	P.AS11.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	S. Punto Real	9.102667 N 79.362028 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR9598391	P4.1S.A.AE16	P4.1S.A.AE16	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR9598393	P4.1S.A.AE.P1	P4.1S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR9598394	P4.1S.A.AE.P2	P4.1S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR9598397	P4.1S.A.AE14	P4.1S.A.AE14	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR9598398	P4.1S.A.AE15	P4.1S.A.AE15	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR9598399	P4.1S.A.AE.P4	P4.1S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR9598400	P4.1S.A.AE13	P4.1S.A.AE13	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR9598401	CL.AS2.A.AE.P1	CL.AS2.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Cocle	Aguadulce	8.24569 N 80.56418 W	Tyre	rubber	27.63	8.44	Metagenome or environmental
+SRR9598402	CN1.17S.L.AE.P1	CN1.17S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Colon	Miguel de la Borda	9.15283 N 80.30654 W	Tyre	rubber	30	8.61	Metagenome or environmental
+SRR9598406	CH7.21S.L.AE.P2	CH7.21S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Chiriqui	David	8.421805 N 82.425909 W	Tyre	rubber	25.2	10.43	Metagenome or environmental
+SRR9598412	P8.1S.A.AE.P1	P8.1S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Felipillo	9.09888 N 79.305 W	Tyre	rubber	30.11	6.12	Metagenome or environmental
+SRR9598416	LS5.22S.A.AE.P1	LS5.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9598417	LS5.21S.A.AE.P1	LS5.21S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	26.27	7.52	Metagenome or environmental
+SRR9598418	LS5.22S.L.AE.P4	LS5.22S.L.AE.P4	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9598419	LS5.22S.A.AE.P3	LS5.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9598420	LS5.22S.L.AE.P6	LS5.22S.L.AE.P6	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9598421	LS5.22S.L.AE.P5	LS5.22S.L.AE.P5	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR9598427	CH.AS01.A.AE.P1	CH.AS01.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Chiriqui	Paso Canoas	8.52709 N 82.83557 W	Tyre	rubber	25.23	9.71	Metagenome or environmental
+SRR9598433	CH.AS12.A.AE.P1	CH.AS12.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Chiriqui	Concepcion	8.51705 N 82.62645 W	Tyre	rubber	26.03	9.54	Metagenome or environmental
+SRR8703905	LS5.22S.A.AE.P3	LS5.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR8703906	LS5.22S.A.AE.P1	LS5.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR8703907	LS5.22S.L.AE.P5	LS5.22S.L.AE.P5	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR8703908	LS5.22S.L.AE.P4	LS5.22S.L.AE.P4	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR8703909	LS2.22S.A.AE8	LS2.22S.A.AE8	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703910	LS2.22S.A.AE7	LS2.22S.A.AE7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703911	LS5.21S.A.AE.P1	LS5.21S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	26.27	7.52	Metagenome or environmental
+SRR8703912	LS2.22S.A.AE9	LS2.22S.A.AE9	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703913	P.AS10.A.AE.P1	P.AS10.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Taller Dadym	8.929222 N 79.701722 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR8703914	LS5.22S.L.AE.P6	LS5.22S.L.AE.P6	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	Pedasi	7.53266666 N 80.02983333 W	Small plastic tank	plastic	25.77	7.6	Metagenome or environmental
+SRR8703925	P.AS6.A.AE.P1	P.AS6.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Cabra	9.11305 N 79.36444 W	Tyre	rubber	28.3	6.29	Metagenome or environmental
+SRR8703926	P.AS6.A.AE.P2	P.AS6.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Cabra	9.11305 N 79.36444 W	Tyre	rubber	28.3	6.29	Metagenome or environmental
+SRR8703927	P.AS12.A.AE8	P.AS12.A.AE8	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR8703928	P.AS12.A.AE9	P.AS12.A.AE9	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR8703929	P.AS11.A.AE.P2	P.AS11.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	S. Punto Real	9.102667 N 79.362028 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR8703930	P.AS12.A.AE7	P.AS12.A.AE7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Panama	9.03994 N 79.46021 W	Wooden door	wood	28.97	9.9	Metagenome or environmental
+SRR8703931	P.AS10.A.AE.P3	P.AS10.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Taller Dadym	8.929222 N 79.701722 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR8703932	P.AS11.A.AE.P1	P.AS11.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	S. Punto Real	9.102667 N 79.362028 W	Tyre	rubber	NA	NA	Metagenome or environmental
+SRR8703933	P.AS9.A.AE.P1	P.AS9.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Monterico	9.10666 N 79.36527 W	Tyre	rubber	30.13	5.97	Metagenome or environmental
+SRR8703934	P.AS9.A.AE.P3	P.AS9.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Monterico	9.10666 N 79.36527 W	Tyre	rubber	30.13	5.97	Metagenome or environmental
+SRR8703946	H.AS2.A.AE.P2	H.AS2.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Herrera	S. J. Bautista	7.970167 N 80.423528 W	Tyre	rubber	30.2	6.58	Metagenome or environmental
+SRR8703947	H.AS2.A.AE.P1	H.AS2.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Herrera	S. J. Bautista	7.970167 N 80.423528 W	Tyre	rubber	30.2	6.58	Metagenome or environmental
+SRR8703948	DA4.16S.A.AE.P1	DA4.16S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Bajo Iglesia	8.39833 N 78.00944 W	Tank	plastic	26.53	7.39	Metagenome or environmental
+SRR8703949	DA2.26S.A.AE.P2	DA2.26S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Meteti	8.4975 N 77.98138 W	Tank	plastic	29.38	6.24	Metagenome or environmental
+SRR8703950	LS1.22S.A.AE.P5	LS1.22S.A.AE.P5	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703951	LS1.22S.A.AE.P3	LS1.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703952	LS1.22S.A.AE.P2	LS1.22S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Small plastic tank	plastic	27.1	6.46	Metagenome or environmental
+SRR8703953	LS1.22S.A.AE.P1	LS1.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.94144444 N 80.41113888 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703954	LS1.23S.L.AE.P1	LS1.23S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Plastic container	plastic	26.87	6.72	Metagenome or environmental
+SRR8703955	LS1.23S.A.AE.P3	LS1.23S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703957	LS2.22S.A.AE.P6	LS2.22S.A.AE.P6	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703958	LS2.22S.A.AE.P7	LS2.22S.A.AE.P7	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR8703959	LS2.22S.A.AE.P1	LS2.22S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR8703960	LS2.22S.A.AE.P2	LS2.22S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703961	LS2.22S.A.AE.P3	LS2.22S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	plastic	28.42	7.44	Metagenome or environmental
+SRR8703962	LS2.22S.A.AE.P4	LS2.22S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	Paritilla	7.62841666 N 80.17741666 W	Tank	rubber	28.42	7.44	Metagenome or environmental
+SRR8703963	LS1.23S.L.AE.P2	LS1.23S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Ethanol	Panama:Los Santos	La Villa	7.93636111 N 80.41577777 W	Small container	plastic	26.87	6.72	Metagenome or environmental
+SRR8703964	LS1.29S.A.AE.P1	LS1.29S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703965	LS1.29S.A.AE.P2	LS1.29S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic sheet	plastic	29.53	7.6	Metagenome or environmental
+SRR8703966	LS1.29S.A.AE.P3	LS1.29S.A.AE.P3	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Los Santos	La Villa	7.93291666 N 80.41505555 W	Plastic container	plastic	27.1	6.46	Metagenome or environmental
+SRR8703967	CN3.19S.A.AE.P2	CN3.19S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Colon	Portobelo	9.15493 N 80.3044 W	Plastic sheet	plastic	26.46	8.69	Metagenome or environmental
+SRR8703968	DA2.26S.A.AE.P1	DA2.26S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Darien	Meteti	8.4975 N 77.98138 W	Tank	plastic	29.38	6.24	Metagenome or environmental
+SRR8703969	CH.AS12.A.AE.P1	CH.AS12.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Chiriqui	Concepcion	8.51705 N 82.62645 W	Tyre	rubber	26.03	9.54	Metagenome or environmental
+SRR8703970	CH7.21S.L.AE.P2	CH7.21S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Chiriqui	David	8.421805 N 82.425909 W	Tyre	rubber	25.2	10.43	Metagenome or environmental
+SRR8703971	BT5.7S.L.AE.P1	BT5.7S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Isla Colon	9.36262 N 82.23995 W	Tyre	rubber	26.27	8.17	Metagenome or environmental
+SRR8703972	CH.AS01.A.AE.P1	CH.AS01.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Chiriqui	Paso Canoas	8.52709 N 82.83557 W	Tyre	rubber	25.23	9.71	Metagenome or environmental
+SRR8703973	CN1.17S.L.AE.P2	CN1.17S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Colon	Miguel de la Borda	9.15283 N 80.30654 W	Tyre	rubber	30	8.61	Metagenome or environmental
+SRR8703974	CN3.19S.A.AE.P1	CN3.19S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Colon	Portobelo	9.15493 N 80.3044 W	Plastic sheet	plastic	26.46	8.69	Metagenome or environmental
+SRR8703975	CL.AS2.A.AE.P1	CL.AS2.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Cocle	Aguadulce	8.24569 N 80.56418 W	Tyre	rubber	27.63	8.44	Metagenome or environmental
+SRR8703976	CN1.17S.L.AE.P1	CN1.17S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Colon	Miguel de la Borda	9.15283 N 80.30654 W	Tyre	rubber	30	8.61	Metagenome or environmental
+SRR8703993	P8.1S.A.AE.P1	P8.1S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Felipillo	9.09888 N 79.305 W	Tyre	rubber	30.11	6.12	Metagenome or environmental
+SRR8703994	P4.1S.A.AE16	P4.1S.A.AE16	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR8703995	P4.1S.A.AE15	P4.1S.A.AE15	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR8703996	P4.1S.A.AE14	P4.1S.A.AE14	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR8703997	P4.1S.A.AE13	P4.1S.A.AE13	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Plastic container	plastic	34.83	6.25	Metagenome or environmental
+SRR8703998	P4.1S.A.AE.P4	P4.1S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR8703999	P4.1S.A.AE.P2	P4.1S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR8704000	P4.1S.A.AE.P1	P4.1S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Panama	Veracruz	8.89805 N 79.62333 W	Tank	plastic	34.83	6.25	Metagenome or environmental
+SRR8704001	BT5.3S.A.AE.P4	BT5.3S.A.AE.P4	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR8704002	BT5.6S.A.AE.P2	BT5.6S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.34173 N 82.24285 W	Plastic container	plastic	27.13	8.47	Metagenome or environmental
+SRR8704003	BT1.24S.L.AE.P3	BT1.24S.L.AE.P3	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR8704004	BT1.24S.L.AE.P4	BT1.24S.L.AE.P4	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR8704005	BT1.24S.L.AE.P1	BT1.24S.L.AE.P1	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR8704006	BT1.24S.L.AE.P2	BT1.24S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Chiriqui Grande	9.34636 N 82.25311 W	Freezer	metal	28.33	9.28	Metagenome or environmental
+SRR8704007	BT4.24S.A.AE.P1	BT4.24S.A.AE.P1	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	28.87	9.34	Metagenome or environmental
+SRR8704008	BT5.3S.A.AE.P2	BT5.3S.A.AE.P2	Aedes aegypti	not applicable	2016	Adult	Dry	Panama:Bocas del Toro	Isla Colon	9.33949 N 82.24311 W	Small plastic tank	plastic	25.47	8.93	Metagenome or environmental
+SRR8704009	BT3.24S.L.AE.P2	BT3.24S.L.AE.P2	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	29.6	9.28	Metagenome or environmental
+SRR8704010	BT3.24S.L.AE.P3	BT3.24S.L.AE.P3	Aedes aegypti	not applicable	2016	Larvae	Dry	Panama:Bocas del Toro	Changuinola	9.45099 N 82.52432 W	Tyre	rubber	29.6	9.28	Metagenome or environmental

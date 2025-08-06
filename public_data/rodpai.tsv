@@ -1,0 +1,13 @@
+Experiment	sample_name	host	isolation_source	collection_date	geographic_location	lat_lon	metagenome
+SRR23029787	AeyM1	Aedes aegypti	Mosquito abdomen	2021-10-18	Thailand: Khon Kaen	16.480731 N 102.828181 E	Metagenome or environmental
+SRR23029788	AeyF3	Aedes aegypti	Mosquito abdomen	2021-10-20	Thailand: Khon Kaen	16.460577 N 102.830760 E	Metagenome or environmental
+SRR23029789	AeyF2	Aedes aegypti	Mosquito abdomen	2021-10-18	Thailand: Khon Kaen	16.446545 N 102.824961 E	Metagenome or environmental
+SRR23029790	AeyF1	Aedes aegypti	Mosquito abdomen	2021-10-18	Thailand: Khon Kaen	16.455770 N 102.854495 E	Metagenome or environmental
+SRR23029797	AeyW3	water	Mosquito larvae habitat water	2021-10-20	Thailand: Khon Kaen	16.460577 N 102.830760 E	Metagenome or environmental
+SRR23029798	AeyL3	Aedes aegypti	Mosquito larvae	2021-10-20	Thailand: Khon Kaen	16.460577 N 102.830760 E	Metagenome or environmental
+SRR23029799	AeyW2	water	Mosquito larvae habitat water	2021-10-18	Thailand: Khon Kaen	16.446545 N 102.824961 E	Metagenome or environmental
+SRR23029800	AeyW1	water	Mosquito larvae habitat water	2021-10-18	Thailand: Khon Kaen	16.455770 N 102.854495 E	Metagenome or environmental
+SRR23029807	AeyM3	Aedes aegypti	Mosquito abdomen	2021-10-20	Thailand: Khon Kaen	16.464477 N 102.816146 E	Metagenome or environmental
+SRR23029808	AeyM2	Aedes aegypti	Mosquito abdomen	2021-10-18	Thailand: Khon Kaen	16.467529 N 102.824222 E	Metagenome or environmental
+SRR23029809	AeyL2	Aedes aegypti	Mosquito larvae	2021-10-18	Thailand: Khon Kaen	16.446545 N 102.824961 E	Metagenome or environmental
+SRR23029810	AeyL1	Aedes aegypti	Mosquito larvae	2021-10-18	Thailand: Khon Kaen	16.455770 N 102.854495 E	Metagenome or environmental
