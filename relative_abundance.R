@@ -8,6 +8,7 @@ library(RColorBrewer)
 library(ggtext)
 library(ggalluvial)
 library(patchwork)
+library(ComplexUpset)
 here::i_am("relative_abundance.R")
 load("Sanon_16S_DADA2_data.RData")
 
@@ -557,7 +558,7 @@ grouped_relabund2 <- grouped_relabund |>
 get_top_ASV_stage <- function(df, stage) {
   df |>
     group_by(Stage, Breeding, Urbanisation) |>
-    slice_max(median, n = 15) |>
+    slice_max(median, n = 15) |> # top 15 ASVs
     filter(Stage == stage) |>
     pull(OTU) |>
     unique()
@@ -604,7 +605,7 @@ grid::grid.draw(venn_stage)
 get_top_adult_ASV <- function(df, breeding, urbanisation) {
   df |>
     group_by(Stage, Breeding, Urbanisation) |>
-    slice_max(median, n = 15) |>
+    slice_max(median, n = 50) |>
     filter(
       Stage == "adult",
       Breeding == breeding,
@@ -626,9 +627,13 @@ adult_list <- lapply(1:nrow(combinations), function(i) {
   urbanisation <- combinations$urbanisation[i]
   get_top_adult_ASV(
     grouped_relabund,
+    #rel_abundance_clean,
     breeding = breeding,
     urbanisation = urbanisation
   )
+})
+names(adult_list) <- apply(combinations, 1, function(row) {
+  paste(row, collapse = "/")
 })
 
 ## Venn diagram
@@ -668,7 +673,7 @@ venn_adult <- VennDiagram::venn.diagram(
 grid::grid.newpage()
 grid::grid.draw(venn_adult)
 
-
+# Alluvial plot of top ASVs per metadata variables
 df_alluvial <- grouped_relabund |>
   filter(OTU %in% grouped_relabund2) |>
   mutate(mean_water = if_else(Stage == "water", mean, NA_real_)) |>
@@ -699,7 +704,7 @@ alluvial_grid <- df_alluvial |>
   )) +
   # scale_fill_viridis_c(option="turbo")+
   scale_fill_manual(values = pal) +
-  # scale_fill_gradientn(colors=c("#3B9AB2", "#F2E191", "#F21A00"))+
+  # scale_fill_gradientn(colors=c("#858b8cff", "#F2E191", "#F21A00"))+
   geom_flow(decreasing = TRUE) +
   geom_stratum(decreasing = TRUE, linewidth = .1) +
   geom_vline(aes(xintercept = 2.25), linetype = "dashed") +
@@ -816,6 +821,98 @@ ggsave(
   width = 169,
   units = "mm",
   height = 120
+)
+
+# Upset plot of the top 50 ASVs in adults
+# create "set" identifiers = Stage/Breeding combination
+df <- grouped_relabund |>
+  mutate(set = paste(Breeding, Urbanisation, sep = "/")) |>
+  filter(
+    Stage == "adult",
+    (OTU %in%
+      adult_list$`plastic/U` &
+      Breeding == "plastic" &
+      Urbanisation == "U") |
+      (OTU %in%
+        adult_list$`tire/U` &
+        Breeding == "tire" &
+        Urbanisation == "U") |
+      (OTU %in%
+        adult_list$`plastic/PU` &
+        Breeding == "plastic" &
+        Urbanisation == "PU") |
+      (OTU %in%
+        adult_list$`tire/PU` &
+        Breeding == "tire" &
+        Urbanisation == "PU")
+  )
+
+# 2) build membership matrix: OTU x set (logical)
+# xtabs will count occurrences; > 0 turns it into logical membership
+membership_mat <- as.data.frame.matrix(xtabs(~ OTU + set, data = df) > 0)
+
+# membership_mat currently has rownames = OTU; move OTU into a column
+membership_mat$OTU <- rownames(membership_mat)
+rownames(membership_mat) <- NULL
+
+# 3) create OTU-level metadata (one row per OTU) -- choose how to collapse if multiple rows:
+# here we take the (mean of mean) and take the first Phylum if consistent
+otu_meta <- df %>%
+  group_by(OTU) %>%
+  summarize(
+    clean_Phylum = first(clean_Phylum),
+    mean_abund = mean(mean, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# 4) join membership + metadata
+membership_df <- membership_mat %>% left_join(otu_meta, by = "OTU")
+
+# 5) determine set column names for ComplexUpset
+set_cols <- setdiff(
+  colnames(membership_df),
+  #c("OTU", "clean_Phylum", "mean_abund")
+  c(
+    "mean_abund",
+    "clean_Phylum",
+  )
+)
+
+# ComplexUpset plot
+p <- upset(
+  membership_df,
+  intersect = set_cols,
+  min_size = 1,
+  width_ratio = 0.2,
+  set_sizes = FALSE, # hide left set-size plot per your request
+  base_annotations = list(
+    #  # intersection_size uses geom="bar" with a weight aesthetic to sum fractional contributions
+    'ASV count' = intersection_size(
+      counts = T,
+      mapping = aes(fill = clean_Phylum),
+    ) +
+      scale_fill_manual(values = pal) +
+      theme(legend.title = element_blank(), axis.text.x = element_blank())
+  ),
+  annotations = list(
+    # extra panel: quasirandom points for mean, with mean point
+    'Mean relative\n abundance (%)' = ggplot(mapping = aes(y = mean_abund)) +
+      ggbeeswarm::geom_quasirandom()
+  ),
+  themes = upset_modify_themes(
+    list(
+      'intersections_matrix' = theme(axis.title.x = element_blank())
+    )
+  )
+)
+print(p)
+
+ggsave(
+  "figures/upset_top50_adult.pdf",
+  dpi = 300,
+  width = 169,
+  height = 100,
+  units = "mm"
 )
 
 #' Compare ASVs only in adult and water per location/breeding material
