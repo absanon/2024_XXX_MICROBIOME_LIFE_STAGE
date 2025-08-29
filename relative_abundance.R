@@ -808,10 +808,10 @@ venn_adult_plot <- ggplot() +
   ) +
   theme_void()
 
-(ag |
-  (venn_stage_plot /
-    venn_adult_plot)) +
-  plot_layout(widths = c(1, .5)) +
+((venn_adult_plot /
+  venn_stage_plot) |
+  ag) +
+  plot_layout(widths = c(.5, 1)) +
   plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(face = "bold"))
 
