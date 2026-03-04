@@ -18,7 +18,6 @@ load("Sanon_16S_DADA2_data.RData")
 #  ggpubr::stat_pwc(method = "wilcox.test", p.adjust.method = "BH", label="p.adj.format", tip.length = 0)+
 #  theme(strip.background = element_blank(), axis.text.x.bottom = element_text(angle = -90 ))
 
-
 alpha_rarefied <- function(ab_table, sequencing_depth) {
   df <- ab_table %>%
     t() %>%
@@ -56,7 +55,13 @@ ggplot(data = df, aes(x = LibrarySize, y = "samples")) +
   theme_bw()
 
 set.seed(1234)
-alpha_df_list <- purrr::map(1:1000, ~ alpha_rarefied(ab_table = as_tibble(otu_table(SANON)), sequencing_depth = min_depth))
+alpha_df_list <- purrr::map(
+  1:1000,
+  ~ alpha_rarefied(
+    ab_table = as_tibble(otu_table(SANON)),
+    sequencing_depth = min_depth
+  )
+)
 alpha_average_df <- Reduce(`+`, alpha_df_list) / length(alpha_df_list)
 alpha_average_df <- alpha_average_df %>%
   mutate(Observed = round(Observed))
@@ -67,10 +72,15 @@ alpha <- alpha_average_df %>%
   left_join(samdf %>% rownames_to_column("Sample")) %>%
   pivot_longer(
     c(
-      -Sample, -Stage, -Breeding, -Sites,
-      -Urbanisation, -breeding_urban
+      -Sample,
+      -Stage,
+      -Breeding,
+      -Sites,
+      -Urbanisation,
+      -breeding_urban
     ),
-    names_to = "Metric", values_to = "Diversity"
+    names_to = "Metric",
+    values_to = "Diversity"
   ) %>%
   ggplot(aes(x = Stage, y = Diversity, color = Stage)) +
   geom_boxplot(outlier.shape = NA) +
@@ -85,8 +95,12 @@ alpha <- alpha_average_df %>%
   # scale_color_brewer(palette="Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
   ggpubr::stat_pwc(
-    method = "wilcox.test", p.adjust.method = "BH",
-    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+    method = "wilcox.test",
+    p.adjust.method = "BH",
+    label = "p.adj.format",
+    hide.ns = "p.adj",
+    show.legend = F,
+    tip.length = 0.01
   )
 alpha
 
@@ -99,14 +113,22 @@ alpha_shape <- alpha_average_df %>%
   left_join(samdf %>% rownames_to_column("Sample")) %>%
   pivot_longer(
     c(
-      -Sample, -Stage, -Breeding, -Sites,
-      -Urbanisation, -breeding_urban
+      -Sample,
+      -Stage,
+      -Breeding,
+      -Sites,
+      -Urbanisation,
+      -breeding_urban
     ),
-    names_to = "Metric", values_to = "Diversity"
+    names_to = "Metric",
+    values_to = "Diversity"
   ) %>%
   ggplot(aes(x = Stage, y = Diversity, color = Stage)) +
   geom_boxplot(outlier.shape = NA) +
-  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
+  geom_jitter(
+    aes(shape = gsub(pattern = "_", replacement = "/", x = breeding_urban)),
+    width = 0.3
+  ) +
   facet_wrap(~Metric, nrow = 1, scales = "free_y") +
   theme_bw() +
   theme(
@@ -117,13 +139,17 @@ alpha_shape <- alpha_average_df %>%
   # scale_color_brewer(palette="Oranges")+
   scale_color_manual(values = c("#3B9AB2", "#EBCC2A", "#F21A00", "#7A0403FF")) +
   scale_shape_manual(values = c(0, 15, 1, 16)) +
-  labs(shape = "Breeding material/\nLocation")+
+  labs(shape = "Breeding material/\nLocation") +
   ggpubr::stat_pwc(
-    method = "wilcox.test", p.adjust.method = "BH",
-    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+    method = "wilcox.test",
+    p.adjust.method = "BH",
+    label = "p.adj.format",
+    hide.ns = "p.adj",
+    show.legend = F,
+    tip.length = 0.01
   )
 alpha_shape
-ggsave("figures/alpha_diversity_shape.pdf", dpi = 300, height=7, width=9)
+ggsave("figures/alpha_diversity_shape.pdf", dpi = 300, height = 7, width = 9)
 
 # Alpha diversity per breeding/urbanisation
 
@@ -133,16 +159,24 @@ alpha_average_df %>%
   left_join(samdf %>% rownames_to_column("Sample")) %>%
   pivot_longer(
     c(
-      -Sample, -Stage, -Breeding, -Sites,
-      -Urbanisation, -breeding_urban
+      -Sample,
+      -Stage,
+      -Breeding,
+      -Sites,
+      -Urbanisation,
+      -breeding_urban
     ),
-    names_to = "Metric", values_to = "Diversity"
+    names_to = "Metric",
+    values_to = "Diversity"
   ) %>%
   filter(Metric == "Simpson") %>%
   ggplot(aes(x = Urbanisation, y = Diversity, color = Urbanisation)) +
   geom_boxplot(outlier.shape = NA) +
-  geom_jitter(aes(shape=gsub(pattern = "_", replacement = "/", x = breeding_urban)), width = 0.3) +
-  facet_nested_wrap(~Stage, nrow=2, scales = "free_y") +
+  geom_jitter(
+    aes(shape = gsub(pattern = "_", replacement = "/", x = breeding_urban)),
+    width = 0.3
+  ) +
+  ggh4x::facet_nested_wrap(~Stage, nrow = 2, scales = "free_y") +
   theme_bw() +
   theme(
     strip.text.x = element_text(size = 10),
@@ -150,8 +184,122 @@ alpha_average_df %>%
     legend.text.align = 0
   ) +
   scale_shape_manual(values = c(0, 15, 1, 16)) +
-  labs(shape = "Breeding material/\nLocation")+
+  labs(shape = "Breeding material/\nLocation") +
   ggpubr::stat_pwc(
-    method = "wilcox.test", p.adjust.method = "BH",
-    label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+    method = "wilcox.test",
+    p.adjust.method = "BH",
+    label = "p.adj.format",
+    hide.ns = "p.adj",
+    show.legend = F,
+    tip.length = 0.01
   )
+
+urba_alpa <- alpha_average_df %>%
+  rownames_to_column("Sample") %>%
+  select(-Observed) %>%
+  left_join(samdf %>% rownames_to_column("Sample")) %>%
+  pivot_longer(
+    c(
+      -Sample,
+      -Stage,
+      -Breeding,
+      -Sites,
+      -Urbanisation,
+      -breeding_urban
+    ),
+    names_to = "Metric",
+    values_to = "Diversity"
+  ) %>%
+  ggplot(aes(x = Urbanisation, y = Diversity, color = Urbanisation)) +
+  geom_boxplot(outlier.shape = NA) +
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    shape = 18,
+    size = 5,
+    fill = "black",
+    color = "black"
+  ) +
+  geom_jitter(
+    width = 0.3
+  ) +
+  facet_wrap(~Metric, nrow = 1, scales = "free_y") +
+  ggpubr::stat_pwc(
+    method = "wilcox.test",
+    p.adjust.method = "BH",
+    label = "p.adj.format",
+    hide.ns = F,
+    label.size = 3,
+    show.legend = F,
+    tip.length = 0.01
+  ) +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave(
+  "figures/alpha_diversity_urbanisation.pdf",
+  dpi = 300,
+  height = 90,
+  width = 90,
+  units = "mm"
+)
+
+breed_alpha <- alpha_average_df %>%
+  rownames_to_column("Sample") %>%
+  select(-Observed) %>%
+  left_join(samdf %>% rownames_to_column("Sample")) %>%
+  pivot_longer(
+    c(
+      -Sample,
+      -Stage,
+      -Breeding,
+      -Sites,
+      -Urbanisation,
+      -breeding_urban
+    ),
+    names_to = "Metric",
+    values_to = "Diversity"
+  ) %>%
+  ggplot(aes(x = Breeding, y = Diversity, color = Breeding)) +
+  geom_boxplot(outlier.shape = NA) +
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    shape = 18,
+    size = 5,
+    fill = "black",
+    color = "black"
+  ) +
+  geom_jitter(
+    width = 0.3
+  ) +
+  facet_wrap(~Metric, nrow = 1, scales = "free_y") +
+  ggpubr::stat_pwc(
+    method = "wilcox.test",
+    p.adjust.method = "BH",
+    label = "p.adj.format",
+    hide.ns = F,
+    label.size = 3,
+    show.legend = F,
+    tip.length = 0.01
+  ) +
+  theme_bw() +
+  theme(legend.position = "none")
+ggsave(
+  "figures/alpha_diversity_breeding_material.pdf",
+  dpi = 300,
+  height = 90,
+  width = 90,
+  units = "mm"
+)
+
+library(patchwork)
+(urba_alpa | breed_alpha) +
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(size = 12, face = "bold"))
+ggsave(
+  "figures/supp_alpha_diversity_urbanisation_breeding.pdf",
+  dpi = 300,
+  height = 90,
+  width = 180,
+  units = "mm"
+)

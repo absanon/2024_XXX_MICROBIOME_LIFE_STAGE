@@ -312,7 +312,7 @@ rel_abundance_clean |>
     fill = Domain
   )) +
   geom_bar(stat = "identity")
-ggsave("test.pdf", dpi = 300, width = 169, height = 120, units = "mm")
+#ggsave("test.pdf", dpi = 300, width = 169, height = 120, units = "mm")
 
 # Create Proteobacteria plot
 
@@ -605,7 +605,7 @@ grid::grid.draw(venn_stage)
 get_top_adult_ASV <- function(df, breeding, urbanisation) {
   df |>
     group_by(Stage, Breeding, Urbanisation) |>
-    slice_max(median, n = 50) |>
+    slice_max(median, n = 50, with_ties = F) |> # don't keep ASVs with same rel abundance, only keep 1
     filter(
       Stage == "adult",
       Breeding == breeding,
@@ -721,7 +721,10 @@ alluvial_grid <- df_alluvial |>
   geom_point(
     data = filter(df_alluvial, OTU %in% top_ASV_adult),
     aes(y = mean * 10),
-    color = "black",
+    shape = 21,
+    color = "white",
+    stroke = 0.1,
+    fill = "black",
     show.legend = F,
     size = 1
   ) +
@@ -797,7 +800,8 @@ venn_stage_plot <- ggplot() +
     ymin = -Inf,
     ymax = Inf
   ) +
-  theme_void()
+  theme_void() +
+  coord_cartesian(clip = "off")
 venn_adult_plot <- ggplot() +
   annotation_custom(
     venn_groba,
@@ -806,7 +810,8 @@ venn_adult_plot <- ggplot() +
     ymin = -Inf,
     ymax = Inf
   ) +
-  theme_void()
+  theme_void() +
+  coord_cartesian(clip = "off")
 
 ((venn_adult_plot /
   venn_stage_plot) |
@@ -1227,7 +1232,7 @@ p_abs <- rel_abundance_clean |>
     max_l = 1
   ) +
   geom_bar(stat = "identity") +
-  labs(x = "", y = "Absolute abundance (copies/µl") +
+  labs(x = "", y = "Absolute abundance (copies/µl)") +
   facet_nested(
     Stage ~ Breeding + Urbanisation,
     scales = "free",
