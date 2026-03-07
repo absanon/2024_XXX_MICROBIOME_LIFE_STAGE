@@ -441,7 +441,7 @@ top_ASV_water <- ps.melt_clean |>
   group_by(OTU) |>
   summarise(mean = mean(Abundance), median = median(Abundance)) |>
   ungroup() |>
-  slice_max(order_by = median, n = 15) |>
+  slice_max(order_by = median, n = 15, ties = F) |>
   pull(OTU)
 
 top_ASV_adult <- ps.melt_clean |>
@@ -449,7 +449,7 @@ top_ASV_adult <- ps.melt_clean |>
   group_by(OTU) |>
   summarise(mean = mean(Abundance), median = median(Abundance)) |>
   ungroup() |>
-  slice_max(order_by = median, n = 15) |>
+  slice_max(order_by = median, n = 15, ties = F) |>
   pull(OTU)
 
 top_ASV <- c(top_ASV_water, top_ASV_adult) |> unique()
@@ -551,14 +551,14 @@ grouped_relabund <- rel_abundance_clean |>
 
 grouped_relabund2 <- grouped_relabund |>
   group_by(Stage, Breeding, Urbanisation) |>
-  slice_max(median, n = 15) |>
+  slice_max(median, n = 15, ties = F) |>
   pull(OTU) |>
   unique()
 
 get_top_ASV_stage <- function(df, stage) {
   df |>
     group_by(Stage, Breeding, Urbanisation) |>
-    slice_max(median, n = 15) |> # top 15 ASVs
+    slice_max(median, n = 15, ties = F) |> # top 15 ASVs
     filter(Stage == stage) |>
     pull(OTU) |>
     unique()
