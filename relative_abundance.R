@@ -879,7 +879,7 @@ set_cols <- setdiff(
   #c("OTU", "clean_Phylum", "mean_abund")
   c(
     "mean_abund",
-    "clean_Phylum",
+    "clean_Phylum"
   )
 )
 
@@ -1127,6 +1127,12 @@ ggsave(
 qpcr <- read_csv("data/16S_qPCR_results.csv") |>
   mutate(Sample = gsub(" ", "-", Sample)) |>
   filter(Task != "Standard")
+
+qpcr |>
+  left_join(samdf |> rownames_to_column("Sample")) |>
+  filter(!is.na(Stage)) |>
+  group_by(Stage) |>
+  summarise(mean = mean(Quantity), median = median(Quantity))
 
 copies_per_stage <- qpcr |>
   left_join(samdf |> rownames_to_column("Sample")) |>
