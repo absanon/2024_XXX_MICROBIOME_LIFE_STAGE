@@ -4,6 +4,7 @@
 .Ruserdata
 
 *.RData
+!Sanon_16S_DADA2_data.RData
 
 .DS_Store
 data/240708_16qPCR bacteria_SA.eds
